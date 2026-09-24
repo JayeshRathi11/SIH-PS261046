@@ -1,0 +1,9 @@
+# AyuTrial-CTMS: Backend Application
+# SIH Problem Statement ID: 26046
+# All India Institute of Ayurveda (AIIA) – NPvCC Platform
+
+[project]
+name = "ayutrial-ctms"
+version = "0.1.0"
+description = "Real-time GCP-compliant Clinical Trial Management System and NPvCC Platform for AIIA"
+requires-python = ">=3.11"
