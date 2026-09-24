@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AyuTrial-CTMS | NPvCC Portal - Regulatory Interoperability &amp; Export Hub</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter, Hanken Grotesk, JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#b6ebfe",
+            "primary": "#003527",
+            "secondary-fixed": "#85f8c4",
+            "tertiary-fixed-dim": "#9acee1",
+            "surface": "#faf8ff",
+            "background": "#faf8ff",
+            "on-secondary-container": "#00714e",
+            "on-background": "#131b2e",
+            "surface-bright": "#faf8ff",
+            "on-tertiary-fixed": "#001f28",
+            "on-tertiary-fixed-variant": "#114d5d",
+            "surface-container-highest": "#dae2fd",
+            "on-primary-container": "#80bea6",
+            "on-tertiary": "#ffffff",
+            "surface-variant": "#dae2fd",
+            "error": "#ba1a1a",
+            "secondary": "#006c4a",
+            "secondary-container": "#82f5c1",
+            "surface-container-high": "#e2e7ff",
+            "primary-container": "#064e3b",
+            "on-primary": "#ffffff",
+            "error-container": "#ffdad6",
+            "inverse-surface": "#283044",
+            "on-surface": "#131b2e",
+            "on-secondary-fixed": "#002114",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#86bacc",
+            "surface-tint": "#2b6954",
+            "surface-dim": "#d2d9f4",
+            "inverse-on-surface": "#eef0ff",
+            "inverse-primary": "#95d3ba",
+            "on-primary-fixed": "#002117",
+            "surface-container-low": "#f2f3ff",
+            "primary-fixed-dim": "#95d3ba",
+            "on-surface-variant": "#404944",
+            "primary-fixed": "#b0f0d6",
+            "outline-variant": "#bfc9c3",
+            "on-secondary-fixed-variant": "#005137",
+            "outline": "#707974",
+            "on-error-container": "#93000a",
+            "tertiary": "#003340",
+            "on-primary-fixed-variant": "#0b513d",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#0d4b5b",
+            "secondary-fixed-dim": "#68dba9",
+            "surface-container": "#eaedff",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-compact": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-dense": "0.5rem",
+            "gutter": "1rem",
+            "margin": "1.5rem",
+            "space-md": "0.75rem",
+            "space-lg": "1rem",
+            "space-xl": "1.5rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "code-xs": ["JetBrains Mono"],
+            "headline-xl-mobile": ["Hanken Grotesk"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-md": ["Hanken Grotesk"],
+            "headline-lg": ["Hanken Grotesk"],
+            "body-lg": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-xl": ["Hanken Grotesk"]
+          },
+          "fontSize": {
+            "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "code-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-xl-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["16px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-lg": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #F8FAFC;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased overflow-x-hidden min-h-screen flex flex-col font-body-md text-body-md select-none">
+<!-- TOP APP BAR -->
+<header class="flex justify-between items-center w-full px-margin h-14 bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline docked full-width top-0 z-50 sticky">
+<!-- Brand & Search cluster -->
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="clinical_notes">clinical_notes</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">AyuTrial-CTMS | NPvCC Portal</span>
+</div>
+<!-- Search on left -->
+<div class="relative hidden lg:flex items-center">
+<span class="material-symbols-outlined absolute left-2 text-outline" data-icon="search">search</span>
+<input class="pl-8 pr-12 py-1 text-body-sm font-body-sm bg-surface-container-low border border-outline-variant rounded focus:border-primary-container focus:ring-1 focus:ring-primary-container w-80 text-on-surface outline-none" placeholder="Search eCRF, FHIR, SDTM datasets, or audit hash..." type="text"/>
+<span class="absolute right-2 font-code-xs text-code-xs text-outline bg-surface-container-lowest px-1 border border-outline-variant rounded">⌘K</span>
+</div>
+</div>
+<!-- Top Links (Desktop) -->
+<nav class="hidden xl:flex items-center gap-space-lg h-full pt-1">
+<a class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed pb-1 font-label-md text-label-md transition-colors duration-150" href="#">Active Trials</a>
+<a class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed pb-1 font-label-md text-label-md transition-colors duration-150" href="#">eCRF Matrix</a>
+<a class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed pb-1 font-label-md text-label-md transition-colors duration-150" href="#">Safety Signals</a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 font-semibold font-label-md text-label-md" href="#">Regulatory Audit</a>
+</nav>
+<!-- Trailing Actions & Persona Switcher -->
+<div class="flex items-center gap-space-md">
+<!-- Persona Switcher -->
+<div class="flex items-center bg-surface-container-low border border-outline-variant rounded px-2 py-1 gap-1.5">
+<span class="font-code-xs text-code-xs text-outline">ROLE:</span>
+<select class="bg-transparent font-label-md text-label-md text-on-surface font-semibold border-none p-0 focus:ring-0 cursor-pointer outline-none">
+<option value="regulatory">Regulatory Officer (CDSCO/FDA)</option>
+<option value="coordinator">Study Coordinator (AIIA Campus)</option>
+<option value="cra">Lead Biostatistician</option>
+</select>
+</div>
+<!-- Action Buttons -->
+<button class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded font-label-md text-label-md hover:bg-surface-container transition-colors duration-150 active:scale-[0.99]">
+<span class="material-symbols-outlined text-sm" data-icon="file_download">file_download</span>
+        CDSCO Export
+      </button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary-container text-on-primary rounded font-label-md text-label-md hover:bg-primary transition-colors duration-150 shadow-sm active:scale-[0.99]">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+        Sign Record (21 CFR)
+      </button>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-1 border-l border-outline-variant pl-2 ml-1">
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container rounded transition-colors duration-150 relative" title="Active Alerts">
+<span class="material-symbols-outlined text-amber-600" data-icon="warning">warning</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container rounded transition-colors duration-150" title="Notifications">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="flex items-center pl-1.5 gap-1.5 cursor-pointer">
+<img class="w-7 h-7 rounded-full object-cover border border-outline-variant" data-alt="Photographic portrait headshot of Chief Clinical Investigator Dr. V. Sharma in sterile medical laboratory attire with AIIA institutional credentials and clinical stethoscope. Lit with soft daylight high-key scientific lighting against clean modern clinical hospital backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwTM7Z4gKB5_FqAV-N0Hn2sosU1sXXw5NC4HdTZcpwRT8dacAQAMyYBL-YSeJDsomM3E18wyFFojgayb7A7Qf4u4PFdMzReRQaPWWQt9_yOo0AmRa3s_E5ocdyQaG0QzdoZEUTJAkJmq6LTRWznyF3davTmmjLGQho_ouC2coM9P_vTnzD24Vk68RIhLgGuP3kCPgt47lUi-Z7o5VfkJnMd0qlLSz7lwQcCzkKeVSG6hsiVyWI23CcQg"/>
+<span class="material-symbols-outlined text-on-surface-variant text-base" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN WRAPPER: SIDEBAR + CONTENT CANVAS -->
+<div class="flex flex-1 w-full overflow-hidden">
+<!-- SIDE NAVIGATION RAIL -->
+<aside class="fixed left-0 top-14 bottom-0 w-64 flex flex-col justify-between p-space-md bg-surface-container-low dark:bg-primary border-r border-outline-variant dark:border-outline z-40">
+<!-- Top header / protocol identity -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-sm pb-space-sm border-b border-outline-variant/60">
+<div class="w-8 h-8 rounded bg-surface-container-lowest border border-outline-variant flex items-center justify-center p-0.5">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="local_hospital">local_hospital</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md font-semibold text-primary dark:text-primary-fixed leading-tight">AIIA CTMS Registry</span>
+<span class="font-code-xs text-code-xs text-on-surface-variant">Protocol AIIA-CT-2024-09</span>
+</div>
+</div>
+<!-- Serious AE CTA -->
+<button class="w-full mt-1 flex items-center justify-center gap-2 py-2 px-3 bg-error text-on-error rounded font-label-md text-label-md font-semibold tracking-wider hover:opacity-95 transition-opacity active:translate-x-0.5 shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="emergency">emergency</span>
+          Initiate Serious AE Form
+        </button>
+<!-- Navigation Tabs -->
+<nav class="flex flex-col gap-1 mt-space-sm">
+<!-- Item 1 -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-outline-variant font-label-md text-label-md rounded hover:bg-surface-container dark:hover:bg-primary-container/40 hover:text-on-surface dark:hover:text-surface-bright transition-colors duration-150 active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-base" data-icon="clinical_notes">clinical_notes</span>
+<span>Trial State Machine</span>
+</a>
+<!-- Item 2 -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-outline-variant font-label-md text-label-md rounded hover:bg-surface-container dark:hover:bg-primary-container/40 hover:text-on-surface dark:hover:text-surface-bright transition-colors duration-150 active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-base" data-icon="assignment">assignment</span>
+<span>eCRF Workspace</span>
+</a>
+<!-- Item 3 -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-outline-variant font-label-md text-label-md rounded hover:bg-surface-container dark:hover:bg-primary-container/40 hover:text-on-surface dark:hover:text-surface-bright transition-colors duration-150 active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-base" data-icon="emergency">emergency</span>
+<span>NPvCC Adverse Reactions</span>
+</a>
+<!-- Item 4 -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-outline-variant font-label-md text-label-md rounded hover:bg-surface-container dark:hover:bg-primary-container/40 hover:text-on-surface dark:hover:text-surface-bright transition-colors duration-150 active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-base" data-icon="verified_user">verified_user</span>
+<span>ALCOA+ Audit Ledger</span>
+</a>
+<!-- Item 5 -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-outline-variant font-label-md text-label-md rounded hover:bg-surface-container dark:hover:bg-primary-container/40 hover:text-on-surface dark:hover:text-surface-bright transition-colors duration-150 active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-base text-amber-700" data-icon="medication">medication</span>
+<span>Herb-Drug Interactions</span>
+</a>
+<!-- Item 6: ACTIVE TAB -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm bg-primary-container dark:bg-primary-container text-on-primary rounded font-label-md text-label-md border-l-4 border-secondary-fixed shadow-sm active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-base text-secondary-fixed" data-icon="file_download">file_download</span>
+<span class="font-semibold tracking-wide">Regulatory Export Hub</span>
+</a>
+</nav>
+</div>
+<!-- Footer tab items -->
+<div class="flex flex-col gap-1 pt-space-sm border-t border-outline-variant/60">
+<a class="flex items-center gap-space-sm px-space-md py-space-xs text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-base text-secondary" data-icon="security">security</span>
+<span>System Health &amp; 21 CFR</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-xs text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-base" data-icon="settings">settings</span>
+<span>Compliance Settings</span>
+</a>
+<!-- System build timestamp -->
+<div class="px-space-md pt-2 flex items-center justify-between font-code-xs text-code-xs text-outline">
+<span>GAMP 5 VAL v3.9</span>
+<span class="flex items-center gap-1 text-secondary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary inline-block animate-pulse"></span> LOCKED
+          </span>
+</div>
+</div>
+</aside>
+<!-- CONTENT CANVAS (Shifted by 64 / 256px for sidebar) -->
+<main class="ml-64 flex-1 p-margin flex flex-col gap-space-lg overflow-y-auto max-h-[calc(100vh-3.5rem)] bg-background">
+<!-- 1. HUB OVERVIEW HEADER & STATUTORY BREADCRUMB -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded p-space-lg flex flex-col gap-space-md relative overflow-hidden">
+<!-- Structural left accent bar -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pl-1">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-code-xs text-code-xs font-semibold bg-secondary-container text-on-secondary-container border border-secondary/30">
+<span class="material-symbols-outlined text-xs" data-icon="verified">verified</span>
+                STATUTORY GATEWAY
+              </span>
+<span class="font-code-xs text-code-xs text-outline">CTRI/2023/11/059882</span>
+<span class="text-outline-variant">•</span>
+<span class="font-code-xs text-code-xs text-outline">GCP / AYUSH-GCP VALIDATED</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">
+              Statutory Regulatory Interoperability &amp; Global CDISC/FHIR Export Engine
+            </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-4xl">
+              Compliant with CDSCO New Drugs &amp; Clinical Trials Rules 2019, US FDA 21 CFR Part 11, and Ayush ABDM Standards.
+              Orchestrates real-time serialized transformation of Ayurvedic phytopharmaceutical and clinical matrices into standard international exchange formats.
+            </p>
+</div>
+<!-- Quick Metrics Banner -->
+<div class="flex items-center gap-3 bg-surface-container-low border border-outline-variant rounded p-3 shrink-0">
+<div class="flex flex-col pr-3 border-r border-outline-variant">
+<span class="font-code-xs text-code-xs text-outline uppercase tracking-wider">Queue Health</span>
+<span class="font-headline-md text-headline-md font-bold text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="check_circle">check_circle</span>
+                3 Formats Verified
+              </span>
+</div>
+<div class="flex flex-col pr-3 border-r border-outline-variant">
+<span class="font-code-xs text-code-xs text-outline uppercase tracking-wider">Serialization</span>
+<span class="font-headline-md text-headline-md font-bold text-primary flex items-center gap-1">
+                0 Errors
+              </span>
+</div>
+<div class="flex flex-col">
+<span class="font-code-xs text-code-xs text-outline uppercase tracking-wider">SHA-256 Digest</span>
+<span class="font-code-xs text-code-xs font-mono text-on-surface bg-surface-container-lowest px-1.5 py-0.5 rounded border border-outline-variant">
+                e8b4...12f0
+              </span>
+</div>
+</div>
+</div>
+<!-- Sub-bar: Compliance & Audit state -->
+<div class="flex flex-wrap items-center justify-between pt-space-sm border-t border-outline-variant/60 font-body-sm text-body-sm text-on-surface-variant gap-2 pl-1">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="lock">lock</span>
+              ALCOA+ Strict Immutable Persistence
+            </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="gavel">gavel</span>
+              CDSCO Schedule Y / Rule 25 Mandate
+            </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-amber-700" data-icon="psychology">psychology</span>
+              Ayurvedic Phenotyping Ontology: NAMASTE &amp; Ayush MESH
+            </span>
+</div>
+<button class="text-primary font-semibold hover:underline flex items-center gap-1 font-label-md text-label-md" id="toggle-contra-drawer">
+<span class="material-symbols-outlined text-base" data-icon="troubleshoot">troubleshoot</span>
+            Live Herb-Drug Interaction Matrix Inspector
+          </button>
+</div>
+</section>
+<!-- 2. CLINICAL EXPORT PACKAGES (THREE INTERACTIVE CARDS BENTO/GRID) -->
+<section class="grid grid-cols-1 xl:grid-cols-3 gap-space-lg items-start">
+<!-- CARD 1: CDISC SDTM TABULATION PACKAGE -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded flex flex-col justify-between shadow-sm relative overflow-hidden h-full">
+<div class="p-space-lg flex flex-col gap-space-md">
+<!-- Header & Badges -->
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex flex-wrap items-center gap-1.5 mb-2">
+<span class="px-2 py-0.5 rounded font-code-xs text-code-xs font-semibold bg-primary text-on-primary">SDTM-IG v3.3</span>
+<span class="px-2 py-0.5 rounded font-code-xs text-code-xs font-semibold bg-surface-container-high text-on-surface border border-outline-variant">Define-XML v2.0 Schema</span>
+<span class="px-2 py-0.5 rounded font-code-xs text-code-xs font-semibold bg-secondary-container text-on-secondary-container">Validated Core 1.4</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">
+                  CDISC SDTM Tabulation Package
+                </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  Study Data Tabulation Model for US FDA, PMDA Japan, and CDSCO New Drug Submissions. Includes botanical phenotype standardizations.
+                </p>
+</div>
+<div class="w-9 h-9 rounded bg-surface-container-low border border-outline-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="inventory_2">inventory_2</span>
+</div>
+</div>
+<!-- Table breakdown of included datasets -->
+<div class="border border-outline-variant rounded overflow-hidden">
+<div class="bg-surface-container-low px-3 py-1.5 border-b border-outline-variant flex justify-between items-center">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Standard Dataset Domains</span>
+<span class="font-code-xs text-code-xs text-outline">5 Files Verified</span>
+</div>
+<div class="divide-y divide-outline-variant text-body-sm font-body-sm">
+<!-- Row 1: dm.csv -->
+<div class="px-3 py-2 flex items-center justify-between hover:bg-surface-container/50 transition-colors">
+<div class="flex items-center gap-2">
+<span class="font-code-xs text-code-xs font-semibold text-primary bg-primary-fixed/30 px-1 rounded">dm.csv</span>
+<span class="font-body-sm text-body-sm text-on-surface">Demographics</span>
+</div>
+<span class="font-code-xs text-code-xs text-on-surface-variant text-right">21 Subjects (Prakriti Phenotypes)</span>
+</div>
+<!-- Row 2: vs.csv -->
+<div class="px-3 py-2 flex items-center justify-between hover:bg-surface-container/50 transition-colors">
+<div class="flex items-center gap-2">
+<span class="font-code-xs text-code-xs font-semibold text-primary bg-primary-fixed/30 px-1 rounded">vs.csv</span>
+<span class="font-body-sm text-body-sm text-on-surface">Vital Signs</span>
+</div>
+<span class="font-code-xs text-code-xs text-on-surface-variant text-right">LOINC + Nadi Pulse Titers</span>
+</div>
+<!-- Row 3: ae.csv -->
+<div class="px-3 py-2 flex items-center justify-between hover:bg-surface-container/50 transition-colors bg-error-container/20">
+<div class="flex items-center gap-2">
+<span class="font-code-xs text-code-xs font-semibold text-error bg-error-container px-1 rounded">ae.csv</span>
+<span class="font-body-sm text-body-sm text-on-surface">Adverse Events</span>
+</div>
+<span class="font-code-xs text-code-xs text-error font-medium text-right">MedDRA v26.1 Coded</span>
+</div>
+<!-- Row 4: cm.csv -->
+<div class="px-3 py-2 flex items-center justify-between hover:bg-surface-container/50 transition-colors">
+<div class="flex items-center gap-2">
+<span class="font-code-xs text-code-xs font-semibold text-primary bg-primary-fixed/30 px-1 rounded">cm.csv</span>
+<span class="font-body-sm text-body-sm text-on-surface">Concomitant Meds</span>
+</div>
+<span class="font-code-xs text-code-xs text-on-surface-variant text-right">Ayurvedic &amp; Allopathic</span>
+</div>
+<!-- Row 5: define.xml -->
+<div class="px-3 py-2 flex items-center justify-between hover:bg-surface-container/50 transition-colors">
+<div class="flex items-center gap-2">
+<span class="font-code-xs text-code-xs font-semibold text-secondary bg-secondary-fixed/40 px-1 rounded">define.xml</span>
+<span class="font-body-sm text-body-sm text-on-surface">Metadata Schema</span>
+</div>
+<span class="font-code-xs text-code-xs text-secondary font-medium text-right">Machine-Readable XML</span>
+</div>
+</div>
+</div>
+<!-- Verification Metadata -->
+<div class="bg-surface-container-low rounded p-2.5 flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base" data-icon="verified_user">verified_user</span>
+<span class="font-code-xs text-code-xs text-on-surface">OpenCDISC Validator: 0 Errors / 0 Warnings</span>
+</div>
+<span class="font-code-xs text-code-xs text-outline">Package: 4.8 MB</span>
+</div>
+</div>
+<!-- Primary CTA Button -->
+<div class="p-space-lg pt-0">
+<button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-primary-container text-on-primary rounded font-label-md text-label-md font-semibold hover:bg-primary transition-all duration-150 active:scale-[0.99] shadow-sm">
+<span class="material-symbols-outlined text-base" data-icon="archive">archive</span>
+              Export CDISC SDTM Submission ZIP (Checksum Verified)
+              <span class="font-code-xs text-code-xs bg-primary px-1.5 py-0.5 rounded ml-1">4.8 MB</span>
+</button>
+</div>
+</article>
+<!-- CARD 2: ABDM & HL7 FHIR R4 PATIENT BUNDLE -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded flex flex-col justify-between shadow-sm relative overflow-hidden h-full">
+<div class="p-space-lg flex flex-col gap-space-md">
+<!-- Header & Badges -->
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex flex-wrap items-center gap-1.5 mb-2">
+<span class="px-2 py-0.5 rounded font-code-xs text-code-xs font-semibold bg-tertiary text-on-tertiary">HL7 FHIR R4</span>
+<span class="px-2 py-0.5 rounded font-code-xs text-code-xs font-semibold bg-tertiary-fixed text-on-tertiary-fixed border border-tertiary/20">ABDM M3 Certified</span>
+<span class="px-2 py-0.5 rounded font-code-xs text-code-xs font-semibold bg-surface-container-high text-on-surface border border-outline-variant">LOINC &amp; SNOMED-CT</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">
+                  ABDM &amp; HL7 FHIR R4 Patient Bundle
+                </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  Ayushman Bharat Digital Mission Interoperability Profile with canonical resource mapping for traditional medicine research.
+                </p>
+</div>
+<div class="w-9 h-9 rounded bg-surface-container-low border border-outline-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary" data-icon="schema">schema</span>
+</div>
+</div>
+<!-- Resource Tags Pill Row -->
+<div class="flex flex-wrap gap-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-low text-on-surface font-code-xs text-code-xs rounded border border-outline-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                Patient Resource (AIIA-P089)
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-low text-on-surface font-code-xs text-code-xs rounded border border-outline-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                Prakriti Observation (Vata-Pitta)
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container-low text-on-surface font-code-xs text-code-xs rounded border border-outline-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                AdverseEvent: Hepatotoxicity
+              </span>
+</div>
+<!-- Code Snippet Preview (FHIR JSON) -->
+<div class="border border-outline-variant rounded bg-[#0A1118] text-surface-bright overflow-hidden">
+<div class="bg-[#131B26] px-3 py-1.5 flex justify-between items-center border-b border-gray-800">
+<span class="font-code-xs text-code-xs text-gray-400">fhir-bundle-patient-p089.json</span>
+<span class="font-code-xs text-code-xs text-emerald-400 font-semibold">VALIDATED R4</span>
+</div>
+<pre class="p-3 font-code-xs text-code-xs overflow-x-auto custom-scrollbar leading-relaxed text-gray-300"><code>{
+  <span class="text-emerald-400">"resourceType"</span>: <span class="text-amber-300">"Bundle"</span>,
+  <span class="text-emerald-400">"id"</span>: <span class="text-amber-300">"aiia-abdm-ct-2024-09"</span>,
+  <span class="text-emerald-400">"type"</span>: <span class="text-amber-300">"collection"</span>,
+  <span class="text-emerald-400">"entry"</span>: [
+    {
+      <span class="text-emerald-400">"resource"</span>: {
+        <span class="text-emerald-400">"resourceType"</span>: <span class="text-amber-300">"Observation"</span>,
+        <span class="text-emerald-400">"code"</span>: {
+          <span class="text-emerald-400">"coding"</span>: [{
+            <span class="text-emerald-400">"system"</span>: <span class="text-sky-300">"https://ayush.gov.in/namaste"</span>,
+            <span class="text-emerald-400">"code"</span>: <span class="text-amber-300">"PRAKRITI-VP"</span>,
+            <span class="text-emerald-400">"display"</span>: <span class="text-amber-300">"Vata-Pitta Constitution"</span>
+          }]
+        },
+        <span class="text-emerald-400">"valueCodeableConcept"</span>: { <span class="text-emerald-400">"text"</span>: <span class="text-amber-300">"Prakriti Validated"</span> }
+      }
+    }
+  ]
+}</code></pre>
+</div>
+<!-- Interoperability Sign-off -->
+<div class="bg-surface-container-low rounded p-2.5 flex items-center justify-between text-body-sm">
+<span class="font-code-xs text-code-xs text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-tertiary" data-icon="token">token</span>
+                NDHM M3 Gateway Token: Encrypted with AIIA Public Key
+              </span>
+<span class="font-code-xs text-code-xs font-semibold text-secondary">ACTIVE</span>
+</div>
+</div>
+<!-- Primary CTA Button -->
+<div class="p-space-lg pt-0">
+<button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-tertiary text-on-tertiary rounded font-label-md text-label-md font-semibold hover:bg-tertiary-container transition-all duration-150 active:scale-[0.99] shadow-sm">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+              Download FHIR R4 JSON Bundle (Signed NDHM Token)
+            </button>
+</div>
+</article>
+<!-- CARD 3: CDSCO FORM CT-16 STATUTORY SERIOUS ADVERSE EVENT PDF -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded flex flex-col justify-between shadow-sm relative overflow-hidden h-full">
+<div class="p-space-lg flex flex-col gap-space-md">
+<!-- Header & Badges -->
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex flex-wrap items-center gap-1.5 mb-2">
+<span class="px-2 py-0.5 rounded font-code-xs text-code-xs font-semibold bg-error text-on-error">Official CDSCO Format</span>
+<span class="px-2 py-0.5 rounded font-code-xs text-code-xs font-semibold bg-error-container text-on-error-container">NDCT Rules 2019 Rule 25</span>
+<span class="px-2 py-0.5 rounded font-code-xs text-code-xs font-semibold bg-surface-container-high text-on-surface border border-outline-variant">Pre-Compiled</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">
+                  CDSCO Form CT-16 Statutory SAE PDF
+                </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  Statutory serious adverse event report for transmission to Central Licensing Authority &amp; Ethics Committee within mandatory 24-hour statutory timeline.
+                </p>
+</div>
+<div class="w-9 h-9 rounded bg-surface-container-low border border-outline-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-error" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+</div>
+<!-- Form CT-16 Detailed Specification Preview Box -->
+<div class="border border-outline-variant rounded bg-surface-container-low p-3 flex flex-col gap-2.5">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<span class="font-label-md text-label-md text-on-surface font-bold uppercase">Preliminary Report Case #089</span>
+<span class="font-code-xs text-code-xs text-error font-semibold bg-error-container px-1.5 py-0.5 rounded">T-MINUS 11h REMAINING</span>
+</div>
+<!-- Key Form Fields -->
+<div class="grid grid-cols-2 gap-2 text-body-sm">
+<div>
+<span class="font-code-xs text-code-xs text-outline uppercase block">Trial Subject Identifier</span>
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">AIIA-P089 (Male, 48y)</span>
+</div>
+<div>
+<span class="font-code-xs text-code-xs text-outline uppercase block">Classification</span>
+<span class="font-body-sm text-body-sm font-semibold text-error">Suspected DILI (Hy's Law)</span>
+</div>
+<div>
+<span class="font-code-xs text-code-xs text-outline uppercase block">Investigational Product</span>
+<span class="font-body-sm text-body-sm text-on-surface">Tinospora cordifolia (Guduchi)</span>
+</div>
+<div>
+<span class="font-code-xs text-code-xs text-outline uppercase block">Concomitant Agent</span>
+<span class="font-body-sm text-body-sm text-on-surface">Paracetamol 650mg TDS</span>
+</div>
+</div>
+<!-- Causality Assessment Scores -->
+<div class="bg-surface-container-lowest p-2 rounded border border-outline-variant">
+<span class="font-code-xs text-code-xs text-outline uppercase block mb-1">Causality Consensus</span>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1 font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface">Naranjo Score:</span>
+<span class="font-code-xs text-code-xs font-bold text-amber-700 bg-amber-50 px-1 rounded border border-amber-200">6 (Probable)</span>
+</div>
+<div class="flex items-center gap-1 font-body-sm text-body-sm">
+<span class="font-semibold text-on-surface">WHO-UMC Scale:</span>
+<span class="font-code-xs text-code-xs font-bold text-amber-700 bg-amber-50 px-1 rounded border border-amber-200">Probable / Likely</span>
+</div>
+</div>
+</div>
+<!-- Cryptographic Stamp Status -->
+<div class="flex items-center justify-between font-code-xs text-code-xs text-outline pt-1">
+<span>Principal Investigator: Dr. V. Sharma</span>
+<span class="text-secondary font-mono">DSC-KEY #21CFR-AIIA-09</span>
+</div>
+</div>
+<!-- Regulatory Countdown Note -->
+<div class="bg-error-container/30 border border-error/30 rounded p-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-base shrink-0" data-icon="alarm">alarm</span>
+<span class="font-code-xs text-code-xs text-on-error-container">
+                CDSCO Rule 25: Mandatory preliminary dispatch to CLA through SUGAM portal is due within 24 hours of site occurrence.
+              </span>
+</div>
+</div>
+<!-- Primary CTA Button -->
+<div class="p-space-lg pt-0">
+<button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-error text-on-error rounded font-label-md text-label-md font-semibold hover:bg-error/90 transition-all duration-150 active:scale-[0.99] shadow-sm">
+<span class="material-symbols-outlined text-base" data-icon="picture_as_pdf">picture_as_pdf</span>
+              Download Pre-Filled Form CT-16 PDF (Cryptographically Sealed)
+            </button>
+</div>
+</article>
+</section>
+<!-- 3. DETAILED STATUTORY PROTOCOL AUDIT & DATASETS MATRIX -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded p-space-lg flex flex-col gap-space-md shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-outline-variant pb-space-sm">
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="table_chart">table_chart</span>
+              Protocol Submissions &amp; e-Record Hash Manifest
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Complete verifiable audit trail satisfying 21 CFR § 11.10(e) and GAMP 5 electronic record integrity.
+            </p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-2.5 py-1 text-body-sm bg-surface-container-low border border-outline-variant rounded hover:bg-surface-container flex items-center gap-1 font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+              Filter Artifacts
+            </button>
+<button class="px-2.5 py-1 text-body-sm bg-surface-container-low border border-outline-variant rounded hover:bg-surface-container flex items-center gap-1 font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+              Export History Log
+            </button>
+</div>
+</div>
+<!-- Table Matrix -->
+<div class="border border-outline-variant rounded overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface font-label-md text-label-md uppercase tracking-wider border-b border-outline-variant">
+<th class="py-2.5 px-4 font-semibold">Standard Artifact</th>
+<th class="py-2.5 px-4 font-semibold">Target Regulatory Body</th>
+<th class="py-2.5 px-4 font-semibold">Schema Specification</th>
+<th class="py-2.5 px-4 font-semibold">Serialization Status</th>
+<th class="py-2.5 px-4 font-semibold">Cryptographic Hash (SHA-256)</th>
+<th class="py-2.5 px-4 font-semibold text-right">Quick Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-sm text-body-sm text-on-surface">
+<!-- Item 1 -->
+<tr class="hover:bg-surface-container/40 transition-colors">
+<td class="py-2.5 px-4 font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base" data-icon="folder_zip">folder_zip</span>
+                  CDISC-SDTM-AIIA-CT-2024-09.zip
+                </td>
+<td class="py-2.5 px-4">US FDA eCTD Module 4 / CDSCO</td>
+<td class="py-2.5 px-4">
+<span class="font-code-xs text-code-xs bg-surface-container-high px-1.5 py-0.5 rounded border border-outline-variant">SDTM-IG 3.3 / define.xml 2.0</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Verified Valid
+                  </span>
+</td>
+<td class="py-2.5 px-4 font-mono font-code-xs text-code-xs text-outline">
+                  8f3c7e09214d4ba...40ef
+                </td>
+<td class="py-2.5 px-4 text-right">
+<button class="text-primary font-semibold hover:underline font-label-md text-label-md">Download (4.8 MB)</button>
+</td>
+</tr>
+<!-- Item 2 -->
+<tr class="hover:bg-surface-container/40 transition-colors">
+<td class="py-2.5 px-4 font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="data_object">data_object</span>
+                  FHIR-ABDM-Bundle-AIIA-P089.json
+                </td>
+<td class="py-2.5 px-4">NHA / ABDM Health Facility Registry</td>
+<td class="py-2.5 px-4">
+<span class="font-code-xs text-code-xs bg-surface-container-high px-1.5 py-0.5 rounded border border-outline-variant">HL7 FHIR R4 Milestone 3</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Signed Token OK
+                  </span>
+</td>
+<td class="py-2.5 px-4 font-mono font-code-xs text-code-xs text-outline">
+                  3b140ad88fe912a...9811
+                </td>
+<td class="py-2.5 px-4 text-right">
+<button class="text-tertiary font-semibold hover:underline font-label-md text-label-md">Download (380 KB)</button>
+</td>
+</tr>
+<!-- Item 3 -->
+<tr class="hover:bg-surface-container/40 transition-colors">
+<td class="py-2.5 px-4 font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-base" data-icon="description">description</span>
+                  CDSCO-FormCT16-SAE-P089.pdf
+                </td>
+<td class="py-2.5 px-4">CDSCO New Delhi / Institutional Ethics</td>
+<td class="py-2.5 px-4">
+<span class="font-code-xs text-code-xs bg-surface-container-high px-1.5 py-0.5 rounded border border-outline-variant">NDCT Rules 2019 / Rule 25</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-error font-semibold">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span> Pending Submission (11h)
+                  </span>
+</td>
+<td class="py-2.5 px-4 font-mono font-code-xs text-code-xs text-outline">
+                  e419aa30f28b491...cc07
+                </td>
+<td class="py-2.5 px-4 text-right">
+<button class="text-error font-semibold hover:underline font-label-md text-label-md">Download Sealed PDF</button>
+</td>
+</tr>
+<!-- Item 4 -->
+<tr class="hover:bg-surface-container/40 transition-colors">
+<td class="py-2.5 px-4 font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-base" data-icon="code_blocks">code_blocks</span>
+                  Botanical-Ontology-NAMASTE-Crosswalk.tsv
+                </td>
+<td class="py-2.5 px-4">WHO International Classification / ICD-11 TM</td>
+<td class="py-2.5 px-4">
+<span class="font-code-xs text-code-xs bg-surface-container-high px-1.5 py-0.5 rounded border border-outline-variant">SNOMED Ayurvedic Extension</span>
+</td>
+<td class="py-2.5 px-4">
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Synced Live
+                  </span>
+</td>
+<td class="py-2.5 px-4 font-mono font-code-xs text-code-xs text-outline">
+                  12fa90b271d488e...b541
+                </td>
+<td class="py-2.5 px-4 text-right">
+<button class="text-primary font-semibold hover:underline font-label-md text-label-md">Download (1.2 MB)</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+</div>
+<!-- INTERACTIVE MODAL / SLIDE-OVER DRAWER: HERB-DRUG CONTRAINDICATION MATRIX -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/60 backdrop-blur-sm hidden" id="contra-modal">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden m-4 animate-in fade-in duration-200">
+<!-- Modal Header -->
+<div class="px-space-lg py-space-md bg-surface-container-low border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-amber-100 border border-amber-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-amber-800 text-sm" data-icon="medication">medication</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md font-bold text-on-surface">Herb-Drug Interaction Intelligence Matrix</h4>
+<span class="font-code-xs text-code-xs text-on-surface-variant">NPvCC Pharmacovigilance Real-Time Evaluation Engine</span>
+</div>
+</div>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" id="close-contra-modal">
+<span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Content Body -->
+<div class="p-space-lg overflow-y-auto custom-scrollbar flex flex-col gap-space-md text-body-sm">
+<!-- Active Conflict Banner -->
+<div class="bg-amber-50 border-l-4 border-amber-600 p-3 rounded-r text-on-surface">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-amber-900 uppercase">Conflict Detected: CYP3A4 &amp; CYP2D6 Pathway Inhibition</span>
+<span class="font-code-xs text-code-xs font-semibold bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded">High Severity</span>
+</div>
+<p class="font-body-sm text-body-sm text-amber-900 mt-1">
+            Co-administration of <em>Curcuma longa</em> (Curcuminoids 95%) with allopathic Anticoagulants (Warfarin sodium) alters international normalized ratio (INR) stability and elevates systemic bleeding liability.
+          </p>
+</div>
+<!-- Botanical Interaction Cross-Reference Table -->
+<div class="border border-outline-variant rounded overflow-hidden">
+<table class="w-full text-left border-collapse font-body-sm">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant font-label-md text-label-md uppercase text-outline">
+<th class="p-2.5">Investigational Botanical</th>
+<th class="p-2.5">Allopathic Drug Class</th>
+<th class="p-2.5">Enzyme / Transporter</th>
+<th class="p-2.5">Clinical Action Plan</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-sm text-on-surface">
+<tr>
+<td class="p-2.5 font-medium">Ashwagandha (Withania somnifera)</td>
+<td class="p-2.5">Benzodiazepines / Barbiturates</td>
+<td class="p-2.5 font-mono font-code-xs text-code-xs text-outline">GABA-A Agonism</td>
+<td class="p-2.5 text-error font-medium">Additive Sedation. Titer titration mandated.</td>
+</tr>
+<tr class="bg-surface-container/30">
+<td class="p-2.5 font-medium">Guduchi (Tinospora cordifolia)</td>
+<td class="p-2.5">Oral Hypoglycemics (Metformin)</td>
+<td class="p-2.5 font-mono font-code-xs text-code-xs text-outline">AMPK Activation</td>
+<td class="p-2.5 text-amber-700 font-medium">Monitor Fasting Glucose daily; risk of hypoglycemia.</td>
+</tr>
+<tr>
+<td class="p-2.5 font-medium">Triphala (Terminalia chebula mix)</td>
+<td class="p-2.5">Fluoroquinolones (Ciprofloxacin)</td>
+<td class="p-2.5 font-mono font-code-xs text-code-xs text-outline">Chelation / Absorption</td>
+<td class="p-2.5 text-primary font-medium">Stagger dosing window by 3 hours minimum.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pharmacovigilance Regulatory Recommendation -->
+<div class="p-3 bg-surface-container-low border border-outline-variant rounded">
+<span class="font-label-md text-label-md text-on-surface font-semibold block mb-1">CDSCO NPvCC Guidance Mandate:</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Under Schedule Y and NDCT Rules 2019, any observed interaction leading to Grade 2 or higher elevation in LFT (AST/ALT &gt; 3x ULN) must be recorded in eCRF Safety Module within 2 hours and classified under expedited Form CT-16 reporting.
+          </p>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-space-lg py-space-sm bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
+<span class="font-code-xs text-code-xs text-outline">Pharmacovigilance Database: MedDRA v26.1 / WHO-DDE</span>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 border border-outline-variant text-on-surface bg-surface-container-lowest hover:bg-surface-container rounded font-label-md text-label-md" id="close-contra-modal-btn">
+            Close Inspector
+          </button>
+<button class="px-3 py-1.5 bg-primary-container text-on-primary hover:bg-primary rounded font-label-md text-label-md flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-sm" data-icon="print">print</span>
+            Export Safety Matrix Report
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- INLINE VANILLA JS FOR DRAWER TOGGLE & MODAL INTERACTION -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('toggle-contra-drawer');
+      const modal = document.getElementById('contra-modal');
+      const closeBtn1 = document.getElementById('close-contra-modal');
+      const closeBtn2 = document.getElementById('close-contra-modal-btn');
+
+      function openModal() {
+        modal.classList.remove('hidden');
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+      }
+
+      if (toggleBtn) toggleBtn.addEventListener('click', openModal);
+      if (closeBtn1) closeBtn1.addEventListener('click', closeModal);
+      if (closeBtn2) closeBtn2.addEventListener('click', closeModal);
+
+      // Close modal on click outside content
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Escape key to close modal
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+    });
+  </script>
+</body></html>

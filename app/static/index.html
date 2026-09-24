@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AyuTrial-CTMS & NPvCC Platform | AIIA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #07090e;
+      --bg-surface: #0f1420;
+      --bg-card: #151b2b;
+      --bg-card-hover: #1b2337;
+      --border-subtle: #1e293b;
+      --border-focus: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --primary: #0284c7;
+      --primary-light: #38bdf8;
+      --primary-glow: rgba(56, 189, 248, 0.15);
+      --ayur-green: #10b981;
+      --ayur-green-glow: rgba(16, 185, 129, 0.18);
+      --danger: #ef4444;
+      --danger-glow: rgba(239, 68, 68, 0.18);
+      --warning: #f59e0b;
+      --accent-purple: #8b5cf6;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Ambient background gradient glow */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(16, 185, 129, 0.06) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(15, 20, 32, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0284c7 0%, #10b981 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #fff;
+    }
+
+    .brand-titles h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-badge {
+      font-size: 0.68rem;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--primary-light);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-titles p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.75rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--ayur-green);
+      font-weight: 600;
+    }
+
+    .status-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--ayur-green);
+      box-shadow: 0 0 8px var(--ayur-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .btn-swagger {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.45rem 0.95rem;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-swagger:hover {
+      border-color: var(--border-focus);
+      background: var(--bg-card-hover);
+      color: var(--primary-light);
+    }
+
+    /* Main Container & Layout */
+    main {
+      flex: 1;
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 3rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Tab Controls */
+    .tab-nav {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 1.75rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .tab-btn.active {
+      color: var(--primary-light);
+      font-weight: 600;
+    }
+
+    .tab-btn.active::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--ayur-green));
+      box-shadow: 0 0 12px var(--primary-light);
+    }
+
+    /* Tab Panes */
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Metric Cards Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .kpi-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--ayur-green));
+      opacity: 0.6;
+    }
+
+    .kpi-title {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .kpi-value {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0.4rem 0;
+      letter-spacing: -0.03em;
+    }
+
+    .kpi-subtext {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .kpi-subtext.highlight-green {
+      color: var(--ayur-green);
+    }
+
+    .kpi-subtext.highlight-red {
+      color: var(--danger);
+    }
+
+    /* Layout Sections */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 980px) {
+      .grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Prakriti Bars */
+    .prakriti-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .prakriti-label {
+      width: 120px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .prakriti-bar-bg {
+      flex: 1;
+      height: 9px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 9999px;
+      margin: 0 1rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .prakriti-bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #0284c7, #10b981);
+      transition: width 0.6s ease;
+    }
+
+    .prakriti-count {
+      width: 32px;
+      text-align: right;
+      font-weight: 600;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    /* Interactive Action Buttons & Form Controls */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+    }
+
+    .btn-danger:hover {
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border-subtle);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--border-focus);
+      background: rgba(56, 189, 248, 0.05);
+      color: var(--primary-light);
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.85rem;
+      font-size: 0.8rem;
+      border-radius: 6px;
+    }
+
+    .input-field, .select-field, textarea {
+      width: 100%;
+      background: #090d15;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      transition: border-color 0.2s;
+    }
+
+    .input-field:focus, .select-field:focus, textarea:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    /* Live 24H Countdown Widget */
+    .countdown-widget {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(15, 20, 32, 0.8) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1.25rem;
+      position: relative;
+    }
+
+    .countdown-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .countdown-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--danger);
+      background: rgba(239, 68, 68, 0.2);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .countdown-digits {
+      font-family: var(--font-mono);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fca5a5;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+    }
+
+    /* Conflict & MedDRA Badges */
+    .conflict-card {
+      background: rgba(239, 68, 68, 0.08);
+      border-left: 4px solid var(--danger);
+      padding: 0.85rem 1rem;
+      border-radius: 0 8px 8px 0;
+      margin-top: 0.85rem;
+      font-size: 0.85rem;
+    }
+
+    .conflict-header {
+      font-weight: 700;
+      color: #fca5a5;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      margin-right: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .badge-meddra {
+      background: rgba(139, 92, 246, 0.18);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+    }
+
+    .badge-green {
+      background: rgba(16, 185, 129, 0.18);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fcd34d;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
+    /* Data Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      background: #0a0e17;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.75rem 1rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-subtle);
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .mono-cell {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    /* JSON payload viewer */
+    .json-viewer {
+      background: #080b12;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #a5f3fc;
+      max-height: 320px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* Toast Notifications */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      z-index: 1000;
+    }
+
+    .toast {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0.85rem 1.25rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      animation: slideIn 0.3s ease-out;
+      min-width: 300px;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .toast.success { border-color: var(--ayur-green); }
+    .toast.error { border-color: var(--danger); }
+    .toast.info { border-color: var(--primary-light); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      background: rgba(10, 14, 23, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-group">
+      <div class="brand-logo">अयु</div>
+      <div class="brand-titles">
+        <h1>AyuTrial-CTMS <span class="brand-badge">NPvCC Safety Node</span></h1>
+        <p>All India Institute of Ayurveda (AIIA) • SIH Problem Statement ID: 26046</p>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <div class="status-pill">
+        <span class="status-pulse"></span>
+        <span>GCP Node Online (Port 8000)</span>
+      </div>
+      <a href="/docs" target="_blank" class="btn-swagger">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+        Swagger Docs
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Body -->
+  <main>
+    <!-- Navigation Tabs -->
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('dashboard')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+        Overview & KPIs
+      </button>
+      <button class="tab-btn" onclick="switchTab('safety')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        NPvCC SAE & Form CT-16
+      </button>
+      <button class="tab-btn" onclick="switchTab('semantic')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        Semantic Signal Detection
+      </button>
+      <button class="tab-btn" onclick="switchTab('patients')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        Patients & Sites
+      </button>
+      <button class="tab-btn" onclick="switchTab('spc')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        SPC Deviations
+      </button>
+      <button class="tab-btn" onclick="switchTab('audit')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        ALCOA+ Ledger
+      </button>
+      <button class="tab-btn" onclick="switchTab('export')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        CDISC / FHIR Export
+      </button>
+    </div>
+
+    <!-- TAB 1: DASHBOARD / KPIS -->
+    <div id="tab-dashboard" class="tab-pane active">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-title">Active Clinical Trials</span>
+          <span class="kpi-value" id="kpi-trials">1</span>
+          <span class="kpi-subtext highlight-green">● Protocol AIIA-GUD-2026 (Recruiting)</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-title">Enrolled Patients</span>
+          <span class="kpi-value" id="kpi-patients">21</span>
+          <span class="kpi-subtext">20 Active, 1 Withdrawn (DPDP)</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-title">Pharmacovigilance SAEs</span>
+          <span class="kpi-value" id="kpi-saes" style="color: #f87171;">1</span>
+          <span class="kpi-subtext highlight-red">▲ 24-hr CDSCO Statutory Countdown</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-title">GCP Compliance Rate</span>
+          <span class="kpi-value" id="kpi-compliance" style="color: #6ee7b7;">100.0%</span>
+          <span class="kpi-subtext highlight-green">✓ Dual-Ledger Zero Tamper</span>
+        </div>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Prakriti Distribution -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Ayurvedic Prakriti Distribution</span>
+            <button class="btn btn-outline btn-sm" onclick="loadKPIs()">Refresh</button>
+          </div>
+          <div id="prakriti-bars-container">
+            <div class="prakriti-row"><span class="prakriti-label">Pitta-Kapha</span><div class="prakriti-bar-bg"><div class="prakriti-bar-fill" style="width: 20%;"></div></div><span class="prakriti-count">4</span></div>
+            <div class="prakriti-row"><span class="prakriti-label">Pitta</span><div class="prakriti-bar-bg"><div class="prakriti-bar-fill" style="width: 15%;"></div></div><span class="prakriti-count">3</span></div>
+            <div class="prakriti-row"><span class="prakriti-label">Kapha</span><div class="prakriti-bar-bg"><div class="prakriti-bar-fill" style="width: 15%;"></div></div><span class="prakriti-count">3</span></div>
+            <div class="prakriti-row"><span class="prakriti-label">Vata-Pitta</span><div class="prakriti-bar-bg"><div class="prakriti-bar-fill" style="width: 15%;"></div></div><span class="prakriti-count">3</span></div>
+            <div class="prakriti-row"><span class="prakriti-label">Vata-Kapha</span><div class="prakriti-bar-bg"><div class="prakriti-bar-fill" style="width: 15%;"></div></div><span class="prakriti-count">3</span></div>
+            <div class="prakriti-row"><span class="prakriti-label">Tridosha</span><div class="prakriti-bar-bg"><div class="prakriti-bar-fill" style="width: 15%;"></div></div><span class="prakriti-count">3</span></div>
+            <div class="prakriti-row"><span class="prakriti-label">Vata</span><div class="prakriti-bar-bg"><div class="prakriti-bar-fill" style="width: 10%;"></div></div><span class="prakriti-count">2</span></div>
+          </div>
+        </div>
+
+        <!-- Quick Demo Patient Highlight -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Pitch Demo Case Profile: AIIA-P089</span>
+            <span class="badge-pill badge-amber">CRITICAL MONITORING</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Pre-configured subject on multicenter trial <strong>AIIA-GUD-2026</strong>. High-risk co-prescription of classical <em>Guduchi Extract</em> and modern <em>Aspirin</em>.
+          </p>
+          <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; font-size: 0.82rem; margin-bottom: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+              <span style="color: var(--text-dim);">Patient UUID:</span>
+              <span class="mono-cell" id="demo-patient-uuid">d1fb346f-7b6f-4de4-a9b1-c9482323affe</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+              <span style="color: var(--text-dim);">Active Herb:</span>
+              <span style="color: var(--ayur-green); font-weight: 600;">Guduchi Extract 500mg BD</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+              <span style="color: var(--text-dim);">Concomitant Allopathic:</span>
+              <span style="color: #f87171; font-weight: 600;">Aspirin 75mg OD</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-dim);">Site:</span>
+              <span>SITE-01 AIIA Apex Centre New Delhi</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <button class="btn btn-primary btn-sm" onclick="switchTab('safety')">Go to SAE Simulator →</button>
+            <button class="btn btn-outline btn-sm" onclick="downloadCT16()">Download Form CT-16 PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: SAFETY & SAE SIMULATOR -->
+    <div id="tab-safety" class="tab-pane">
+      <div class="grid-2col">
+        <!-- SAE Trigger Form -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Trigger Serious Adverse Event (SAE)</span>
+            <span class="badge-pill badge-meddra">Pessimistic Locking & Idempotent</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target Patient UUID</label>
+            <input type="text" id="sae-patient-id" class="input-field mono-cell" value="d1fb346f-7b6f-4de4-a9b1-c9482323affe">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Severity Level</label>
+            <select id="sae-severity" class="select-field">
+              <option value="HOSPITALIZATION">HOSPITALIZATION (Trigger 24-hr CDSCO SLA)</option>
+              <option value="LIFE_THREATENING">LIFE_THREATENING</option>
+              <option value="DEATH">DEATH</option>
+              <option value="DISABILITY">DISABILITY</option>
+              <option value="MODERATE">MODERATE (Non-SAE)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ayurvedic Drug / Intervention</label>
+            <input type="text" id="sae-herb" class="input-field" value="Guduchi Extract 500mg BD">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Concomitant Modern Drugs (Comma Separated)</label>
+            <input type="text" id="sae-drugs" class="input-field" value="Aspirin 75mg OD">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Clinical Presentation & Symptoms (Colloquial / Ayurvedic Phrasing)</label>
+            <textarea id="sae-notes" rows="3" class="input-field">Subject developed acute netra-peetata, dark stool, and severe nausea after morning dose.</textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">X-Idempotency-Key</label>
+            <div style="display: flex; gap: 0.5rem;">
+              <input type="text" id="sae-idempotency" class="input-field mono-cell" value="DEMO-KEY-AIIA-P089">
+              <button class="btn btn-outline btn-sm" onclick="genNewKey()">New Key</button>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+            <button class="btn btn-danger" onclick="submitSAE()">⚡ Submit SAE Event</button>
+            <button class="btn btn-outline" onclick="testIdempotency()">🛡️ Test Idempotency Shield</button>
+          </div>
+        </div>
+
+        <!-- SAE Response / Live Countdown -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Pharmacovigilance Intelligence Response</span>
+            <span id="sae-badge-status" class="badge-pill badge-green">IDLE / READY</span>
+          </div>
+
+          <!-- Countdown -->
+          <div class="countdown-widget" id="countdown-box">
+            <div class="countdown-header">
+              <span class="countdown-tag">CDSCO NDCT 2019 Mandatory 24-hr SLA</span>
+              <span id="countdown-status" style="font-size: 0.8rem; font-weight: 600; color: #fca5a5;">ACTIVE STATUTORY COUNTDOWN</span>
+            </div>
+            <div class="countdown-digits" id="countdown-timer">23:59:45</div>
+            <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.5rem;">
+              Statutory notification deadline to Central Licensing Authority (CDSCO) & Ethics Committee.
+            </p>
+          </div>
+
+          <!-- Conflict detected -->
+          <div id="conflict-box" class="conflict-card" style="display: block;">
+            <div class="conflict-header">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              <span>HERB-DRUG INTERACTION ALERT: GUDUCHI + ASPIRIN</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem;">
+              Critical antiplatelet potentiation / hemorrhage risk. Potentiates bleeding diathesis with concurrent NSAID/salicylate therapy.
+            </p>
+          </div>
+
+          <!-- MedDRA Extracted terms -->
+          <div style="margin-top: 1rem;">
+            <span class="form-label">Auto-Mapped MedDRA Terms:</span>
+            <div id="meddra-badges">
+              <span class="badge-pill badge-meddra">Eye: Jaundice ocular (10023126)</span>
+              <span class="badge-pill badge-meddra">GI: Nausea (10028813)</span>
+              <span class="badge-pill badge-meddra">GI: Melaena (10027175)</span>
+            </div>
+          </div>
+
+          <!-- CT-16 Download -->
+          <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 0.85rem; font-weight: 600;">CDSCO Form CT-16</div>
+              <div style="font-size: 0.75rem; color: var(--text-dim);">Automated ReportLab PDF Generator</div>
+            </div>
+            <button class="btn btn-primary btn-sm" id="btn-download-ct16" onclick="downloadCT16()">
+              <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: SEMANTIC SEARCH -->
+    <div id="tab-semantic" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Semantic Case-Similarity Search (NPvCC Signal Detection)</span>
+          <span class="badge-pill badge-meddra">In-Memory Cosine Vectorizer</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+          Query safety reports using Ayurvedic diagnostic terms (e.g. <em>netra-peetata, raktapitta, chhardi</em>) or colloquial expressions (e.g. <em>peeli aankhein, yellow eyes, dark stool</em>) to detect similar pharmacovigilance clusters.
+        </p>
+        <div class="form-group">
+          <div style="display: flex; gap: 0.75rem;">
+            <input type="text" id="semantic-query" class="input-field" value="hepatic tenderness and peeli aankhein" placeholder="Enter clinical presentation or Ayurvedic phrases...">
+            <button class="btn btn-primary" onclick="runSemanticSearch()">Search Cases</button>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <span style="font-size: 0.78rem; color: var(--text-dim);">Suggested Queries:</span>
+          <button class="btn btn-outline btn-sm" onclick="setQuery('hepatic tenderness and peeli aankhein')">hepatic tenderness and peeli aankhein</button>
+          <button class="btn btn-outline btn-sm" onclick="setQuery('acute netra-peetata and severe nausea')">acute netra-peetata and severe nausea</button>
+          <button class="btn btn-outline btn-sm" onclick="setQuery('dark stool and bleeding risk')">dark stool and bleeding risk</button>
+        </div>
+
+        <div id="semantic-results-box" class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Similarity</th>
+                <th>Patient USUBJID</th>
+                <th>Severity</th>
+                <th>Intervention & Concomitants</th>
+                <th>Mapped MedDRA Concepts</th>
+                <th>Clinical Presentation</th>
+              </tr>
+            </thead>
+            <tbody id="semantic-results-body">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-dim); padding: 2rem;">
+                  Click "Search Cases" to run vector matching against the safety database.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: PATIENTS & SITES -->
+    <div id="tab-patients" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Enrolled Patient Cohort & Multi-Tenant Registry</span>
+          <div style="display: flex; gap: 0.5rem;">
+            <select id="site-filter" class="select-field" style="width: 220px;" onchange="loadPatients()">
+              <option value="ALL">All Sites (Apex + Jamnagar)</option>
+              <option value="7a0e86f9-1463-4a18-95a2-a59e7ef47d53">SITE-01: AIIA New Delhi</option>
+              <option value="f404bd30-b171-466c-b09e-7aa346b776f3">SITE-02: Jamnagar Facility</option>
+            </select>
+            <button class="btn btn-outline btn-sm" onclick="loadPatients()">Reload</button>
+          </div>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Subject ID</th>
+                <th>Prakriti Archetype</th>
+                <th>Baseline Agni</th>
+                <th>DPDP Consent</th>
+                <th>Patient UUID</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="patients-table-body">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-dim); padding: 2rem;">Loading multicenter patient records...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: SPC DEVIATIONS -->
+    <div id="tab-spc" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Statistical Process Control (SPC) Protocol Deviations</span>
+          <span class="badge-pill badge-green">Automated 3-Sigma Anomaly Detection</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+          Continuous quality assurance engine monitoring rolling site visit intervals ($\mu, \sigma$) and patient dosage compliance across active centers.
+        </p>
+        <div class="grid-2col" style="margin-bottom: 1.5rem;">
+          <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px;">
+            <div style="font-size: 0.85rem; font-weight: 600; color: var(--primary-light); margin-bottom: 0.5rem;">SITE-01: AIIA New Delhi Apex Centre</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">
+              <div>Total Records: <strong>27 visits</strong></div>
+              <div>Visit Interval: <strong>μ = 9.5 days, σ = 9.6 days</strong></div>
+              <div>Dosage Compliance: <strong>μ = 95.67%, σ = 8.28%</strong></div>
+            </div>
+          </div>
+          <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px;">
+            <div style="font-size: 0.85rem; font-weight: 600; color: var(--ayur-green); margin-bottom: 0.5rem;">SITE-02: Jamnagar Research Facility</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">
+              <div>Total Records: <strong>25 visits</strong></div>
+              <div>Visit Interval: <strong>μ = 8.6 days, σ = 7.17 days</strong></div>
+              <div>Dosage Compliance: <strong>μ = 97.00%, σ = 1.44%</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Patient USUBJID</th>
+                <th>Visit #</th>
+                <th>Metric Flagged</th>
+                <th>Observed</th>
+                <th>Baseline (μ ± σ)</th>
+                <th>Z-Score</th>
+                <th>Risk Category</th>
+              </tr>
+            </thead>
+            <tbody id="spc-table-body">
+              <tr>
+                <td><strong>AIIA-P007</strong></td>
+                <td>Visit 2</td>
+                <td><span class="badge-pill badge-amber">VISIT_INTERVAL</span></td>
+                <td>42.0 days</td>
+                <td>9.5 ± 9.6</td>
+                <td style="color: #f87171; font-weight: 700;">+3.39 σ</td>
+                <td><span class="badge-pill badge-amber">PROTOCOL_DRIFT_ANOMALY</span></td>
+              </tr>
+              <tr>
+                <td><strong>AIIA-P007</strong></td>
+                <td>Visit 2</td>
+                <td><span class="badge-pill badge-amber">DOSAGE_COMPLIANCE</span></td>
+                <td>55.0%</td>
+                <td>95.67 ± 8.28</td>
+                <td style="color: #f87171; font-weight: 700;">-4.91 σ</td>
+                <td><span class="badge-pill badge-amber">PROTOCOL_DRIFT_ANOMALY</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: ALCOA+ AUDIT -->
+    <div id="tab-audit" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Cryptographic ALCOA+ Dual-Ledger & Merkle Root</span>
+          <button class="btn btn-primary btn-sm" onclick="verifyChain()">Verify Integrity</button>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Every clinical interaction, eCRF entry, SAE notification, and consent state transition is irreversibly appended into an SHA-256 linear hash chain and verifiable via Merkle tree roots.
+        </p>
+        <div id="chain-verify-status" style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div class="status-pulse"></div>
+            <div>
+              <div style="font-weight: 700; color: var(--ayur-green); font-size: 0.95rem;" id="audit-status-text">STATUS: VERIFIED_SECURE</div>
+              <div style="font-size: 0.78rem; color: var(--text-dim);" id="audit-sub-text">Total Chained Blocks: 74 • Tamper Detected: False</div>
+            </div>
+          </div>
+          <span class="badge-pill badge-green">100% GCP Tamper-Proof</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Latest Cryptographic Merkle Root (SHA-256)</label>
+          <input type="text" id="merkle-root-display" class="input-field mono-cell" readonly value="4e3c21556c92d4aa9b15ae3e014ecd3755a9c3e2a657a3734874126f2a666cb5">
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 7: EXPORT -->
+    <div id="tab-export" class="tab-pane">
+      <div class="grid-2col">
+        <!-- CDISC SDTM -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">CDISC SDTM v1.7 Tabulation Package</span>
+            <span class="badge-pill badge-green">FDA / PMDA Ready</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Generates standardized clinical study datasets compliant with CDISC SDTM guidelines, bundled with W3C Define-XML 2.0 schema:
+          </p>
+          <ul style="font-size: 0.82rem; color: var(--text-dim); margin-left: 1.25rem; margin-bottom: 1.5rem;">
+            <li><strong>dm.csv</strong> — Demographics domain with Prakriti phenotype mappings</li>
+            <li><strong>vs.csv</strong> — Longitudinal vital signs (BP, Heart Rate)</li>
+            <li><strong>ae.csv</strong> — Adverse event occurrences with MedDRA Preferred Terms</li>
+            <li><strong>define.xml</strong> — Statutory metadata definition schema</li>
+          </ul>
+          <button class="btn btn-primary" onclick="downloadSDTM()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Download SDTM ZIP Package
+          </button>
+        </div>
+
+        <!-- HL7 FHIR R4 -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">HL7 FHIR R4 Patient Export</span>
+            <span class="badge-pill badge-meddra">ABDM Compatible</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Clinical health record interoperability format compatible with India's Ayushman Bharat Digital Mission (ABDM).
+          </p>
+          <div class="form-group">
+            <label class="form-label">Patient UUID</label>
+            <input type="text" id="fhir-patient-id" class="input-field mono-cell" value="d1fb346f-7b6f-4de4-a9b1-c9482323affe">
+          </div>
+          <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem;">
+            <button class="btn btn-outline btn-sm" onclick="fetchFHIR()">Fetch FHIR JSON</button>
+          </div>
+          <div class="json-viewer" id="fhir-json-viewer">// Click "Fetch FHIR JSON" to inspect FHIR R4 Resource...</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toasts"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div>AyuTrial-CTMS v0.1.0 • All India Institute of Ayurveda (AIIA) New Delhi</div>
+    <div>Smart India Hackathon Problem Statement 26046 • CDSCO NDCT 2019 Compliant</div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const TRIAL_ID = "fdce8312-da6f-4535-b3af-f5b1c9f6e256";
+    let CURRENT_AE_ID = "46f6487e-3a7f-41c6-8ff2-10f35d64d95a";
+    let lastUsedIdempotencyKey = "DEMO-KEY-AIIA-P089";
+
+    function showToast(msg, type="info") {
+      const container = document.getElementById("toasts");
+      const toast = document.createElement("div");
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `<span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
+      
+      const btn = Array.from(document.querySelectorAll(".tab-btn")).find(b => b.getAttribute("onclick").includes(tabId));
+      if (btn) btn.classList.add("active");
+      
+      const pane = document.getElementById(`tab-${tabId}`);
+      if (pane) pane.classList.add("active");
+
+      if (tabId === "patients") loadPatients();
+      if (tabId === "dashboard") loadKPIs();
+    }
+
+    function genNewKey() {
+      const key = "DEMO-KEY-" + Math.floor(Date.now() / 1000);
+      document.getElementById("sae-idempotency").value = key;
+      showToast("Generated new Idempotency Key: " + key, "info");
+    }
+
+    async function loadKPIs() {
+      try {
+        const resp = await fetch("/api/v1/analytics/portfolio-kpis");
+        if (!resp.ok) throw new Error("Failed to load KPIs");
+        const data = await resp.json();
+        
+        document.getElementById("kpi-trials").innerText = data.trial_portfolio.total_trials;
+        document.getElementById("kpi-patients").innerText = data.patient_metrics.total_enrolled;
+        document.getElementById("kpi-saes").innerText = data.safety_kpis.total_saes;
+        document.getElementById("kpi-compliance").innerText = data.compliance_rate.toFixed(1) + "%";
+        
+        showToast("KPI metrics refreshed", "success");
+      } catch (e) {
+        showToast("Error loading KPIs: " + e.message, "error");
+      }
+    }
+
+    async function submitSAE() {
+      const patientId = document.getElementById("sae-patient-id").value.trim();
+      const severity = document.getElementById("sae-severity").value;
+      const notes = document.getElementById("sae-notes").value;
+      const herb = document.getElementById("sae-herb").value;
+      const drugs = document.getElementById("sae-drugs").value.split(",").map(s => s.trim());
+      const idemKey = document.getElementById("sae-idempotency").value.trim();
+      lastUsedIdempotencyKey = idemKey;
+
+      const payload = {
+        patient_id: patientId,
+        severity: severity,
+        clinical_notes: notes,
+        ayurvedic_intervention: herb,
+        concomitant_drugs: drugs,
+        reported_by: "dr_vaidya"
+      };
+
+      try {
+        const resp = await fetch("/api/v1/safety/adverse-event", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Idempotency-Key": idemKey
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (resp.status === 409) {
+          const err = await resp.json();
+          showToast("🛡️ IDEMPOTENCY SHIELD: " + err.detail, "error");
+          document.getElementById("sae-badge-status").innerText = "409 CONFLICT (REJECTED)";
+          document.getElementById("sae-badge-status").className = "badge-pill badge-amber";
+          return;
+        }
+
+        if (!resp.ok) {
+          throw new Error("HTTP error " + resp.status);
+        }
+
+        const data = await resp.json();
+        CURRENT_AE_ID = data.id;
+        showToast("SAE reported successfully! ID: " + data.id.slice(0,8) + "...", "success");
+        document.getElementById("sae-badge-status").innerText = "201 CREATED (24H CLOCK ACTIVE)";
+        document.getElementById("sae-badge-status").className = "badge-pill badge-green";
+        
+        // Render MedDRA
+        if (data.coded_meddra_terms && data.coded_meddra_terms.length > 0) {
+          const badges = data.coded_meddra_terms.map(t => 
+            `<span class="badge-pill badge-meddra">${t.soc}: ${t.preferred_term} (${t.pt_code})</span>`
+          ).join(" ");
+          document.getElementById("meddra-badges").innerHTML = badges;
+        }
+
+      } catch (e) {
+        showToast("Error: " + e.message, "error");
+      }
+    }
+
+    async function testIdempotency() {
+      // Re-submit exact same request
+      submitSAE();
+    }
+
+    function setQuery(q) {
+      document.getElementById("semantic-query").value = q;
+      runSemanticSearch();
+    }
+
+    async function runSemanticSearch() {
+      const q = document.getElementById("semantic-query").value.trim();
+      if (!q) return;
+
+      try {
+        const resp = await fetch("/api/v1/safety/cases/similar?query=" + encodeURIComponent(q));
+        const results = await resp.json();
+        const tbody = document.getElementById("semantic-results-body");
+        
+        if (!results || results.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-dim); padding: 1.5rem;">No cases matched cutoff threshold.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = results.map(r => `
+          <tr>
+            <td>
+              <span class="badge-pill badge-green">${r.similarity_percentage.toFixed(1)}%</span>
+            </td>
+            <td><strong>${r.usubjid}</strong></td>
+            <td><span class="badge-pill badge-amber">${r.severity}</span></td>
+            <td style="font-size: 0.8rem;">
+              <div><strong>Herb:</strong> ${r.ayurvedic_intervention || "N/A"}</div>
+              <div style="color: var(--text-dim);"><strong>Drugs:</strong> ${(r.concomitant_drugs||[]).join(", ")}</div>
+            </td>
+            <td>
+              ${(r.coded_meddra_terms||[]).map(t => `<span class="badge-pill badge-meddra" style="font-size: 0.72rem;">${t.preferred_term}</span>`).join(" ")}
+            </td>
+            <td style="font-size: 0.8rem; color: var(--text-muted); max-width: 250px;">
+              ${r.clinical_notes}
+            </td>
+          </tr>
+        `).join("");
+        
+        showToast(`Found ${results.length} contextually matched cases!`, "success");
+      } catch (e) {
+        showToast("Search failed: " + e.message, "error");
+      }
+    }
+
+    async function loadPatients() {
+      try {
+        const site = document.getElementById("site-filter").value;
+        let url = "/api/v1/patients";
+        const headers = { "X-User-Role": "SUPER_ADMIN" };
+        if (site !== "ALL") {
+          headers["X-Site-Id"] = site;
+        }
+
+        const resp = await fetch(url, { headers });
+        const list = await resp.json();
+        const tbody = document.getElementById("patients-table-body");
+        
+        tbody.innerHTML = list.map(p => `
+          <tr>
+            <td><strong>${p.usubjid}</strong></td>
+            <td><span class="badge-pill badge-pill" style="background: rgba(255,255,255,0.05);">${p.prakriti_type || "N/A"}</span></td>
+            <td>${p.baseline_agni || "SAMA"}</td>
+            <td>
+              <span class="badge-pill ${p.consent_status === 'CONSENTED' ? 'badge-green' : 'badge-amber'}">
+                ${p.consent_status}
+              </span>
+            </td>
+            <td class="mono-cell" style="font-size: 0.75rem; color: var(--text-dim);">${p.id}</td>
+            <td>
+              <button class="btn btn-outline btn-sm" onclick="selectForSAE('${p.id}', '${p.usubjid}')">Report SAE</button>
+            </td>
+          </tr>
+        `).join("");
+      } catch (e) {
+        showToast("Error loading patients: " + e.message, "error");
+      }
+    }
+
+    function selectForSAE(pid, usubjid) {
+      document.getElementById("sae-patient-id").value = pid;
+      switchTab("safety");
+      showToast(`Selected patient ${usubjid} for SAE form`, "info");
+    }
+
+    async function verifyChain() {
+      try {
+        const resp = await fetch("/api/v1/audit/verify-chain");
+        const data = await resp.json();
+        document.getElementById("audit-status-text").innerText = "STATUS: " + data.status;
+        document.getElementById("audit-sub-text").innerText = `Total Chained Blocks: ${data.total_blocks} • Tamper Detected: ${data.tamper_detected}`;
+        if (data.local_merkle_root) {
+          document.getElementById("merkle-root-display").value = data.local_merkle_root;
+        }
+        showToast("ALCOA+ chain verified: " + data.status, "success");
+      } catch (e) {
+        showToast("Audit verify error: " + e.message, "error");
+      }
+    }
+
+    function downloadCT16() {
+      const url = `/api/v1/safety/reports/ct16/${CURRENT_AE_ID}`;
+      window.open(url, "_blank");
+      showToast("Downloading CDSCO Form CT-16 PDF...", "info");
+    }
+
+    function downloadSDTM() {
+      const url = `/api/v1/export/cdisc-sdtm/${TRIAL_ID}`;
+      window.open(url, "_blank");
+      showToast("Downloading CDISC SDTM ZIP...", "info");
+    }
+
+    async function fetchFHIR() {
+      const pid = document.getElementById("fhir-patient-id").value.trim();
+      try {
+        const resp = await fetch(`/api/v1/export/fhir-r4/${pid}`);
+        const data = await resp.json();
+        document.getElementById("fhir-json-viewer").innerText = JSON.stringify(data, null, 2);
+        showToast("FHIR R4 Bundle fetched successfully", "success");
+      } catch (e) {
+        showToast("FHIR fetch error: " + e.message, "error");
+      }
+    }
+
+    // Run initial loaders
+    loadKPIs();
+    runSemanticSearch();
+  </script>
+</body>
+</html>

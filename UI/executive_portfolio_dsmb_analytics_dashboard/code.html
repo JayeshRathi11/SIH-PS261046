@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AyuTrial-CTMS | NPvCC Portal - Executive Portfolio &amp; DSMB Analytics</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#b6ebfe",
+            "primary": "#003527",
+            "secondary-fixed": "#85f8c4",
+            "tertiary-fixed-dim": "#9acee1",
+            "surface": "#faf8ff",
+            "background": "#faf8ff",
+            "on-secondary-container": "#00714e",
+            "on-background": "#131b2e",
+            "surface-bright": "#faf8ff",
+            "on-tertiary-fixed": "#001f28",
+            "on-tertiary-fixed-variant": "#114d5d",
+            "surface-container-highest": "#dae2fd",
+            "on-primary-container": "#80bea6",
+            "on-tertiary": "#ffffff",
+            "surface-variant": "#dae2fd",
+            "error": "#ba1a1a",
+            "secondary": "#006c4a",
+            "secondary-container": "#82f5c1",
+            "surface-container-high": "#e2e7ff",
+            "primary-container": "#064e3b",
+            "on-primary": "#ffffff",
+            "error-container": "#ffdad6",
+            "inverse-surface": "#283044",
+            "on-surface": "#131b2e",
+            "on-secondary-fixed": "#002114",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#86bacc",
+            "surface-tint": "#2b6954",
+            "surface-dim": "#d2d9f4",
+            "inverse-on-surface": "#eef0ff",
+            "inverse-primary": "#95d3ba",
+            "on-primary-fixed": "#002117",
+            "surface-container-low": "#f2f3ff",
+            "primary-fixed-dim": "#95d3ba",
+            "on-surface-variant": "#404944",
+            "primary-fixed": "#b0f0d6",
+            "outline-variant": "#bfc9c3",
+            "on-secondary-fixed-variant": "#005137",
+            "outline": "#707974",
+            "on-error-container": "#93000a",
+            "tertiary": "#003340",
+            "on-primary-fixed-variant": "#0b513d",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#0d4b5b",
+            "secondary-fixed-dim": "#68dba9",
+            "surface-container": "#eaedff",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-compact": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-dense": "0.5rem",
+            "gutter": "1rem",
+            "margin": "1.5rem",
+            "space-md": "0.75rem",
+            "space-lg": "1rem",
+            "space-xl": "1.5rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "code-xs": ["JetBrains Mono"],
+            "headline-xl-mobile": ["Hanken Grotesk"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-md": ["Hanken Grotesk"],
+            "headline-lg": ["Hanken Grotesk"],
+            "body-lg": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-xl": ["Hanken Grotesk"]
+          },
+          "fontSize": {
+            "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "code-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-xl-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["16px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-lg": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.65; }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-subtle 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] text-on-surface antialiased overflow-x-hidden selection:bg-secondary-container selection:text-primary min-h-screen flex flex-col">
+<!-- ========================================================================= -->
+<!-- TOP APP BAR (Shared Components JSON Anchor: TopNavBar)                     -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 left-0 right-0 z-50 h-14 bg-surface-container-lowest border-b border-outline-variant flex items-center justify-between px-margin shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+<!-- Brand & Clinical Search -->
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded bg-primary-container text-white flex items-center justify-center font-headline-md font-bold text-sm tracking-tight border border-secondary-fixed">
+          आ
+        </span>
+<div class="leading-none">
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight block">AyuTrial-CTMS | NPvCC Portal</span>
+<span class="font-code-xs text-code-xs text-outline tracking-wider">AIIA REGULATORY CTMS INSTANCE #IN-09</span>
+</div>
+</div>
+<!-- Quick Search Bar (search_bar: "on_left") -->
+<div class="relative hidden xl:flex items-center ml-4">
+<span class="material-symbols-outlined absolute left-2.5 text-outline text-lg pointer-events-none" data-icon="search">search</span>
+<input class="pl-8 pr-12 py-1.5 bg-surface-container-low border border-outline-variant rounded text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container w-72 transition-all" placeholder="Protocol CTRI, SAE ID, or Subject Hash (⌘K)..." type="text"/>
+<span class="absolute right-2 font-code-xs text-code-xs text-outline border border-outline-variant px-1 rounded bg-white">⌘K</span>
+</div>
+</div>
+<!-- Top Links (Navigation Links from JSON: "Active Trials" active) -->
+<nav class="hidden lg:flex items-center gap-6 h-full pt-1">
+<a class="text-primary border-b-2 border-primary pb-3.5 font-semibold font-label-md text-label-md flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="clinical_notes">clinical_notes</span>
+        Active Trials
+      </a>
+<a class="text-on-surface-variant hover:text-primary pb-3.5 font-label-md text-label-md flex items-center gap-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="assignment">assignment</span>
+        eCRF Matrix
+      </a>
+<a class="text-on-surface-variant hover:text-primary pb-3.5 font-label-md text-label-md flex items-center gap-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="emergency">emergency</span>
+        Safety Signals
+      </a>
+<a class="text-on-surface-variant hover:text-primary pb-3.5 font-label-md text-label-md flex items-center gap-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="verified_user">verified_user</span>
+        Regulatory Audit
+      </a>
+</nav>
+<!-- Trailing Action Cluster & Persona Profile -->
+<div class="flex items-center gap-3">
+<!-- Persona Switcher -->
+<div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-surface-container rounded border border-outline-variant/70">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-code-xs text-code-xs text-outline uppercase font-semibold">Role:</span>
+<span class="font-label-md text-label-md font-semibold text-primary">DSMB / Executive Admin</span>
+</div>
+<!-- Action Buttons from JSON -->
+<button class="hidden md:inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant hover:bg-surface-container rounded text-body-sm font-label-md text-on-surface transition-all active:scale-[0.99]">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="file_download">file_download</span>
+        CDSCO Export
+      </button>
+<button class="inline-flex items-center gap-1 px-3.5 py-1.5 bg-primary-container text-on-primary hover:bg-[#022c22] rounded text-body-sm font-label-md font-semibold transition-all active:scale-[0.99] shadow-sm">
+<span class="material-symbols-outlined text-sm text-secondary-fixed" data-icon="draw">draw</span>
+        Sign Record (21 CFR)
+      </button>
+<!-- Trailing Icon Actions: warning, notifications, account_circle -->
+<div class="flex items-center border-l border-outline-variant pl-3 gap-1">
+<button class="p-1.5 text-error hover:bg-error-container/40 rounded transition-colors relative" title="Safety Signal Alert">
+<span class="material-symbols-outlined text-[20px]" data-icon="warning">warning</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full ring-2 ring-white"></span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:bg-surface-container rounded transition-colors relative" title="System Notifications">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 px-1 bg-primary text-white font-code-xs text-[9px] rounded-full leading-tight">3</span>
+</button>
+<!-- Persona profile with image and details -->
+<div class="flex items-center gap-2 pl-2">
+<img class="w-7 h-7 rounded border border-outline-variant object-cover" data-alt="Photorealistic headshot of Dr. Jayesh Rathi, Senior Clinical Pharmacologist and DSMB Chair, wearing a formal crisp medical blazer with clinical trial badge in an Ayurvedic research institute conference room, soft institutional daylight, serious scientific demeanor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBPiZp7pxi3W9YXxAC-Qc73aEmXR5S7So7I4cb5lpiq3qScgHJoQVs3mm796pkab3yFCNI07JOAnQcvDwdWE3LwWkphzZz9efikV4pAUlmX8-xiwc0HIQGCoqniPhx4VqGPLUpCJrpxiJ7TgM0EFuuO0A_FMcrk3Udu5eqrTS-Wp_eKH2ouZ0yGfBr0BUseTs18UWgiML6kr8aN7NP6c3upgVs1HmeCxHqm23g-ETVniurkYYp1laVPA"/>
+<div class="hidden 2xl:block text-left leading-tight">
+<span class="font-label-md text-label-md font-semibold block text-on-surface">Dr. Jayesh Rathi</span>
+<span class="font-code-xs text-code-xs text-outline block">NPvCC Lead Monitor</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- CRITICAL CDSCO 24-HOUR STATUTORY COUNTDOWN TICKER                         -->
+<!-- ========================================================================= -->
+<div class="fixed top-14 left-0 right-0 z-40 bg-[#FEF2F2] border-b border-[#FECACA] px-margin py-1.5 flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-3 overflow-hidden text-ellipsis whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-error text-white font-code-xs text-[10px] tracking-wide uppercase font-bold animate-pulse-subtle">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+        🚨 ACTIVE SAE: Patient AIIA-P089
+      </span>
+<span class="font-label-md text-label-md text-[#991B1B] font-medium hidden sm:inline">
+        Grade 3 Suspected Hepatotoxicity Signal during Phase II Trial (AIIA-CT-2024-09)
+      </span>
+<span class="font-code-xs text-code-xs text-[#DC2626] font-semibold bg-white/80 px-2 py-0.5 rounded border border-[#FCA5A5]">
+        23:59:12 remaining until CDSCO statutory deadline | SLA: T-24h Window Active
+      </span>
+</div>
+<div class="flex items-center gap-2 flex-shrink-0">
+<a class="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#DC2626] hover:bg-[#B91C1C] text-white text-[11px] font-label-md font-semibold rounded transition-colors" href="#investigate-sae">
+<span>Expedite CIOMS Form</span>
+<span class="material-symbols-outlined text-[13px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<span class="font-code-xs text-[10px] text-outline hidden md:inline">21 CFR §312.32 Compliant</span>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- WORKSTATION WRAPPER WITH SIDENAVBAR                                      -->
+<!-- ========================================================================= -->
+<div class="flex pt-[5.25rem] min-h-screen">
+<!-- ======================================================================= -->
+<!-- SIDENAVBAR (Shared Components JSON Anchor: SideNavBar)                  -->
+<!-- ======================================================================= -->
+<aside class="fixed left-0 top-[5.25rem] bottom-0 w-64 flex flex-col justify-between p-space-md bg-surface-container-low border-r border-outline-variant z-30 select-none">
+<!-- Upper Section: Protocol Emblem & CTMS Registry Header -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3 px-1 py-1 border-b border-outline-variant/60 pb-3">
+<div class="w-9 h-9 rounded bg-primary text-secondary-fixed flex items-center justify-center font-bold text-xs border border-secondary">
+<span class="material-symbols-outlined text-lg" data-icon="health_and_safety">health_and_safety</span>
+</div>
+<div class="overflow-hidden">
+<h2 class="font-headline-md text-headline-md font-semibold text-primary truncate leading-tight">AIIA CTMS Registry</h2>
+<p class="font-code-xs text-code-xs text-outline truncate font-medium">Protocol AIIA-CT-2024-09</p>
+</div>
+</div>
+<!-- Primary CTA from JSON -->
+<button class="w-full flex items-center justify-center gap-1.5 px-3 py-2 bg-error text-white font-label-md text-label-md rounded font-semibold hover:bg-[#991B1B] transition-colors shadow-xs active:translate-x-0.5">
+<span class="material-symbols-outlined text-base" data-icon="add_alert">add_alert</span>
+          Initiate Serious AE Form
+        </button>
+<!-- Tab Items (6 tab_labels from JSON) -->
+<nav class="flex flex-col gap-1 mt-1">
+<!-- Active Tab: Trial State Machine / Executive KPIs -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm bg-primary-container text-on-primary rounded font-label-md text-label-md border-l-4 border-secondary-fixed shadow-xs" href="#">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed" data-icon="clinical_notes">clinical_notes</span>
+<span class="truncate">Trial State Machine</span>
+<span class="ml-auto font-code-xs text-[9px] bg-secondary-fixed/20 text-secondary-fixed px-1.5 py-0.2 rounded font-semibold">ACTIVE</span>
+</a>
+<!-- Inactive Tab 2: eCRF Workspace -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container hover:text-on-surface transition-colors active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-[18px] text-outline" data-icon="assignment">assignment</span>
+<span class="truncate">eCRF Workspace</span>
+<span class="ml-auto font-code-xs text-[10px] text-outline">18/21</span>
+</a>
+<!-- Inactive Tab 3: NPvCC Adverse Reactions -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container hover:text-on-surface transition-colors active:translate-x-0.5 relative" href="#">
+<span class="material-symbols-outlined text-[18px] text-error" data-icon="emergency">emergency</span>
+<span class="truncate">NPvCC Adverse Reactions</span>
+<span class="ml-auto w-2 h-2 rounded-full bg-error animate-ping"></span>
+</a>
+<!-- Inactive Tab 4: ALCOA+ Audit Ledger -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container hover:text-on-surface transition-colors active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-[18px] text-outline" data-icon="verified_user">verified_user</span>
+<span class="truncate">ALCOA+ Audit Ledger</span>
+<span class="ml-auto font-code-xs text-[10px] text-outline">SHA256</span>
+</a>
+<!-- Inactive Tab 5: Herb-Drug Interactions -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container hover:text-on-surface transition-colors active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-[18px] text-[#D97706]" data-icon="medication">medication</span>
+<span class="truncate">Herb-Drug Interactions</span>
+<span class="ml-auto font-code-xs text-[9px] bg-[#FFFBEB] text-[#D97706] border border-[#FDE68A] px-1 rounded">2 Alert</span>
+</a>
+<!-- Inactive Tab 6: Regulatory Export Hub -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container hover:text-on-surface transition-colors active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-[18px] text-outline" data-icon="file_download">file_download</span>
+<span class="truncate">Regulatory Export Hub</span>
+</a>
+</nav>
+</div>
+<!-- Footer Tabs from JSON: footer_tab_labels: ["System Health & 21 CFR", "Compliance Settings"] -->
+<div class="border-t border-outline-variant/60 pt-3 flex flex-col gap-1">
+<a class="flex items-center gap-space-sm px-space-md py-1.5 text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-outline" data-icon="security">security</span>
+<span class="truncate">System Health &amp; 21 CFR</span>
+<span class="ml-auto w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-1.5 text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-outline" data-icon="settings">settings</span>
+<span class="truncate">Compliance Settings</span>
+</a>
+<!-- Instance Footprint Token -->
+<div class="mt-2 p-2 bg-surface-container rounded border border-outline-variant/40 flex items-center justify-between">
+<div>
+<div class="font-code-xs text-[9px] text-outline uppercase font-semibold">GAMP 5 Validation</div>
+<div class="font-code-xs text-code-xs text-primary font-bold">SHA: 8f7e...12a9</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-base" data-icon="lock">lock</span>
+</div>
+</div>
+</aside>
+<!-- ======================================================================= -->
+<!-- MAIN WORKSTATION CANVAS (Level 0 Base: #F8FAFC)                         -->
+<!-- ======================================================================= -->
+<main class="ml-64 flex-1 p-margin space-y-space-lg max-w-[1720px] w-full">
+<!-- Breadcrumbs & Quick DSMB Executive Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-3 pb-2 border-b border-outline-variant/60">
+<div class="flex items-center gap-2">
+<span class="font-code-xs text-code-xs text-outline uppercase">Registry</span>
+<span class="text-outline text-xs">/</span>
+<span class="font-code-xs text-code-xs text-outline uppercase">Protocol AIIA-CT-2024-09</span>
+<span class="text-outline text-xs">/</span>
+<span class="font-label-md text-label-md text-primary font-bold">DSMB Executive Dashboard &amp; Accrual Analytics</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-code-xs text-code-xs text-outline">Last Ledger Sync:</span>
+<span class="font-code-xs text-code-xs font-semibold text-on-surface bg-white px-2 py-0.5 rounded border border-outline-variant">
+            10:48:22 IST (UTC+05:30)
+          </span>
+<button class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container border border-outline-variant bg-white transition-colors" title="Force Audit Trail Sync">
+<span class="material-symbols-outlined text-[15px]" data-icon="refresh">refresh</span>
+</button>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-outline-variant rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="filter_list">filter_list</span>
+            Cohort Filter: All Sites (3)
+          </button>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- TOP METRIC CARDS (KPI GRID)                                            -->
+<!-- ===================================================================== -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- CARD 1: Active Trials -->
+<div class="bg-white border border-outline-variant rounded p-space-md shadow-xs relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<div class="font-code-xs text-code-xs text-outline uppercase font-semibold tracking-wider">Protocol Pipeline</div>
+<div class="font-headline-xl text-headline-xl font-bold text-primary mt-0.5">4 Protocols</div>
+</div>
+<span class="p-2 bg-surface-container-low rounded border border-outline-variant text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="account_tree">account_tree</span>
+</span>
+</div>
+<div class="mt-3 pt-2.5 border-t border-outline-variant/60">
+<div class="font-code-xs text-[10px] text-outline mb-1.5 flex items-center justify-between">
+<span>CTRI Registry Reference</span>
+<span class="font-semibold text-on-surface">CTRI/2024/09/0712</span>
+</div>
+<!-- Regulatory Tags -->
+<div class="flex flex-wrap gap-1">
+<span class="font-code-xs text-[9px] bg-surface-container text-on-surface-variant px-1.5 py-0.5 rounded border border-outline-variant font-medium">1 Draft</span>
+<span class="font-code-xs text-[9px] bg-[#ECFDF5] text-[#059669] px-1.5 py-0.5 rounded border border-[#A7F3D0] font-semibold">1 IEC Approved</span>
+<span class="font-code-xs text-[9px] bg-[#E0F2FE] text-[#0284C7] px-1.5 py-0.5 rounded border border-[#BAE6FD] font-semibold">2 Recruiting</span>
+</div>
+</div>
+</div>
+<!-- CARD 2: Enrolled Cohort (Prakriti Distribution) -->
+<div class="bg-white border border-outline-variant rounded p-space-md shadow-xs flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<div class="font-code-xs text-code-xs text-outline uppercase font-semibold tracking-wider">Accrued Cohort</div>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-headline-xl text-headline-xl font-bold text-primary">21</span>
+<span class="font-body-sm text-body-sm text-outline">/ 30 Target Subjects</span>
+</div>
+</div>
+<span class="p-2 bg-surface-container-low rounded border border-outline-variant text-secondary">
+<span class="material-symbols-outlined text-xl" data-icon="groups">groups</span>
+</span>
+</div>
+<!-- Prakriti Phenotypic Breakdown Bar -->
+<div class="mt-3 pt-2.5 border-t border-outline-variant/60">
+<div class="flex items-center justify-between text-[10px] font-code-xs text-outline mb-1">
+<span>Ayurvedic Prakriti Distribution</span>
+<span class="font-semibold text-primary">70% Target Met</span>
+</div>
+<!-- Progress Bar Segments -->
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden flex mb-2">
+<div class="h-full bg-[#4F46E5] w-[45%]" title="45% Vata-Pitta"></div>
+<div class="h-full bg-[#059669] w-[35%]" title="35% Pitta-Kapha"></div>
+<div class="h-full bg-[#D97706] w-[20%]" title="20% Sama"></div>
+</div>
+<!-- Pills -->
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-[#EEF2FF] text-[#4338CA] border border-[#C7D2FE] rounded font-code-xs text-[9px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#4F46E5]"></span>
+                45% Vata-Pitta
+              </span>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-[#ECFDF5] text-[#047857] border border-[#A7F3D0] rounded font-code-xs text-[9px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#059669]"></span>
+                35% Pitta-Kapha
+              </span>
+<span class="inline-flex items-center gap-1 px-1.5 py-0.5 bg-[#FFFBEB] text-[#B45309] border border-[#FDE68A] rounded font-code-xs text-[9px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#D97706]"></span>
+                20% Sama
+              </span>
+</div>
+</div>
+</div>
+<!-- CARD 3: Active SAEs (Red Indicator) -->
+<div class="bg-white border-l-4 border-l-error border-y border-r border-outline-variant rounded p-space-md shadow-xs flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-start justify-between">
+<div>
+<div class="font-code-xs text-code-xs text-error uppercase font-bold tracking-wider flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+                Active Serious Adverse Events
+              </div>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-headline-xl text-headline-xl font-bold text-error">1</span>
+<span class="font-label-md text-label-md text-error font-semibold">Clock Active (T-24h)</span>
+</div>
+</div>
+<span class="p-2 bg-[#FEF2F2] rounded border border-[#FECACA] text-error">
+<span class="material-symbols-outlined text-xl" data-icon="emergency">emergency</span>
+</span>
+</div>
+<div class="mt-3 pt-2.5 border-t border-outline-variant/60">
+<div class="flex items-center justify-between text-[11px] mb-1">
+<span class="font-code-xs text-code-xs font-semibold text-on-surface">Subject: AIIA-P089</span>
+<span class="font-code-xs text-code-xs text-error font-bold bg-[#FEF2F2] px-1.5 py-0.2 rounded border border-[#FECACA]">Site-02 (AIIA New Delhi)</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant truncate">
+              Suspected DILI vs Herb Interaction (Curcumin + Standard of Care)
+            </div>
+</div>
+</div>
+<!-- CARD 4: 24h SLA Compliance Rate -->
+<div class="bg-white border-l-4 border-l-secondary border-y border-r border-outline-variant rounded p-space-md shadow-xs flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<div class="font-code-xs text-code-xs text-outline uppercase font-semibold tracking-wider">Statutory Reporting SLA</div>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-headline-xl text-headline-xl font-bold text-secondary">100.0%</span>
+<span class="font-code-xs text-code-xs text-[#059669] font-semibold">Zero Breaches</span>
+</div>
+</div>
+<span class="p-2 bg-[#ECFDF5] rounded border border-[#A7F3D0] text-secondary">
+<span class="material-symbols-outlined text-xl" data-icon="verified">verified</span>
+</span>
+</div>
+<div class="mt-3 pt-2.5 border-t border-outline-variant/60 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-code-xs text-[10px] text-outline">21 CFR Part 11 Audit Status</span>
+<span class="font-label-md text-label-md font-semibold text-primary">Cryptographically Sealed</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] font-code-xs text-[10px] font-bold">
+<span class="material-symbols-outlined text-[13px]" data-icon="lock">lock</span>
+              ALCOA+
+            </span>
+</div>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- CENTER DASHBOARD LAYOUT: BENTO SECTION                                 -->
+<!-- ===================================================================== -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- =================================================================== -->
+<!-- CHART PANEL: Recruitment vs Target Accrual Curve (8 Cols)           -->
+<!-- =================================================================== -->
+<div class="lg:col-span-8 bg-white border border-outline-variant rounded shadow-xs p-space-lg flex flex-col justify-between">
+<div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-outline-variant/60">
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline-md text-headline-md font-bold text-primary">Clinical Accrual Trajectory &amp; Bayesian Milestone Model</h3>
+<span class="font-code-xs text-[10px] bg-surface-container text-on-surface-variant px-2 py-0.5 rounded border border-outline-variant font-medium">95% Credible Interval</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">Statistical trajectory comparing scheduled vs real-time enrolled subject kinetics across active sites.</p>
+</div>
+<!-- Chart Legends -->
+<div class="flex items-center gap-4 text-xs font-label-md">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-0.5 bg-outline border border-outline"></span>
+<span class="text-outline">Planned Target</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-1 bg-secondary rounded-xs"></span>
+<span class="text-primary font-semibold">Actual Enrolled (21)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-2 bg-[#E2E8F0]/70 rounded-xs"></span>
+<span class="text-outline">Bayesian Accrual Range</span>
+</div>
+</div>
+</div>
+<!-- SVG Accrual Milestone Chart Canvas -->
+<div class="relative w-full h-64 mt-4 pt-2">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 760 220">
+<defs>
+<!-- Target confidence area fill -->
+<lineargradient id="accrualShade" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#82f5c1" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#82f5c1" stop-opacity="0.02"></stop>
+</lineargradient>
+<lineargradient id="actualLineGrad" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#006c4a"></stop>
+<stop offset="100%" stop-color="#064e3b"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Horizontal Lines -->
+<line stroke="#E2E8F0" stroke-dasharray="3,3" stroke-width="1" x1="40" x2="740" y1="20" y2="20"></line>
+<line stroke="#E2E8F0" stroke-dasharray="3,3" stroke-width="1" x1="40" x2="740" y1="65" y2="65"></line>
+<line stroke="#E2E8F0" stroke-dasharray="3,3" stroke-width="1" x1="40" x2="740" y1="110" y2="110"></line>
+<line stroke="#E2E8F0" stroke-dasharray="3,3" stroke-width="1" x1="40" x2="740" y1="155" y2="155"></line>
+<line stroke="#CBD5E1" stroke-width="1" x1="40" x2="740" y1="200" y2="200"></line>
+<!-- Y-Axis Labels (Subject Count) -->
+<text class="font-code-xs text-[10px] fill-[#707974]" text-anchor="end" x="30" y="24">30</text>
+<text class="font-code-xs text-[10px] fill-[#707974]" text-anchor="end" x="30" y="69">20</text>
+<text class="font-code-xs text-[10px] fill-[#707974]" text-anchor="end" x="30" y="114">15</text>
+<text class="font-code-xs text-[10px] fill-[#707974]" text-anchor="end" x="30" y="159">5</text>
+<text class="font-code-xs text-[10px] fill-[#707974]" text-anchor="end" x="30" y="204">0</text>
+<!-- Target Trajectory Path (Dashed Grey Line) -->
+<!-- Points: M(40, 200) -> Wk2(160, 165) -> Wk4(280, 130) -> Wk6(400, 95) -> Wk8(520, 60) -> Wk10(640, 30) -> Wk12(740, 20) -->
+<path d="M 40,200 L 160,165 L 280,130 L 400,95 L 520,60 L 640,30 L 740,20" fill="none" stroke="#94A3B8" stroke-dasharray="5,4" stroke-width="1.8"></path>
+<!-- Confidence Band Area -->
+<path d="M 40,200 L 160,172 L 280,120 L 400,80 L 520,40 L 520,80 L 400,110 L 280,140 L 160,180 Z" fill="url(#accrualShade)"></path>
+<!-- Actual Enrollment Trajectory Curve -->
+<!-- Current time marker at X=520 (Week 8, Subject 21 => Y=60 approx) -->
+<path d="M 40,200 Q 150,185 240,150 T 400,90 T 520,62" fill="none" stroke="url(#actualLineGrad)" stroke-linecap="round" stroke-width="3"></path>
+<!-- Data Points on Actual Curve -->
+<circle cx="40" cy="200" fill="#003527" r="3.5" stroke="#ffffff" stroke-width="1.5"></circle>
+<circle cx="160" cy="178" fill="#003527" r="3.5" stroke="#ffffff" stroke-width="1.5"></circle>
+<circle cx="280" cy="135" fill="#003527" r="3.5" stroke="#ffffff" stroke-width="1.5"></circle>
+<circle cx="400" cy="90" fill="#003527" r="3.5" stroke="#ffffff" stroke-width="1.5"></circle>
+<!-- Current Milestone Node (Week 8, N=21) -->
+<g class="cursor-pointer">
+<circle class="animate-ping opacity-75" cx="520" cy="62" fill="#006c4a" r="6"></circle>
+<circle cx="520" cy="62" fill="#006c4a" r="5" stroke="#ffffff" stroke-width="2"></circle>
+</g>
+<!-- Current Time Line Divider -->
+<line stroke="#006c4a" stroke-dasharray="2,2" stroke-width="1" x1="520" x2="520" y1="10" y2="200"></line>
+<!-- X-Axis Labels (Timeline) -->
+<text class="font-code-xs text-[10px] fill-[#707974]" text-anchor="middle" x="40" y="216">Wk 0 (Initiation)</text>
+<text class="font-code-xs text-[10px] fill-[#707974]" text-anchor="middle" x="160" y="216">Wk 2</text>
+<text class="font-code-xs text-[10px] fill-[#707974]" text-anchor="middle" x="280" y="216">Wk 4</text>
+<text class="font-code-xs text-[10px] fill-[#707974]" text-anchor="middle" x="400" y="216">Wk 6</text>
+<text class="font-code-xs text-[10px] fill-[#003527] font-bold" text-anchor="middle" x="520" y="216">Wk 8 [Current]</text>
+<text class="font-code-xs text-[10px] fill-[#707974]" text-anchor="middle" x="640" y="216">Wk 10 (Est.)</text>
+<text class="font-code-xs text-[10px] fill-[#707974]" text-anchor="middle" x="740" y="216">Wk 12 (Lock)</text>
+</svg>
+<!-- Inline Floating Milestone Badge -->
+<div class="absolute top-4 left-[64%] bg-white/95 backdrop-blur-xs border border-secondary p-2 rounded shadow-sm flex flex-col pointer-events-none">
+<span class="font-code-xs text-[9px] uppercase tracking-wider text-secondary font-bold">Active Checkpoint</span>
+<span class="font-label-md text-label-md font-bold text-primary">N=21 Subjects Logged</span>
+<span class="font-code-xs text-[10px] text-outline">+2 Ahead of Scheduled Trajectory</span>
+</div>
+</div>
+<!-- Bottom Micro-metrics summary -->
+<div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-outline-variant/60 text-center">
+<div class="p-2 bg-surface-container-low rounded border border-outline-variant/40">
+<div class="font-code-xs text-[10px] text-outline">Mean Velocity</div>
+<div class="font-headline-md text-headline-md font-bold text-primary">2.62 Subj/Wk</div>
+</div>
+<div class="p-2 bg-surface-container-low rounded border border-outline-variant/40">
+<div class="font-code-xs text-[10px] text-outline">Forecasted Accrual Date</div>
+<div class="font-headline-md text-headline-md font-bold text-primary">24 Nov 2024</div>
+</div>
+<div class="p-2 bg-surface-container-low rounded border border-outline-variant/40">
+<div class="font-code-xs text-[10px] text-outline">Retention Fidelity</div>
+<div class="font-headline-md text-headline-md font-bold text-secondary">95.4% Retention</div>
+</div>
+</div>
+</div>
+<!-- =================================================================== -->
+<!-- STATISTICAL PROCESS CONTROL (SPC) SITE DRIFT CARD (4 Cols)          -->
+<!-- =================================================================== -->
+<div class="lg:col-span-4 bg-white border border-[#FECACA] rounded shadow-xs p-space-lg flex flex-col justify-between relative overflow-hidden">
+<!-- Top edge regulatory highlight bar -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-error"></div>
+<div>
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-error text-lg" data-icon="troubleshoot">troubleshoot</span>
+<span class="font-code-xs text-code-xs text-error uppercase font-bold tracking-wider">SPC Drift Alert</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-[#FEF2F2] border border-[#FECACA] text-error font-code-xs text-[10px] font-bold">
+                Z = 2.81 &gt; 2.50
+              </span>
+</div>
+<h4 class="font-headline-md text-headline-md font-bold text-on-surface mt-2 leading-tight">
+              Site-02 (AIIA New Delhi) Protocol Adherence Breach
+            </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+              Statistical Shewhart chart flags sudden upward variance in biochemical liver monitoring turnaround time and Ayush botanical dosage scheduling.
+            </p>
+<!-- Mini Shewhart Control Chart Graphic -->
+<div class="mt-3 p-3 bg-surface-container-low rounded border border-outline-variant/60">
+<div class="flex items-center justify-between text-[10px] font-code-xs mb-1">
+<span class="text-error font-bold">UCL (+3σ): 2.50</span>
+<span class="text-outline">Mean (CL): 1.12</span>
+<span class="text-[#059669]">LCL (-3σ): 0.20</span>
+</div>
+<!-- Mini SVG SPC Run Chart -->
+<svg class="w-full h-16 overflow-visible" viewbox="0 0 280 60">
+<!-- Limit Lines -->
+<line stroke="#DC2626" stroke-dasharray="3,2" stroke-width="1" x1="0" x2="280" y1="12" y2="12"></line>
+<line stroke="#94A3B8" stroke-width="1" x1="0" x2="280" y1="34" y2="34"></line>
+<line stroke="#059669" stroke-dasharray="3,2" stroke-width="1" x1="0" x2="280" y1="52" y2="52"></line>
+<!-- Shewhart Run Points (Sites 1, 2, 3 historical shifts) -->
+<!-- P1(20, 36) -> P2(60, 32) -> P3(100, 38) -> P4(140, 28) -> P5(180, 22) -> P6(220, 16) -> P7(260, 6 = OUT OF CONTROL) -->
+<polyline fill="none" points="20,36 60,32 100,38 140,28 180,22 220,16 260,6" stroke="#707974" stroke-width="1.5"></polyline>
+<circle cx="20" cy="36" fill="#707974" r="3"></circle>
+<circle cx="60" cy="32" fill="#707974" r="3"></circle>
+<circle cx="100" cy="38" fill="#707974" r="3"></circle>
+<circle cx="140" cy="28" fill="#707974" r="3"></circle>
+<circle cx="180" cy="22" fill="#D97706" r="3"></circle>
+<circle cx="220" cy="16" fill="#D97706" r="3"></circle>
+<!-- Breach Node -->
+<circle class="animate-ping" cx="260" cy="6" fill="#DC2626" r="5" stroke="#ffffff" stroke-width="1.5"></circle>
+<circle cx="260" cy="6" fill="#DC2626" r="4"></circle>
+</svg>
+<div class="flex items-center justify-between text-[9px] font-code-xs text-outline mt-1">
+<span>Subject Batches #01 - #08</span>
+<span class="text-error font-semibold">Point #09 Exceeds 3-Sigma Limit</span>
+</div>
+</div>
+<!-- Metadata Details -->
+<div class="mt-3 space-y-1.5 text-[11px] font-body-sm">
+<div class="flex items-center justify-between">
+<span class="text-outline">Assigned CRA:</span>
+<span class="font-semibold text-on-surface">Dr. M. K. Kulkarni</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline">Primary Intervention:</span>
+<span class="font-code-xs text-primary font-semibold">Guduchi Ghana Vati (500mg)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline">Adherence Score:</span>
+<span class="font-code-xs text-error font-bold">81.4% (Threshold: 90%)</span>
+</div>
+</div>
+</div>
+<!-- SPC Action Trigger -->
+<div class="mt-4 pt-3 border-t border-outline-variant/60 flex items-center gap-2">
+<button class="flex-1 py-1.5 px-3 bg-error text-white font-label-md text-label-md font-semibold rounded hover:bg-[#991B1B] transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[15px]" data-icon="search_check">search_check</span>
+              Investigate Site-02
+            </button>
+<button class="p-1.5 border border-outline-variant rounded hover:bg-surface-container text-on-surface-variant transition-colors" title="Download Shewhart Raw CSV">
+<span class="material-symbols-outlined text-base" data-icon="download">download</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- ACTIVE PROTOCOLS TABLE (Tabular Precision Component)                  -->
+<!-- ===================================================================== -->
+<section class="bg-white border border-outline-variant rounded shadow-xs overflow-hidden">
+<!-- Table Control Header -->
+<div class="px-space-md py-3 bg-surface-container-low border-b border-outline-variant flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="table_chart">table_chart</span>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-primary leading-none">Active Protocol Governance Matrix</h3>
+<p class="font-code-xs text-code-xs text-outline mt-0.5">Real-time surveillance across Phase II/III Ayurvedic clinical evaluations under CDSCO Rule 122DA</p>
+</div>
+</div>
+<!-- Actions & Filters -->
+<div class="flex items-center gap-2">
+<div class="relative">
+<input class="pl-7 pr-3 py-1 bg-white border border-outline-variant rounded text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container text-xs w-48" placeholder="Filter protocols..." type="text"/>
+<span class="material-symbols-outlined absolute left-1.5 top-1.5 text-outline text-sm" data-icon="filter_alt">filter_alt</span>
+</div>
+<button class="px-2.5 py-1 bg-white border border-outline-variant rounded text-xs font-label-md text-on-surface hover:bg-surface-container flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="tune">tune</span>
+              Columns
+            </button>
+<button class="px-2.5 py-1 bg-primary text-white rounded text-xs font-label-md font-semibold hover:bg-primary-container flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="add">add</span>
+              Register Protocol
+            </button>
+</div>
+</div>
+<!-- Tabular Grid View -->
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container/70 border-b border-outline-variant font-label-md text-label-md text-outline uppercase tracking-wider select-none">
+<th class="py-2.5 px-3 w-12 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-0" type="checkbox"/>
+</th>
+<th class="py-2.5 px-3">Protocol Identification</th>
+<th class="py-2.5 px-3">Principal Investigator</th>
+<th class="py-2.5 px-3">Active Herbal Intervention</th>
+<th class="py-2.5 px-4 w-52">Accrual Progress</th>
+<th class="py-2.5 px-3">Safety Signals</th>
+<th class="py-2.5 px-3">Regulatory Status</th>
+<th class="py-2.5 px-3 text-right">Audit Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/60 font-body-sm text-body-sm">
+<!-- ROW 1: AIIA-CT-2024-09 (Active Flagged Row) -->
+<tr class="bg-[#FFFDFD] hover:bg-[#FEF2F2]/40 transition-colors border-l-4 border-l-error">
+<td class="py-2.5 px-3 text-center">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-0" type="checkbox"/>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-headline-md text-headline-md font-bold text-primary leading-tight">AIIA-CT-2024-09</div>
+<div class="font-code-xs text-code-xs text-outline flex items-center gap-1 mt-0.5">
+<span>CTRI/2024/09/0712</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="text-primary font-semibold">Phase II Randomized</span>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-label-md text-label-md font-semibold text-on-surface">Dr. V. Sharma, MD (Ayu)</div>
+<div class="font-code-xs text-code-xs text-outline">All India Institute of Ayurveda</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md font-semibold text-primary">Guduchi Ghana Vati</span>
+</div>
+<div class="font-code-xs text-code-xs text-outline">Tinospora cordifolia (500mg BD)</div>
+</td>
+<td class="py-2.5 px-4">
+<div class="flex items-center justify-between font-code-xs text-[11px] mb-1">
+<span class="font-semibold text-primary">21 / 30 Subjects</span>
+<span class="font-bold text-secondary">70.0%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 70%"></div>
+</div>
+<div class="font-code-xs text-[9px] text-outline mt-0.5">3 Active Study Sites</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FEF2F2] text-[#DC2626] border border-[#FECACA] font-code-xs text-[10px] font-bold animate-pulse-subtle">
+<span class="material-symbols-outlined text-[13px]" data-icon="emergency">emergency</span>
+                    1 Serious AE (T-24h)
+                  </span>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[12px]" data-icon="check_circle">check_circle</span>
+                    CDSCO Expedited Review
+                  </span>
+</td>
+<td class="py-2.5 px-3 text-right">
+<button class="px-2 py-1 bg-white border border-outline-variant hover:bg-surface-container rounded font-code-xs text-code-xs text-on-surface font-semibold inline-flex items-center gap-1">
+<span>Inspect</span>
+<span class="material-symbols-outlined text-[12px]" data-icon="open_in_new">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- ROW 2: AIIA-CT-2024-04 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2.5 px-3 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-0" type="checkbox"/>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-headline-md text-headline-md font-bold text-primary leading-tight">AIIA-CT-2024-04</div>
+<div class="font-code-xs text-code-xs text-outline flex items-center gap-1 mt-0.5">
+<span>CTRI/2024/04/0521</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span>Phase III Multicenter</span>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-label-md text-label-md font-semibold text-on-surface">Dr. Ananya Sengupta</div>
+<div class="font-code-xs text-code-xs text-outline">BHU Faculty of Ayurveda</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#82f5c1]"></span>
+<span class="font-label-md text-label-md font-semibold text-primary">Ashwagandha Extract</span>
+</div>
+<div class="font-code-xs text-code-xs text-outline">Withania somnifera (600mg)</div>
+</td>
+<td class="py-2.5 px-4">
+<div class="flex items-center justify-between font-code-xs text-[11px] mb-1">
+<span class="font-semibold text-primary">84 / 120 Subjects</span>
+<span class="font-bold text-primary">70.0%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 70%"></div>
+</div>
+<div class="font-code-xs text-[9px] text-outline mt-0.5">6 Active Sites</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FFFBEB] text-[#D97706] border border-[#FDE68A] font-code-xs text-[10px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" data-icon="report_problem">report_problem</span>
+                    2 Minor ADRs (Resolved)
+                  </span>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#E0F2FE] text-[#0284C7] border border-[#BAE6FD] font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[12px]" data-icon="pending">pending</span>
+                    IEC Interim Approved
+                  </span>
+</td>
+<td class="py-2.5 px-3 text-right">
+<button class="px-2 py-1 bg-white border border-outline-variant hover:bg-surface-container rounded font-code-xs text-code-xs text-on-surface font-semibold inline-flex items-center gap-1">
+<span>Inspect</span>
+<span class="material-symbols-outlined text-[12px]" data-icon="open_in_new">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- ROW 3: AIIA-CT-2024-11 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2.5 px-3 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-0" type="checkbox"/>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-headline-md text-headline-md font-bold text-primary leading-tight">AIIA-CT-2024-11</div>
+<div class="font-code-xs text-code-xs text-outline flex items-center gap-1 mt-0.5">
+<span>CTRI/2024/07/0688</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span>Phase I PK/PD Study</span>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-label-md text-label-md font-semibold text-on-surface">Dr. Rajeshwari Nair</div>
+<div class="font-code-xs text-code-xs text-outline">Govt Ayurveda College, TVM</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#D97706]"></span>
+<span class="font-label-md text-label-md font-semibold text-primary">Curcumin Phytosome</span>
+</div>
+<div class="font-code-xs text-code-xs text-outline">Curcuma longa (Bio-enhanced)</div>
+</td>
+<td class="py-2.5 px-4">
+<div class="flex items-center justify-between font-code-xs text-[11px] mb-1">
+<span class="font-semibold text-primary">12 / 18 Subjects</span>
+<span class="font-bold text-secondary">66.6%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 66.6%"></div>
+</div>
+<div class="font-code-xs text-[9px] text-outline mt-0.5">1 Specialist Phase I Unit</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FFFBEB] text-[#D97706] border border-[#FDE68A] font-code-xs text-[10px] font-semibold">
+<span class="material-symbols-outlined text-[13px]" data-icon="warning">warning</span>
+                    Herb-Drug: Warfarin Interaction
+                  </span>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#ECFDF5] text-[#059669] border border-[#A7F3D0] font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[12px]" data-icon="check">check</span>
+                    Active Enrolling
+                  </span>
+</td>
+<td class="py-2.5 px-3 text-right">
+<button class="px-2 py-1 bg-white border border-outline-variant hover:bg-surface-container rounded font-code-xs text-code-xs text-on-surface font-semibold inline-flex items-center gap-1">
+<span>Inspect</span>
+<span class="material-symbols-outlined text-[12px]" data-icon="open_in_new">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- ROW 4: AIIA-CT-2024-14 (Draft Stage) -->
+<tr class="hover:bg-surface-container-low transition-colors opacity-85">
+<td class="py-2.5 px-3 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-0" type="checkbox"/>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-headline-md text-headline-md font-bold text-on-surface-variant leading-tight">AIIA-CT-2024-14</div>
+<div class="font-code-xs text-code-xs text-outline flex items-center gap-1 mt-0.5">
+<span>Pending CTRI Number</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span>Phase IIa Comparative</span>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-label-md text-label-md font-semibold text-on-surface">Dr. K. S. Balachandran</div>
+<div class="font-code-xs text-code-xs text-outline">Kottakkal Arya Vaidya Sala</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span class="font-label-md text-label-md font-semibold text-on-surface-variant">Brahmi Medhya Rasayana</span>
+</div>
+<div class="font-code-xs text-code-xs text-outline">Bacopa monnieri Hydroethanolic</div>
+</td>
+<td class="py-2.5 px-4">
+<div class="flex items-center justify-between font-code-xs text-[11px] mb-1">
+<span class="text-outline">0 / 60 Subjects</span>
+<span class="font-semibold text-outline">0.0%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-outline rounded-full" style="width: 0%"></div>
+</div>
+<div class="font-code-xs text-[9px] text-outline mt-0.5">IEC Protocol Review</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container text-on-surface-variant border border-outline-variant font-code-xs text-[10px]">
+<span class="material-symbols-outlined text-[13px]" data-icon="shield">shield</span>
+                    Pre-Clinical Safe
+                  </span>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container text-on-surface-variant border border-outline-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[12px]" data-icon="edit_note">edit_note</span>
+                    Draft Form 44 Prep
+                  </span>
+</td>
+<td class="py-2.5 px-3 text-right">
+<button class="px-2 py-1 bg-white border border-outline-variant hover:bg-surface-container rounded font-code-xs text-code-xs text-outline font-semibold inline-flex items-center gap-1">
+<span>Edit Draft</span>
+<span class="material-symbols-outlined text-[12px]" data-icon="edit">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer Pagination / Hash Assurance -->
+<div class="px-space-md py-2.5 bg-surface-container-low border-t border-outline-variant flex flex-wrap items-center justify-between gap-3 text-xs">
+<div class="flex items-center gap-3">
+<span class="font-code-xs text-code-xs text-outline">Displaying 1–4 of 4 Registered Protocols</span>
+<div class="h-3 w-[1px] bg-outline-variant"></div>
+<span class="font-code-xs text-code-xs text-[#059669] flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="verified_user">verified_user</span>
+              Continuous ALCOA+ Data Integrity Ledger Active
+            </span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-2 py-1 bg-white border border-outline-variant rounded font-code-xs text-code-xs text-on-surface disabled:opacity-50" disabled="">
+              Prev
+            </button>
+<span class="font-code-xs text-code-xs font-semibold px-2">Page 1 of 1</span>
+<button class="px-2 py-1 bg-white border border-outline-variant rounded font-code-xs text-code-xs text-on-surface disabled:opacity-50" disabled="">
+              Next
+            </button>
+</div>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- REGULATORY CONTEXT & 21 CFR AUDIT LEDGER FOOTPRINT                   -->
+<!-- ===================================================================== -->
+<footer class="pt-2 pb-6 border-t border-outline-variant/60 flex flex-wrap items-center justify-between gap-4 text-outline font-code-xs text-[11px]">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>CDSCO Sugam Portal Bridge: <strong>Connected (TLS 1.3)</strong></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm" data-icon="fingerprint">fingerprint</span>
+<span>Current Session Hash: <strong>SHA256: 7d84a...93fcb</strong></span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span>Validated Under US FDA 21 CFR Part 11 &amp; GAMP 5 Category 4</span>
+<span>•</span>
+<span class="text-primary font-semibold">National Pharmacovigilance Centre for Ayurveda (NPvCC)</span>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

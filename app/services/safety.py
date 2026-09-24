@@ -5,10 +5,11 @@ Business logic for:
 - Creating adverse events with pessimistic row-level locking on the patient row.
 - Automatic SAE flag + 24-hour SLA deadline when severity is
   HOSPITALIZATION, LIFE_THREATENING, or DEATH (NDCT Rules 2019).
+- NPvCC Pharmacovigilance: Ayurvedic herb-drug interaction checking & MedDRA term extraction.
 - Writing corresponding ALCOA+ audit ledger entries.
 """
 from datetime import datetime, timedelta, timezone
-from typing import Any, Optional
+from typing import Any, List, Optional
 import uuid
 
 from sqlalchemy import select
@@ -23,6 +24,9 @@ from app.models.clinical import (
     TrialPatient,
 )
 from app.services.audit import append_audit_entry
+from app.services.herb_matrix import check_herb_drug_interactions
+from app.services.meddra_coder import extract_meddra_terms
+from app.services.analytics_service import invalidate_kpi_cache
 
 
 SAE_REPORTING_WINDOW_HOURS = 24
@@ -34,27 +38,10 @@ async def create_adverse_event(
     patient_id: uuid.UUID,
     severity: AESeverity,
     clinical_notes: Optional[str],
+    ayurvedic_intervention: Optional[str] = None,
+    concomitant_drugs: Optional[List[str]] = None,
     reported_by: str,
 ) -> AdverseEvent:
-    """
-    Create an adverse event record atomically.
-
-    Pessimistic locking:
-        SELECT ... FOR UPDATE on the patient row prevents concurrent writes
-        (e.g., two coordinators submitting AEs simultaneously for the same patient).
-
-    SAE auto-trigger:
-        If severity in {HOSPITALIZATION, LIFE_THREATENING, DEATH}:
-            is_serious = True
-            sae_clock_start = now()
-            sla_deadline   = now() + 24h
-
-    ALCOA+ audit:
-        Appends a cryptographically chained ledger entry for this INSERT.
-    """
-    # ------------------------------------------------------------------
-    # 1. Lock patient row (pessimistic concurrency control)
-    # ------------------------------------------------------------------
     stmt = (
         select(TrialPatient)
         .where(TrialPatient.id == patient_id)
@@ -62,27 +49,35 @@ async def create_adverse_event(
     )
     result = await db.execute(stmt)
     patient: Optional[TrialPatient] = result.scalar_one_or_none()
-
     if patient is None:
         raise ValueError(f"TrialPatient with id={patient_id} not found.")
 
-    # ------------------------------------------------------------------
-    # 2. Determine SAE flags
-    # ------------------------------------------------------------------
+    drug_list = concomitant_drugs or []
     now = datetime.now(tz=timezone.utc)
     is_serious = severity in SAE_SEVERITIES
-    sae_clock_start: Optional[datetime] = now if is_serious else None
-    sla_deadline: Optional[datetime] = (
+    sae_clock_start = now if is_serious else None
+    sla_deadline = (
         now + timedelta(hours=SAE_REPORTING_WINDOW_HOURS) if is_serious else None
     )
 
-    # ------------------------------------------------------------------
-    # 3. Persist adverse event
-    # ------------------------------------------------------------------
+    conflicts = []
+    if ayurvedic_intervention:
+        conflicts = check_herb_drug_interactions(ayurvedic_intervention, drug_list)
+
+    meddra = extract_meddra_terms(clinical_notes or "")
+    has_conflict = bool(conflicts)
+    form_ct16_available = is_serious
+
     ae = AdverseEvent(
         patient_id=patient_id,
         severity=severity,
         clinical_notes=clinical_notes,
+        ayurvedic_intervention=ayurvedic_intervention,
+        concomitant_drugs=drug_list,
+        herb_drug_conflicts=conflicts,
+        coded_meddra_terms=meddra,
+        has_conflict=has_conflict,
+        form_ct16_available=form_ct16_available,
         is_serious=is_serious,
         sae_clock_start=sae_clock_start,
         sla_deadline=sla_deadline,
@@ -91,21 +86,23 @@ async def create_adverse_event(
         recorded_at=now,
     )
     db.add(ae)
-    await db.flush()  # populate ae.id before audit entry
+    await db.flush()
 
-    # ------------------------------------------------------------------
-    # 4. Write ALCOA+ audit entry
-    # ------------------------------------------------------------------
     field_changes: dict[str, Any] = {
         "patient_id": str(patient_id),
         "severity": severity.value,
         "is_serious": is_serious,
         "clinical_notes": clinical_notes,
+        "ayurvedic_intervention": ayurvedic_intervention,
+        "concomitant_drugs": drug_list,
+        "herb_drug_conflicts": conflicts,
+        "coded_meddra_terms": meddra,
+        "has_conflict": has_conflict,
+        "form_ct16_available": form_ct16_available,
         "sae_clock_start": sae_clock_start.isoformat() if sae_clock_start else None,
         "sla_deadline": sla_deadline.isoformat() if sla_deadline else None,
         "status": AEStatus.OPEN.value,
     }
-
     await append_audit_entry(
         db,
         entity_name="adverse_events",
@@ -114,7 +111,13 @@ async def create_adverse_event(
         field_changes=field_changes,
         modified_by=reported_by,
     )
-
     await db.commit()
     await db.refresh(ae)
+    if is_serious:
+        invalidate_kpi_cache()
+        try:
+            from app.routers.websockets import broadcast_sae_alert
+            await broadcast_sae_alert(ae)
+        except Exception:
+            pass
     return ae

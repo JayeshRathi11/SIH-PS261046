@@ -42,84 +42,8 @@ from app.models.clinical import (
 settings = get_settings()
 
 
-# ---------------------------------------------------------------------------
-# Session-scoped engine fixture (must be created inside async fixture, not
-# at module level, to bind to the session event loop)
-# ---------------------------------------------------------------------------
-@pytest_asyncio.fixture(scope="session")
-async def test_engine() -> AsyncGenerator[AsyncEngine, None]:
-    """Create one async engine for the entire test session."""
-    engine = create_async_engine(
-        settings.DATABASE_URL,
-        echo=False,
-        pool_pre_ping=True,
-        pool_size=5,
-        max_overflow=10,
-    )
-
-    # Create all tables once
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-
-    yield engine
-
-    # Teardown: drop tables and dispose engine
-    try:
-        async with engine.begin() as conn:
-            await conn.run_sync(Base.metadata.drop_all)
-    except Exception:
-        pass
-    await engine.dispose()
-
-
-@pytest_asyncio.fixture(scope="session")
-async def session_factory(test_engine: AsyncEngine) -> async_sessionmaker:
-    """Session factory bound to the test engine."""
-    return async_sessionmaker(
-        bind=test_engine,
-        class_=AsyncSession,
-        expire_on_commit=False,
-        autoflush=False,
-        autocommit=False,
-    )
-
-
-# ---------------------------------------------------------------------------
-# Per-test fixtures
-# ---------------------------------------------------------------------------
-@pytest_asyncio.fixture(autouse=True)
-async def clean_tables(test_engine: AsyncEngine):
-    """Truncate all data before each test for isolation."""
-    async with test_engine.begin() as conn:
-        await conn.execute(text("TRUNCATE TABLE alcoa_audit_ledger RESTART IDENTITY CASCADE;"))
-        await conn.execute(text("TRUNCATE TABLE adverse_events CASCADE;"))
-        await conn.execute(text("TRUNCATE TABLE trial_patients CASCADE;"))
-        await conn.execute(text("TRUNCATE TABLE clinical_trials CASCADE;"))
-    yield
-
-
-@pytest_asyncio.fixture
-async def db_session(session_factory: async_sessionmaker) -> AsyncGenerator[AsyncSession, None]:
-    """Per-test database session."""
-    async with session_factory() as session:
-        yield session
-
-
-@pytest_asyncio.fixture
-async def client(db_session: AsyncSession) -> AsyncGenerator[httpx.AsyncClient, None]:
-    """FastAPI test client with DB dependency overridden to test session."""
-    app = create_app()
-
-    async def _override_get_db():
-        yield db_session
-
-    app.dependency_overrides[get_db] = _override_get_db
-
-    async with httpx.AsyncClient(
-        transport=httpx.ASGITransport(app=app),
-        base_url="http://testserver",
-    ) as ac:
-        yield ac
+# Fixtures (test_engine, session_factory, clean_tables, db_session, client)
+# are provided by tests/conftest.py.
 
 
 # ---------------------------------------------------------------------------

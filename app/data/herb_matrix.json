@@ -1,0 +1,40 @@
+{
+  "rules": [
+    {
+      "herb": "Guduchi",
+      "drugs": ["Aspirin", "Warfarin", "Clopidogrel"],
+      "severity": "CRITICAL",
+      "description": "Antiplatelet potentiation / hemorrhage risk"
+    },
+    {
+      "herb": "Guggulu",
+      "drugs": ["Aspirin", "Warfarin", "Clopidogrel"],
+      "severity": "CRITICAL",
+      "description": "Antiplatelet potentiation / hemorrhage risk"
+    },
+    {
+      "herb": "Ashwagandha",
+      "drugs": ["Diazepam", "Alprazolam", "Lorazepam"],
+      "severity": "HIGH",
+      "description": "Additive CNS depression"
+    },
+    {
+      "herb": "Karela",
+      "drugs": ["Metformin", "Insulin", "Glimepiride"],
+      "severity": "CRITICAL",
+      "description": "Additive hypoglycemia"
+    },
+    {
+      "herb": "Vijaysar",
+      "drugs": ["Metformin", "Insulin", "Glimepiride"],
+      "severity": "CRITICAL",
+      "description": "Additive hypoglycemia"
+    },
+    {
+      "herb": "Shankhpushpi",
+      "drugs": ["Phenytoin", "Carbamazepine"],
+      "severity": "CRITICAL",
+      "description": "Reduces antiepileptic efficacy"
+    }
+  ]
+}

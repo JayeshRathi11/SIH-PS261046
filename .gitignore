@@ -1,9 +1,11 @@
+# Virtual environments & Python packages
 .venv/
+venv/
+env/
 __pycache__/
 *.pyc
 *.pyo
-.env
-.env.local
+*.pyd
 *.egg-info/
 dist/
 build/
@@ -11,3 +13,32 @@ build/
 htmlcov/
 .coverage
 *.log
+*.tmp
+temp_*
+
+# Node & Frontend build outputs
+node_modules/
+.next/
+out/
+.turbo/
+
+# Sensitive environment files (preserve .env.example)
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Heavy media & binary artifacts
+UI/**/screen.png
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.zip
+!apps/web/public/**
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AyuTrial-CTMS | NPvCC Pharmacovigilance &amp; Adverse Event Incident Desk</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter, JetBrains Mono, Hanken Grotesk -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,500;0,600;0,700;0,800;1,600&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#b6ebfe",
+            "primary": "#003527",
+            "secondary-fixed": "#85f8c4",
+            "tertiary-fixed-dim": "#9acee1",
+            "surface": "#faf8ff",
+            "background": "#faf8ff",
+            "on-secondary-container": "#00714e",
+            "on-background": "#131b2e",
+            "surface-bright": "#faf8ff",
+            "on-tertiary-fixed": "#001f28",
+            "on-tertiary-fixed-variant": "#114d5d",
+            "surface-container-highest": "#dae2fd",
+            "on-primary-container": "#80bea6",
+            "on-tertiary": "#ffffff",
+            "surface-variant": "#dae2fd",
+            "error": "#ba1a1a",
+            "secondary": "#006c4a",
+            "secondary-container": "#82f5c1",
+            "surface-container-high": "#e2e7ff",
+            "primary-container": "#064e3b",
+            "on-primary": "#ffffff",
+            "error-container": "#ffdad6",
+            "inverse-surface": "#283044",
+            "on-surface": "#131b2e",
+            "on-secondary-fixed": "#002114",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#86bacc",
+            "surface-tint": "#2b6954",
+            "surface-dim": "#d2d9f4",
+            "inverse-on-surface": "#eef0ff",
+            "inverse-primary": "#95d3ba",
+            "on-primary-fixed": "#002117",
+            "surface-container-low": "#f2f3ff",
+            "primary-fixed-dim": "#95d3ba",
+            "on-surface-variant": "#404944",
+            "primary-fixed": "#b0f0d6",
+            "outline-variant": "#bfc9c3",
+            "on-secondary-fixed-variant": "#005137",
+            "outline": "#707974",
+            "on-error-container": "#93000a",
+            "tertiary": "#003340",
+            "on-primary-fixed-variant": "#0b513d",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#0d4b5b",
+            "secondary-fixed-dim": "#68dba9",
+            "surface-container": "#eaedff",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-compact": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-dense": "0.5rem",
+            "gutter": "1rem",
+            "margin": "1.5rem",
+            "space-md": "0.75rem",
+            "space-lg": "1rem",
+            "space-xl": "1.5rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "code-xs": ["JetBrains Mono"],
+            "headline-xl-mobile": ["Hanken Grotesk"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-md": ["Hanken Grotesk"],
+            "headline-lg": ["Hanken Grotesk"],
+            "body-lg": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-xl": ["Hanken Grotesk"]
+          },
+          "fontSize": {
+            "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "code-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-xl-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["16px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-lg": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      vertical-align: middle;
+      display: inline-block;
+      line-height: 1;
+    }
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    /* Monospace tabular numeric flow */
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased flex flex-col min-h-screen overflow-x-hidden font-body-sm text-body-sm selection:bg-primary-container selection:text-on-primary">
+<!-- PERSISTENT RED EMERGENCY ALERT TICKER -->
+<div class="w-full bg-error text-on-error px-space-md py-1 text-label-md font-label-md flex items-center justify-between z-50 shadow-sm border-b border-on-error-container/30">
+<div class="flex items-center gap-space-sm overflow-hidden whitespace-nowrap">
+<span class="inline-flex items-center justify-center p-0.5 bg-white/20 rounded-full animate-pulse">
+<span class="material-symbols-outlined text-[14px]">emergency</span>
+</span>
+<span class="font-bold tracking-wider">STATUTORY EMERGENCY ALERT (CDSCO NDCT RULES 2019):</span>
+<span class="truncate">Patient AIIA-P089 flagged with Grade 3 Acute Jaundice &amp; Coagulopathy. Statutory 24-Hour expedited Form CT-16 reporting window active.</span>
+</div>
+<div class="flex items-center gap-space-lg flex-shrink-0 font-code-xs text-code-xs">
+<span class="bg-black/25 px-2 py-0.5 rounded font-semibold tabular-nums text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">timer</span> SLA REMAINING: <span id="ticker-clock">23:59:12</span>
+</span>
+<span class="text-white/80 hidden sm:inline">Protocol: AIIA-GUD-2026</span>
+</div>
+</div>
+<!-- TOP APP BAR (from Shared Components JSON: TopNavBar) -->
+<header class="docked full-width top-0 z-50 flex justify-between items-center w-full px-margin h-14 bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline">
+<!-- Left: Product Identity & Search -->
+<div class="flex items-center gap-space-xl">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-headline-md font-headline-md shadow-xs">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]">local_hospital</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight leading-none">
+            AyuTrial-CTMS | NPvCC Portal
+          </span>
+<span class="font-code-xs text-code-xs text-on-surface-variant dark:text-inverse-on-surface mt-0.5">
+            National Pharmacovigilance Coordination Centre (NPvCC) • Ministry of Ayush
+          </span>
+</div>
+</div>
+<!-- Search Bar (on_left) -->
+<div class="relative hidden lg:block w-72">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/60 rounded px-2 pl-8 py-1.5 font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" placeholder="Filter subject, eCRF field or AE code..." type="text"/>
+</div>
+</div>
+<!-- Center: Navigation Links -->
+<nav class="hidden xl:flex items-center gap-space-lg text-body-sm">
+<a class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed pb-1" href="#">Active Trials</a>
+<a class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed pb-1" href="#">eCRF Matrix</a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 font-semibold flex items-center gap-1" href="#">
+<span>Safety Signals</span>
+<span class="w-2 h-2 rounded-full bg-error"></span>
+</a>
+<a class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed pb-1" href="#">Regulatory Audit</a>
+</nav>
+<!-- Right: Persona Switcher, Actions & Profile -->
+<div class="flex items-center gap-space-md">
+<!-- Persona Switcher -->
+<div class="hidden md:flex items-center bg-surface-container px-2 py-1 rounded border border-outline-variant/40">
+<span class="material-symbols-outlined text-primary text-[16px] mr-1.5">verified_user</span>
+<div class="flex flex-col text-left">
+<span class="text-[9px] font-label-md text-outline uppercase tracking-wider leading-none">Role Context</span>
+<span class="font-label-md text-label-md text-primary font-semibold leading-tight">NPvCC Pharmacovigilance Officer</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[14px] ml-1">expand_more</span>
+</div>
+<!-- Trailing Action: CDSCO Export -->
+<button class="hidden sm:flex items-center gap-1 px-space-md py-1.5 bg-surface-container-lowest border border-outline-variant rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors duration-150 active:scale-[0.99]">
+<span class="material-symbols-outlined text-[14px]">file_download</span>
+<span>CDSCO Export</span>
+</button>
+<!-- Trailing Action: Sign Record (21 CFR) -->
+<button class="flex items-center gap-1 px-space-md py-1.5 bg-primary-container text-on-primary rounded font-label-md text-label-md hover:bg-primary transition-colors duration-150 shadow-sm active:scale-[0.99]">
+<span class="material-symbols-outlined text-secondary-fixed text-[14px]">draw</span>
+<span>Sign Record (21 CFR)</span>
+</button>
+<div class="h-5 w-px bg-outline-variant"></div>
+<!-- Icon Actions -->
+<div class="flex items-center gap-1">
+<button class="relative p-1.5 rounded hover:bg-surface-container text-error transition-colors" title="Safety Warning">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full ring-2 ring-white"></span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container text-on-surface-variant transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+</div>
+<!-- Chief Investigator / PV Profile -->
+<div class="flex items-center gap-2 pl-1 border-l border-outline-variant/60" title="Chief Clinical Investigator Dr. V. Sharma">
+<div class="w-8 h-8 rounded-full bg-primary text-secondary-fixed flex items-center justify-center font-bold text-xs ring-1 ring-primary-container">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- BODY CONTENT WRAPPER WITH FIXED SIDEBAR -->
+<div class="flex flex-1 relative pt-0">
+<!-- SIDE NAVIGATION BAR (from Shared Components JSON: SideNavBar) -->
+<aside class="fixed left-0 top-[88px] bottom-0 w-64 flex flex-col justify-between p-space-md bg-surface-container-low dark:bg-primary border-r border-outline-variant dark:border-outline z-40 overflow-y-auto">
+<div class="flex flex-col gap-space-md">
+<!-- Site Registry Identity Header -->
+<div class="px-space-sm py-space-xs border-b border-outline-variant/40 pb-space-md">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-primary-container text-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">assured_workload</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md font-semibold text-primary dark:text-primary-fixed leading-tight">AIIA CTMS Registry</h2>
+<p class="font-code-xs text-code-xs text-on-surface-variant dark:text-outline-variant">Protocol AIIA-CT-2024-09</p>
+</div>
+</div>
+</div>
+<!-- Call to Action: Initiate Serious AE Form -->
+<button class="w-full flex items-center justify-center gap-2 px-space-md py-2 bg-error text-on-error rounded font-label-md text-label-md font-bold tracking-wide uppercase hover:bg-error/90 transition-all shadow-xs active:translate-x-0.5">
+<span class="material-symbols-outlined text-[16px]">add_alert</span>
+<span>Initiate Serious AE Form</span>
+</button>
+<!-- Main Tab Links -->
+<nav class="flex flex-col gap-1 mt-1">
+<!-- Tab 1: Trial State Machine -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-outline-variant font-label-md text-label-md rounded hover:bg-surface-container dark:hover:bg-primary-container/40 hover:text-on-surface dark:hover:text-surface-bright transition-colors duration-150 active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-[18px]">clinical_notes</span>
+<span>Trial State Machine</span>
+</a>
+<!-- Tab 2: eCRF Workspace -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-outline-variant font-label-md text-label-md rounded hover:bg-surface-container dark:hover:bg-primary-container/40 hover:text-on-surface dark:hover:text-surface-bright transition-colors duration-150 active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-[18px]">assignment</span>
+<span>eCRF Workspace</span>
+</a>
+<!-- Tab 3: NPvCC Adverse Reactions (ACTIVE TAB - Exactly matches Intent) -->
+<a class="flex items-center justify-between px-space-md py-space-sm bg-primary-container dark:bg-primary-container text-on-primary rounded font-label-md text-label-md border-l-4 border-secondary-fixed active:translate-x-0.5" href="#">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed">emergency</span>
+<span class="font-semibold text-white">NPvCC Adverse Reactions</span>
+</div>
+<!-- Alert Badge '1' -->
+<span class="bg-error text-on-error text-code-xs font-code-xs px-1.5 py-0.2 rounded-full font-bold animate-pulse">1</span>
+</a>
+<!-- Tab 4: ALCOA+ Audit Ledger -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-outline-variant font-label-md text-label-md rounded hover:bg-surface-container dark:hover:bg-primary-container/40 hover:text-on-surface dark:hover:text-surface-bright transition-colors duration-150 active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>ALCOA+ Audit Ledger</span>
+</a>
+<!-- Tab 5: Herb-Drug Interactions -->
+<a class="flex items-center justify-between px-space-md py-space-sm text-on-surface-variant dark:text-outline-variant font-label-md text-label-md rounded hover:bg-surface-container dark:hover:bg-primary-container/40 hover:text-on-surface dark:hover:text-surface-bright transition-colors duration-150 active:translate-x-0.5" href="#">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px]">medication</span>
+<span>Herb-Drug Interactions</span>
+</div>
+<span class="bg-amber-100 text-amber-900 border border-amber-300 text-[9px] px-1 rounded font-bold">FLAG</span>
+</a>
+<!-- Tab 6: Regulatory Export Hub -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant dark:text-outline-variant font-label-md text-label-md rounded hover:bg-surface-container dark:hover:bg-primary-container/40 hover:text-on-surface dark:hover:text-surface-bright transition-colors duration-150 active:translate-x-0.5" href="#">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span>Regulatory Export Hub</span>
+</a>
+</nav>
+</div>
+<!-- Footer Tab Labels -->
+<div class="border-t border-outline-variant/40 pt-space-md flex flex-col gap-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-xs text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">security</span>
+<span>System Health &amp; 21 CFR</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-xs text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">settings</span>
+<span>Compliance Settings</span>
+</a>
+<div class="mt-2 p-2 bg-surface-container rounded border border-outline-variant/30 flex items-center justify-between">
+<span class="font-code-xs text-code-xs text-outline">GAMP 5 VALIDATED</span>
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+</div>
+</div>
+</aside>
+<!-- MAIN CLINICAL WORKSTATION CANVAS -->
+<main class="ml-64 flex-1 p-space-lg bg-surface flex flex-col gap-space-lg min-w-0">
+<!-- BREADCRUMB & CONTEXT HEADER -->
+<div class="flex flex-wrap items-center justify-between gap-space-md border-b border-outline-variant/60 pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-outline">CTMS</span>
+<span class="text-outline">/</span>
+<span class="font-label-md text-label-md text-outline">NPvCC Safety Desk</span>
+<span class="text-outline">/</span>
+<span class="font-label-md text-label-md text-primary font-bold">Active SAE Incident #AIIA-SAE-2026-004</span>
+</div>
+<!-- Status indicator cluster -->
+<div class="flex items-center gap-space-sm font-code-xs text-code-xs">
+<span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-300 flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+            21 CFR PART 11 COMPLIANT
+          </span>
+<span class="px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200">
+            SUGAM GATEWAY: STANDBY
+          </span>
+<span class="text-outline font-code-xs">HASH: 0x9f4a...e81c</span>
+</div>
+</div>
+<!-- WORKSTATION GRID: 2-COLUMN ASYMMETRIC BENTO ARCHITECTURE -->
+<div class="grid grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN (SPAN 8): ACTIVE SERIOUS ADVERSE EVENT (SAE) WORKSPACE -->
+<section class="col-span-12 lg:col-span-8 flex flex-col gap-space-lg">
+<!-- 1. PATIENT PROFILE BANNER & CRITICAL SEVERITY CLUSTER -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-lg p-space-lg shadow-sm border-l-4 border-l-error">
+<div class="flex flex-wrap items-start justify-between gap-space-md mb-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded bg-surface-container-high border border-outline-variant flex items-center justify-center font-bold text-primary text-headline-md">
+                  P089
+                </div>
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">Patient AIIA-P089</h1>
+<!-- Emergency Crimson Pulsing Badge -->
+<span class="px-2.5 py-0.5 rounded-full bg-error text-on-error font-label-md text-label-md font-bold tracking-wider uppercase flex items-center gap-1 animate-pulse shadow-sm">
+<span class="w-2 h-2 rounded-full bg-white"></span>
+                      HOSPITALIZATION / SAE
+                    </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-body-sm text-on-surface-variant font-medium">
+<span><strong class="text-on-surface">Trial:</strong> AIIA-GUD-2026 (Phase IIb)</span>
+<span class="text-outline">•</span>
+<span><strong class="text-on-surface">Demographics:</strong> 48 M</span>
+<span class="text-outline">•</span>
+<span><strong class="text-on-surface">Site:</strong> AIIA New Delhi (Site 01)</span>
+<span class="text-outline">•</span>
+<span><strong class="text-on-surface">Investigator:</strong> Dr. R. K. Suresh (PI)</span>
+</div>
+</div>
+</div>
+<!-- Quick Meta Tag -->
+<div class="bg-surface-container-low px-space-md py-1.5 rounded border border-outline-variant/50 text-right">
+<div class="text-[10px] font-label-md text-outline">PRIMARY STUDY ARM</div>
+<div class="font-label-md text-label-md text-primary font-bold">Guduchi Extract (500mg BID)</div>
+</div>
+</div>
+<!-- Vital Signs & Lab Micro Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm pt-space-sm border-t border-outline-variant/40 font-code-xs text-code-xs">
+<div class="p-2 bg-surface-container-low/60 rounded">
+<span class="text-outline block">Total Bilirubin</span>
+<span class="text-error font-bold text-body-md font-body-md">4.2 mg/dL</span>
+<span class="text-error font-medium block">↑ (Baseline: 0.8)</span>
+</div>
+<div class="p-2 bg-surface-container-low/60 rounded">
+<span class="text-outline block">Serum ALT / SGPT</span>
+<span class="text-error font-bold text-body-md font-body-md">312 IU/L</span>
+<span class="text-error font-medium block">↑ Grade 3 Elevation</span>
+</div>
+<div class="p-2 bg-surface-container-low/60 rounded">
+<span class="text-outline block">INR / Coagulation</span>
+<span class="text-error font-bold text-body-md font-body-md">2.41</span>
+<span class="text-error font-medium block">Critical prolonged</span>
+</div>
+<div class="p-2 bg-surface-container-low/60 rounded">
+<span class="text-outline block">Platelet Count</span>
+<span class="text-on-surface font-bold text-body-md font-body-md">135,000 /µL</span>
+<span class="text-outline-variant block">Low Normal</span>
+</div>
+</div>
+</div>
+<!-- 2. PROMINENT 24-HOUR STATUTORY REGULATORY SLA COUNTDOWN CLOCK -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-lg p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[22px]">hourglass_top</span>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">24-Hour Statutory Regulatory SLA Window</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Statutory compliance under CDSCO New Drugs and Clinical Trials Rules, 2019 (Form CT-16)</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-md text-label-md font-bold">T-24h CLOCK ACTIVE</span>
+</div>
+<!-- Countdown Timer & Circular Gauge Container -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg items-center bg-surface-container-low p-space-md rounded-lg border border-outline-variant/40 mt-space-sm">
+<!-- Circular Progress SLA Gauge (Custom SVG) -->
+<div class="md:col-span-4 flex flex-col items-center justify-center py-2">
+<div class="relative w-36 h-36 flex items-center justify-center">
+<!-- Background Ring -->
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 120 120">
+<circle cx="60" cy="60" fill="transparent" r="50" stroke="#dae2fd" stroke-width="10"></circle>
+<!-- Progress Track: SLA Consumed (e.g. 5% consumed, 95% left) -->
+<circle class="transition-all duration-1000 ease-out" cx="60" cy="60" fill="transparent" r="50" stroke="#ba1a1a" stroke-dasharray="314.159" stroke-dashoffset="18" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<!-- Inner Gauge Readout -->
+<div class="absolute flex flex-col items-center text-center">
+<span class="text-[10px] font-label-md text-outline uppercase font-bold">Elapsed</span>
+<span class="font-headline-md text-headline-md font-bold text-error">00:00:48</span>
+<span class="text-[9px] font-code-xs text-outline">WINDOW T-0</span>
+</div>
+</div>
+<span class="font-label-md text-label-md text-error font-semibold mt-2">Critical Expedited Window</span>
+</div>
+<!-- High-Visibility Digital Timer & Regulatory Directives -->
+<div class="md:col-span-8 flex flex-col justify-center gap-space-sm">
+<div class="bg-surface-container-lowest p-space-md rounded border border-outline-variant/60">
+<div class="flex items-center justify-between text-outline text-label-md font-label-md mb-1">
+<span>TIME REMAINING UNTIL CDSCO STATUTORY DEADLINE:</span>
+<span class="font-code-xs text-code-xs text-error font-bold">MANDATORY SUBMISSION</span>
+</div>
+<!-- High Visibility Digital Timer -->
+<div class="font-code-sm text-[36px] font-bold tracking-tight text-error leading-tight tabular-nums flex items-baseline gap-2">
+<span id="countdown-main">23:59:12</span>
+<span class="text-xs font-label-md text-on-surface-variant font-normal">hours:min:sec</span>
+</div>
+<div class="w-full bg-outline-variant/30 h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-error h-full rounded-full w-[96%]"></div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between text-code-xs font-code-xs text-on-surface-variant gap-2 pt-1">
+<span><strong>SAE Intake Timestamp:</strong> 2026-03-30 08:30 IST</span>
+<span><strong>Statutory Cutoff:</strong> 2026-03-31 08:30 IST</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. AUTO-CODED MedDRA PREFERRED TERMS (PT) SECTION -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-lg p-space-lg shadow-sm">
+<div class="flex items-center justify-between pb-space-sm border-b border-outline-variant/40 mb-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Auto-Coded MedDRA Preferred Terms (v26.1)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Extracted directly from PI clinical admission notes via Clinical NLP BioBERT Classifier</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-code-xs text-code-xs font-bold flex items-center gap-1 border border-secondary">
+<span class="material-symbols-outlined text-[13px]">smart_toy</span>
+                94.2% AI CONFIDENCE SCORE
+              </span>
+</div>
+<!-- MedDRA Hierarchy Interactive Badges -->
+<div class="flex flex-col gap-space-sm">
+<!-- Term 1: Jaundice ocular -->
+<div class="p-space-sm bg-surface-container-low rounded border border-outline-variant/60 flex items-start justify-between gap-space-md hover:bg-surface-container transition-colors">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-amber-700 text-[18px] mt-0.5">visibility</span>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">Jaundice ocular</span>
+<span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary font-code-xs text-code-xs">MedDRA PT: 10023126</span>
+</div>
+<p class="font-code-xs text-code-xs text-on-surface-variant mt-0.5">
+                      System Organ Class (SOC): <strong class="text-primary font-semibold">Hepatobiliary disorders</strong> • Low Level Term (LLT): Scleral icterus
+                    </p>
+</div>
+</div>
+<div class="flex items-center gap-2 font-code-xs text-code-xs flex-shrink-0">
+<span class="text-secondary font-bold">NLP: 98.1% match</span>
+<button class="px-2 py-1 bg-surface-container-lowest border border-outline-variant rounded hover:bg-surface-container text-on-surface" title="Override code">
+                    Edit
+                  </button>
+</div>
+</div>
+<!-- Term 2: Nausea -->
+<div class="p-space-sm bg-surface-container-low rounded border border-outline-variant/60 flex items-start justify-between gap-space-md hover:bg-surface-container transition-colors">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">sick</span>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">Nausea</span>
+<span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary font-code-xs text-code-xs">MedDRA PT: 10028813</span>
+</div>
+<p class="font-code-xs text-code-xs text-on-surface-variant mt-0.5">
+                      System Organ Class (SOC): <strong class="text-primary font-semibold">Gastrointestinal disorders</strong> • LLT: Emesis sensation
+                    </p>
+</div>
+</div>
+<div class="flex items-center gap-2 font-code-xs text-code-xs flex-shrink-0">
+<span class="text-secondary font-bold">NLP: 94.6% match</span>
+<button class="px-2 py-1 bg-surface-container-lowest border border-outline-variant rounded hover:bg-surface-container text-on-surface" title="Override code">
+                    Edit
+                  </button>
+</div>
+</div>
+<!-- Term 3: Alanine aminotransferase increased -->
+<div class="p-space-sm bg-surface-container-low rounded border border-outline-variant/60 flex items-start justify-between gap-space-md hover:bg-surface-container transition-colors">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-error text-[18px] mt-0.5">chips</span>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">Alanine aminotransferase increased</span>
+<span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary font-code-xs text-code-xs">MedDRA PT: 10001551</span>
+</div>
+<p class="font-code-xs text-code-xs text-on-surface-variant mt-0.5">
+                      System Organ Class (SOC): <strong class="text-primary font-semibold">Investigations</strong> • Laboratory value altered
+                    </p>
+</div>
+</div>
+<div class="flex items-center gap-2 font-code-xs text-code-xs flex-shrink-0">
+<span class="text-secondary font-bold">NLP: 99.0% match</span>
+<button class="px-2 py-1 bg-surface-container-lowest border border-outline-variant rounded hover:bg-surface-container text-on-surface" title="Override code">
+                    Edit
+                  </button>
+</div>
+</div>
+</div>
+<!-- Raw Extracted Clinical Excerpt -->
+<div class="mt-space-md p-space-sm bg-surface-container-lowest border border-dashed border-outline-variant rounded font-body-sm text-on-surface-variant">
+<span class="text-label-md font-label-md text-outline uppercase block mb-1">PI Source Encounter Note (Snippet):</span>
+<p class="italic text-on-surface">
+                "...Subject presented to emergency care unit on Day 14 with severe yellowing of eyes and sclera (<span class="bg-amber-100 px-1 font-semibold text-on-surface">ocular jaundice</span>), persistent epigastric nausea, and dark tea-colored urine. Serum lab reveals <span class="bg-red-100 px-1 font-semibold text-error">ALT 312 IU/L</span>. Concomitantly taking non-disclosed Aspirin 75mg for chronic vascular prophylaxis..."
+              </p>
+</div>
+</div>
+<!-- 4. CRITICAL HERB-DRUG CONFLICT WARNING CARD -->
+<div class="bg-red-50/70 border-2 border-red-300 rounded-lg p-space-lg shadow-sm border-l-8 border-l-red-600">
+<div class="flex items-start gap-space-md">
+<div class="p-2 bg-red-100 text-red-800 rounded-lg flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[28px]">warning</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-md text-headline-md font-bold text-red-950 uppercase tracking-wide">
+                    CRITICAL INTERACTION DETECTED: Guduchi (Tinospora cordifolia) + Aspirin
+                  </span>
+<span class="px-2 py-0.5 bg-red-700 text-white rounded text-label-md font-label-md font-bold">HIGH SEVERITY</span>
+</div>
+<p class="font-body-md text-body-md text-red-900 leading-relaxed mt-1">
+<strong>⚠️ CRITICAL INTERACTION DETECTED:</strong> Guduchi (<em>Tinospora cordifolia</em>) potentiates antiplatelet action of Aspirin. Elevated hemorrhagic risk &amp; additive hepatic load. Pharmacological mechanism: Bioactive proberberine/diterpenoid lactones interact with platelet aggregation pathways.
+                </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm mt-space-sm pt-space-sm border-t border-red-200 font-body-sm text-body-sm">
+<div>
+<span class="font-bold text-red-950 block">Ayurvedic Botanical Component:</span>
+<span class="text-red-900">Guduchi Ghan Vati (AIIA Trial Investigational Product)</span>
+</div>
+<div>
+<span class="font-bold text-red-950 block">Concomitant Allopathic Agent:</span>
+<span class="text-red-900">Aspirin 75mg (Acetylsalicylic acid - Self-administered)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md mt-space-sm">
+<button class="px-space-md py-1 bg-red-800 hover:bg-red-900 text-white font-label-md text-label-md rounded font-semibold transition-colors flex items-center gap-1 shadow-xs">
+<span class="material-symbols-outlined text-[14px]">science</span>
+<span>View Phytochemical Kinetic Dossier</span>
+</button>
+<button class="text-red-900 underline font-label-md text-label-md hover:text-red-950">
+                    Acknowledge &amp; Append to Safety Narrative
+                  </button>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. ACTION HEADER TOOLBAR -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-lg p-space-md shadow-sm flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">assignment_turned_in</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Statutory Filing Actions (Form CT-16 Ready)</span>
+</div>
+<div class="flex items-center gap-space-md flex-wrap">
+<!-- Button 1: Download CDSCO Form CT-16 PDF -->
+<button class="flex items-center gap-2 px-space-md py-2 bg-surface-container-lowest border border-outline-variant rounded font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors duration-150 shadow-xs active:scale-[0.99]">
+<span class="material-symbols-outlined text-primary text-[18px]">picture_as_pdf</span>
+<span>Download CDSCO Form CT-16 PDF (Auto-Compiled)</span>
+</button>
+<!-- Button 2 (Emergency Red CTA): Submit Statutory Report to CDSCO (SUGAM Portal) -->
+<button class="flex items-center gap-2 px-space-lg py-2 bg-error hover:bg-error/90 text-on-error rounded font-label-md text-label-md font-bold tracking-wide transition-all duration-150 shadow-md active:scale-[0.99]">
+<span class="material-symbols-outlined text-white text-[18px]">send</span>
+<span>Submit Statutory Report to CDSCO (SUGAM Portal)</span>
+<span class="bg-white/20 text-white text-[9px] px-1.5 py-0.5 rounded font-code-xs font-bold uppercase tracking-wider flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px]">enhanced_encryption</span> 21 CFR
+                </span>
+</button>
+</div>
+</div>
+</section>
+<!-- RIGHT COLUMN (SPAN 4): AI-POWERED SEMANTIC CASE-SIMILARITY SEARCH & AUDIT DRAWER -->
+<section class="col-span-12 lg:col-span-4 flex flex-col gap-space-lg">
+<!-- 2. AI-POWERED SEMANTIC CASE-SIMILARITY SEARCH WIDGET -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-lg p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/40 mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">manage_search</span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Semantic Case Search</h3>
+</div>
+<span class="font-code-xs text-code-xs text-outline">AYUSH-BERT v3</span>
+</div>
+<!-- Search Input Bar -->
+<div class="relative mb-space-md">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">search</span>
+<input class="w-full bg-surface-container-low border border-primary-container/40 rounded px-2 pl-8 py-2 font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container text-[11px]" placeholder="Search prior adverse cases (e.g. peeli aankhein, liver tenderness, Guduchi jaundice)..." type="text" value="peeli aankhein, liver tenderness, Guduchi jaundice"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] bg-primary-container text-on-primary px-1.5 py-0.5 rounded font-label-md">
+                Search
+              </button>
+</div>
+<!-- Semantic Result Counts -->
+<div class="flex items-center justify-between text-code-xs font-code-xs text-on-surface-variant mb-space-sm px-1">
+<span>PRIOR NPvCC REPOSITORIES (2018–2026)</span>
+<span class="text-primary font-bold">2 High Matches</span>
+</div>
+<!-- Match Results List -->
+<div class="flex flex-col gap-space-sm">
+<!-- Card 1: NPvCC-2023-884 -->
+<div class="p-space-sm bg-surface-container-low rounded border border-outline-variant/70 hover:border-secondary transition-all hover:shadow-xs flex flex-col gap-1.5 cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">Case NPvCC-2023-884</span>
+<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-code-xs text-code-xs font-bold border border-emerald-300">
+                    68.4% Similarity Match
+                  </span>
+</div>
+<div class="font-body-sm text-body-sm font-semibold text-on-surface">
+                  Guduchi Ghan Vati + Clopidogrel
+                </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+                  Elevated LFTs &amp; micro-hematuria, resolved post-washout and cessation of concomitant thienopyridine.
+                </p>
+<div class="flex items-center justify-between text-code-xs font-code-xs pt-1 border-t border-outline-variant/30 text-outline">
+<span>Site: Gujarat Ayurved Univ</span>
+<span class="text-secondary font-medium">Outcome: Full Recovery</span>
+</div>
+</div>
+<!-- Card 2: NPvCC-2022-112 -->
+<div class="p-space-sm bg-surface-container-low rounded border border-outline-variant/70 hover:border-secondary transition-all hover:shadow-xs flex flex-col gap-1.5 cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">Case NPvCC-2022-112</span>
+<span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-code-xs text-code-xs font-bold border border-blue-200">
+                    54.1% Match
+                  </span>
+</div>
+<div class="font-body-sm text-body-sm font-semibold text-on-surface">
+                  Giloy Kwath high-dose (Self-medicated)
+                </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+                  Transient hyperbilirubinemia, ALT 180 IU/L without concurrent allopathic medication. Normalised in 14 days.
+                </p>
+<div class="flex items-center justify-between text-code-xs font-code-xs pt-1 border-t border-outline-variant/30 text-outline">
+<span>Site: IPGT&amp;RA Jamnagar</span>
+<span class="text-secondary font-medium">De-challenge: Positive</span>
+</div>
+</div>
+</div>
+<!-- Similarity Vector Analysis Footnote -->
+<div class="mt-space-sm p-2 bg-surface-container rounded font-code-xs text-code-xs text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">info</span>
+<span>Vector cosine embedding covers cross-lingual Hindi Ayurvedic phrases &amp; MedDRA terms.</span>
+</div>
+</div>
+<!-- 3. ALCOA+ AUDIT TRAIL PREVIEW & SIGNATURE LEDGER -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-lg p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/40 mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">ALCOA+ Audit Trail (Part 11)</h3>
+</div>
+<span class="material-symbols-outlined text-outline text-[16px]">history</span>
+</div>
+<!-- Audit Trail Micro Rows -->
+<div class="flex flex-col gap-2 font-code-xs text-code-xs">
+<div class="p-2 bg-surface-container-low rounded border-l-2 border-l-secondary flex flex-col gap-0.5">
+<div class="flex justify-between items-center text-outline">
+<span>2026-03-30 09:12:04 IST</span>
+<span class="text-secondary font-semibold">VERIFIED</span>
+</div>
+<div class="text-on-surface">
+<strong>NLP MedDRA Extraction</strong>: Auto-coded PT 10023126, 10028813 by BioBERT-Ayur.
+                </div>
+<div class="text-[9px] text-outline font-mono truncate">SHA256: 7d88c2...3a19b8</div>
+</div>
+<div class="p-2 bg-surface-container-low rounded border-l-2 border-l-error flex flex-col gap-0.5">
+<div class="flex justify-between items-center text-outline">
+<span>2026-03-30 08:45:10 IST</span>
+<span class="text-error font-semibold">ESCALATION</span>
+</div>
+<div class="text-on-surface">
+<strong>PI Emergency Call Logged</strong>: Dr. R. K. Suresh marked record as SAE Hospitalization.
+                </div>
+<div class="text-[9px] text-outline font-mono truncate">SHA256: 4a9f3b...1109dc</div>
+</div>
+<div class="p-2 bg-surface-container-low rounded border-l-2 border-l-primary flex flex-col gap-0.5">
+<div class="flex justify-between items-center text-outline">
+<span>2026-03-30 08:30:00 IST</span>
+<span class="text-primary font-semibold">ADMISSION</span>
+</div>
+<div class="text-on-surface">
+<strong>Inpatient eCRF Initial Entry</strong>: T-24h Statutory Clock initialized.
+                </div>
+<div class="text-[9px] text-outline font-mono truncate">SHA256: 1e2c90...ff42ae</div>
+</div>
+</div>
+<button class="w-full mt-space-sm py-1.5 border border-outline-variant rounded font-label-md text-label-md text-primary hover:bg-surface-container transition-colors text-center">
+              View Complete Cryptographic Ledger (18 Entries)
+            </button>
+</div>
+<!-- 4. REGULATORY MANDATE CARD -->
+<div class="bg-surface-container-low border border-outline-variant/70 rounded-lg p-space-md text-body-sm">
+<h4 class="font-headline-md text-headline-md font-bold text-primary mb-1">CDSCO Statutory Notice</h4>
+<p class="text-on-surface-variant text-body-sm leading-relaxed">
+              As per Table 1 of Third Schedule (Rule 42), the Ethics Committee, Sponsor, and Central Licensing Authority must receive Form CT-16 within 24 hours of occurrence.
+            </p>
+<div class="mt-2 text-label-md font-label-md text-secondary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">call</span>
+<span>NPvCC Helpdesk: +91 11 2987 0000</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- JAVASCRIPT FOR REAL-TIME COUNTDOWN TIMER INTERACTION -->
+<script>
+    // Live countdown clock demonstration logic
+    let totalSeconds = 23 * 3600 + 59 * 60 + 12;
+
+    function updateTimers() {
+      if (totalSeconds > 0) {
+        totalSeconds--;
+      }
+      
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      const formatted = 
+        String(hours).padStart(2, '0') + ':' + 
+        String(minutes).padStart(2, '0') + ':' + 
+        String(seconds).padStart(2, '0');
+
+      const mainClock = document.getElementById('countdown-main');
+      const tickerClock = document.getElementById('ticker-clock');
+
+      if (mainClock) mainClock.textContent = formatted;
+      if (tickerClock) tickerClock.textContent = formatted;
+    }
+
+    setInterval(updateTimers, 1000);
+  </script>
+</body></html>

@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AyuTrial-CTMS | NPvCC Portal - PI Workspace</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter, Hanken Grotesk, JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#b6ebfe",
+            "primary": "#003527",
+            "secondary-fixed": "#85f8c4",
+            "tertiary-fixed-dim": "#9acee1",
+            "surface": "#faf8ff",
+            "background": "#faf8ff",
+            "on-secondary-container": "#00714e",
+            "on-background": "#131b2e",
+            "surface-bright": "#faf8ff",
+            "on-tertiary-fixed": "#001f28",
+            "on-tertiary-fixed-variant": "#114d5d",
+            "surface-container-highest": "#dae2fd",
+            "on-primary-container": "#80bea6",
+            "on-tertiary": "#ffffff",
+            "surface-variant": "#dae2fd",
+            "error": "#ba1a1a",
+            "secondary": "#006c4a",
+            "secondary-container": "#82f5c1",
+            "surface-container-high": "#e2e7ff",
+            "primary-container": "#064e3b",
+            "on-primary": "#ffffff",
+            "error-container": "#ffdad6",
+            "inverse-surface": "#283044",
+            "on-surface": "#131b2e",
+            "on-secondary-fixed": "#002114",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#86bacc",
+            "surface-tint": "#2b6954",
+            "surface-dim": "#d2d9f4",
+            "inverse-on-surface": "#eef0ff",
+            "inverse-primary": "#95d3ba",
+            "on-primary-fixed": "#002117",
+            "surface-container-low": "#f2f3ff",
+            "primary-fixed-dim": "#95d3ba",
+            "on-surface-variant": "#404944",
+            "primary-fixed": "#b0f0d6",
+            "outline-variant": "#bfc9c3",
+            "on-secondary-fixed-variant": "#005137",
+            "outline": "#707974",
+            "on-error-container": "#93000a",
+            "tertiary": "#003340",
+            "on-primary-fixed-variant": "#0b513d",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#0d4b5b",
+            "secondary-fixed-dim": "#68dba9",
+            "surface-container": "#eaedff",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-compact": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-dense": "0.5rem",
+            "gutter": "1rem",
+            "margin": "1.5rem",
+            "space-md": "0.75rem",
+            "space-lg": "1rem",
+            "space-xl": "1.5rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "code-xs": ["JetBrains Mono"],
+            "headline-xl-mobile": ["Hanken Grotesk"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-md": ["Hanken Grotesk"],
+            "headline-lg": ["Hanken Grotesk"],
+            "body-lg": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-xl": ["Hanken Grotesk"]
+          },
+          "fontSize": {
+            "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "code-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-xl-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-md": ["16px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-lg": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "code-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-xl": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f2f3ff;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #bfc9c3;
+      border-radius: 4px;
+    }
+    @keyframes waveBar {
+      0%, 100% { height: 4px; }
+      50% { height: 18px; }
+    }
+    .wave-anim-1 { animation: waveBar 0.8s ease-in-out infinite; }
+    .wave-anim-2 { animation: waveBar 0.9s ease-in-out infinite 0.15s; }
+    .wave-anim-3 { animation: waveBar 0.7s ease-in-out infinite 0.3s; }
+    .wave-anim-4 { animation: waveBar 1.0s ease-in-out infinite 0.2s; }
+    .wave-anim-5 { animation: waveBar 0.85s ease-in-out infinite 0.4s; }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed relative">
+<!-- ================= TOP APP BAR (Shared Components JSON Anchor) ================= -->
+<header class="flex justify-between items-center w-full px-margin h-14 bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline fixed top-0 left-0 right-0 z-50">
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight flex items-center gap-1.5">
+<span class="w-7 h-7 bg-primary text-on-primary rounded flex items-center justify-center text-xs font-code-xs font-bold border border-secondary-fixed">AYU</span>
+          AyuTrial-CTMS | NPvCC Portal
+        </span>
+<span class="font-code-xs text-code-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-medium border border-outline-variant">v4.8.2-CDSCO</span>
+</div>
+<!-- Search on Left -->
+<div class="relative hidden xl:block w-64">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-8 pr-3 py-1 bg-surface text-on-surface border border-outline-variant rounded font-body-sm text-body-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Search Subject ID, eCRF #, Loinc..." type="text"/>
+</div>
+</div>
+<!-- TOP CENTER: WEBSOCKET SLA COUNTDOWN TICKER (<SLACountdownTicker />) -->
+<div class="flex items-center gap-2">
+<div class="cursor-pointer group flex items-center gap-2 px-3 py-1 bg-red-50 hover:bg-red-100 border border-red-300 rounded shadow-sm transition-all" onclick="toggleDrawer('sla-drawer')">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" id="sla-dot-ping"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-red-600" id="sla-dot"></span>
+</span>
+<span class="font-label-md text-label-md text-red-900 font-bold uppercase tracking-wide">WebSocket SLA:</span>
+<span class="font-code-xs text-code-xs text-red-800 bg-red-200/70 px-1.5 py-0.2 rounded font-semibold" id="sla-patient-tag">P089</span>
+<span class="font-code-sm text-code-sm font-bold text-red-700 font-mono tracking-tight" id="sla-timer">23:59:12</span>
+<span class="font-code-xs text-code-xs bg-red-700 text-white px-2 py-0.5 rounded font-semibold flex items-center gap-0.5" id="sla-badge">
+<span class="material-symbols-outlined text-xs" data-icon="alarm">alarm</span>
+<span>T-24h Window Active</span>
+</span>
+<span class="material-symbols-outlined text-red-700 text-sm group-hover:translate-x-0.5 transition-transform" data-icon="open_in_new">open_in_new</span>
+</div>
+<!-- SLA State Simulation Toggle Dropdown -->
+<div class="relative inline-block text-left">
+<button class="px-2 py-1 bg-surface-container hover:bg-surface-container-high text-on-surface font-code-xs text-code-xs border border-outline-variant rounded flex items-center gap-1" onclick="toggleElement('sla-sim-menu')" title="Simulate WebSocket Event">
+<span class="material-symbols-outlined text-xs text-secondary" data-icon="sync">sync</span>
+<span>Simulate WS</span>
+<span class="material-symbols-outlined text-xs" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-56 bg-surface-container-lowest border border-outline-variant rounded shadow-xl py-1 z-50 text-xs font-body-sm" id="sla-sim-menu">
+<div class="px-3 py-1 font-label-md text-label-md text-outline uppercase border-b border-outline-variant">Simulate WebSocket State</div>
+<button class="w-full text-left px-3 py-1.5 hover:bg-red-50 text-red-800 flex items-center justify-between" onclick="setSlaState('active')">
+<span>Simulate Active SAE (23:59:12)</span>
+<span class="w-2 h-2 rounded-full bg-red-600"></span>
+</button>
+<button class="w-full text-left px-3 py-1.5 hover:bg-red-100 text-red-950 flex items-center justify-between" onclick="setSlaState('breached')">
+<span>Simulate Breached SLA (00:00:00)</span>
+<span class="w-2 h-2 rounded-full bg-red-900 animate-ping"></span>
+</button>
+<button class="w-full text-left px-3 py-1.5 hover:bg-emerald-50 text-emerald-800 flex items-center justify-between" onclick="setSlaState('none')">
+<span>Simulate No SAE / Standby</span>
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+</button>
+</div>
+</div>
+</div>
+<!-- Navigation Links from JSON Anchor -->
+<nav class="hidden 2xl:flex items-center gap-space-lg font-body-sm text-body-sm">
+<a class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed pb-1" href="#">Active Trials</a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 font-semibold flex items-center gap-1" href="#">
+<span>eCRF Matrix</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</a>
+<a class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed pb-1" href="#">Safety Signals</a>
+<a class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed pb-1" href="#">Regulatory Audit</a>
+</nav>
+<!-- Trailing Actions & Persona Switcher -->
+<div class="flex items-center gap-space-md">
+<!-- DPDP Granular Consent Button (Act 2023) -->
+<button class="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 rounded font-label-md text-label-md flex items-center gap-1.5 shadow-sm transition-colors" onclick="toggleDrawer('dpdp-drawer')">
+<span class="material-symbols-outlined text-emerald-700 text-sm" data-icon="policy">policy</span>
+<span>DPDP Consent &amp; Privacy (Act 2023)</span>
+<span class="w-2 h-2 rounded-full bg-emerald-600" id="dpdp-badge-status"></span>
+</button>
+<!-- Persona Switcher Badge -->
+<div class="hidden lg:flex items-center bg-surface-container-high px-2 py-1 rounded border border-outline-variant text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-primary mr-1 text-sm" data-icon="badge">badge</span>
+<span class="font-medium mr-1.5">Role:</span>
+<span class="font-bold text-primary">PI / Doctor</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="p-1.5 rounded hover:bg-surface-container transition-colors relative" onclick="openHerbModal()" title="Herb-Drug Safety Warning">
+<span class="material-symbols-outlined text-amber-700" data-icon="warning">warning</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container transition-colors" title="Audit System Notifications">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+<!-- Action Buttons from JSON -->
+<div class="hidden md:flex items-center gap-space-sm border-l border-outline-variant pl-space-md">
+<button class="px-2.5 py-1 text-primary bg-surface-container-high hover:bg-surface-container border border-outline rounded font-label-md text-label-md flex items-center gap-1" onclick="toggleDrawer('fastapi-drawer')" title="FastAPI API &amp; SDK Explorer">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="terminal">terminal</span>
+          FastAPI SDK
+</button>
+<button class="px-2.5 py-1 text-primary border border-outline rounded hover:bg-surface-container font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="ios_share">ios_share</span>
+          CDSCO Export
+</button>
+<button class="px-3 py-1 bg-primary text-on-primary rounded hover:bg-primary-container font-label-md text-label-md flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="encrypted">encrypted</span>
+          Sign Record (21 CFR)
+</button>
+</div>
+<!-- Profile -->
+<div class="flex items-center gap-2 pl-1">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-semibold text-xs border border-secondary-fixed">
+          VS
+</div>
+</div>
+</div>
+</header>
+<!-- ================= MAIN LAYOUT WRAPPER ================= -->
+<div class="flex flex-1 pt-14 h-screen overflow-hidden">
+<!-- ================= SIDE NAVIGATION BAR (Shared Components JSON Anchor) ================= -->
+<aside class="fixed left-0 top-14 bottom-0 w-64 flex flex-col justify-between p-space-md bg-surface-container-low dark:bg-primary border-r border-outline-variant dark:border-outline z-40 overflow-y-auto custom-scrollbar">
+<div>
+<!-- Institutional Header Anchor -->
+<div class="pb-space-md mb-space-md border-b border-outline-variant">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="account_balance">account_balance</span>
+<span class="font-headline-md text-headline-md font-semibold text-primary dark:text-primary-fixed">AIIA CTMS Registry</span>
+</div>
+<p class="font-code-xs text-code-xs text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            Protocol AIIA-CT-2024-09
+          </p>
+</div>
+<!-- Call to Action Button from JSON -->
+<button class="w-full mb-space-md px-space-md py-space-sm bg-error text-on-error rounded font-label-md text-label-md font-semibold flex items-center justify-center gap-2 shadow-sm hover:opacity-95 transition-opacity" onclick="toggleDrawer('sla-drawer')">
+<span class="material-symbols-outlined text-sm" data-icon="e911_emergency">e911_emergency</span>
+          Initiate Serious AE Form
+</button>
+<!-- Main Navigation Tab Links -->
+<div class="space-y-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded font-label-md text-label-md transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="clinical_notes">clinical_notes</span>
+<span>Trial State Machine</span>
+</a>
+<!-- Active tab mapped strictly to eCRF Workspace -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm bg-primary-container text-on-primary rounded font-label-md text-label-md border-l-4 border-secondary-fixed" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span>eCRF Workspace</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded font-label-md text-label-md transition-colors duration-150 cursor-pointer" href="javascript:void(0)" onclick="toggleDrawer('sla-drawer')">
+<span class="material-symbols-outlined text-error" data-icon="emergency">emergency</span>
+<span>NPvCC Adverse Reactions</span>
+<span class="ml-auto font-code-xs text-code-xs bg-red-100 text-error px-1.5 py-0.5 rounded font-bold">1 SLA</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded font-label-md text-label-md transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span>ALCOA+ Audit Ledger</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded font-label-md text-label-md transition-colors duration-150 cursor-pointer" href="javascript:void(0)" onclick="openHerbModal()">
+<span class="material-symbols-outlined text-amber-600" data-icon="medication">medication</span>
+<span>Herb-Drug Interactions</span>
+<span class="ml-auto font-code-xs text-code-xs bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">Alert</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded font-label-md text-label-md transition-colors duration-150 cursor-pointer" href="javascript:void(0)" onclick="toggleDrawer('dpdp-drawer')">
+<span class="material-symbols-outlined text-emerald-700" data-icon="gavel">gavel</span>
+<span>DPDP Consent Ledger</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded font-label-md text-label-md transition-colors duration-150 cursor-pointer" href="javascript:void(0)" onclick="toggleDrawer('fastapi-drawer')">
+<span class="material-symbols-outlined text-secondary" data-icon="api">api</span>
+<span>FastAPI Client SDK</span>
+</a>
+</div>
+</div>
+<!-- Footer Tab Anchor Links -->
+<div class="pt-space-md border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded font-label-md text-label-md transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span>System Health &amp; 21 CFR</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded font-label-md text-label-md transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Compliance Settings</span>
+</a>
+</div>
+</aside>
+<!-- ================= MAIN CLINICAL WORKSTATION CANVAS ================= -->
+<main class="ml-64 flex-1 flex flex-col h-full bg-background overflow-hidden relative">
+<!-- DPDP QUARANTINE FULL-VIEW OVERLAY BANNER (Initially Hidden) -->
+<div class="hidden absolute inset-0 z-40 bg-red-950/40 backdrop-blur-[2px] flex items-center justify-center p-6" id="dpdp-quarantine-overlay">
+<div class="bg-surface-container-lowest border-2 border-error rounded-xl max-w-xl w-full p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in duration-200">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-red-100 text-error rounded-full shrink-0">
+<span class="material-symbols-outlined text-3xl" data-icon="gavel">gavel</span>
+</div>
+<div>
+<span class="font-code-xs text-code-xs bg-red-100 text-error font-bold px-2 py-0.5 rounded border border-red-300 uppercase">DPDP Act 2023 §6(4) Mandatory Lock</span>
+<h3 class="font-headline-lg text-headline-lg font-bold text-on-surface mt-1">Consent Withdrawn: Data Quarantined</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5">
+          Subject <strong class="text-on-surface font-code-sm">AIIA-P089</strong> exercised statutory right to withdraw consent under the Digital Personal Data Protection Act, 2023. All eCRF visit input cards are cryptographically frozen. No further clinical telemetry or phenotyping can be committed.
+        </p>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded font-code-xs text-code-xs space-y-1 text-on-surface-variant border border-outline-variant">
+<div>Quarantine Timestamp: <span class="font-semibold text-primary">2026-03-31T14:35:12+05:30</span></div>
+<div>Ledger Revocation Hash: <span class="font-mono text-xs">0x44bd8...f021e9</span></div>
+<div>CDSCO Audit Trait: Notice dispatched to Principal Investigator &amp; CDSCO Grievance Portal.</div>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant">
+<button class="px-3 py-1.5 text-primary border border-outline-variant hover:bg-surface-container rounded font-label-md text-label-md" onclick="toggleDrawer('dpdp-drawer')">
+        View Legal Audit Dossier
+      </button>
+<button class="px-4 py-1.5 bg-secondary text-on-secondary hover:bg-secondary/90 font-bold rounded font-label-md text-label-md flex items-center gap-1.5 shadow" onclick="restoreConsent()">
+<span class="material-symbols-outlined text-sm" data-icon="restore">restore</span>
+        Restore / Process Re-Consent Form
+      </button>
+</div>
+</div>
+</div>
+<!-- ================= PATIENT CONTEXT HEADER BANNER ================= -->
+<section class="bg-surface-container-lowest border-b border-outline-variant px-margin py-3 shrink-0 shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+<!-- Subject Key Vitals & Demographics -->
+<div class="flex flex-wrap items-center gap-y-2 gap-x-4">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-primary text-on-primary font-code-sm text-code-sm rounded font-bold">
+                Patient AIIA-P089
+              </span>
+<span class="font-code-xs text-code-xs text-on-surface-variant bg-surface-container px-2 py-0.5 rounded border border-outline-variant">
+                CRF-V2.14
+              </span>
+</div>
+<div class="h-4 w-px bg-outline-variant hidden sm:block"></div>
+<div class="flex items-center gap-1.5 font-body-sm text-body-sm">
+<span class="text-outline font-label-md text-label-md">TRIAL:</span>
+<span class="font-semibold text-primary">AIIA-GUD-2026</span>
+</div>
+<div class="h-4 w-px bg-outline-variant hidden sm:block"></div>
+<div class="flex items-center gap-1.5 font-body-sm text-body-sm">
+<span class="text-outline font-label-md text-label-md">ARM:</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface font-medium border border-outline-variant">
+                Guduchi Extract 500mg BD
+              </span>
+</div>
+<div class="h-4 w-px bg-outline-variant hidden sm:block"></div>
+<div class="flex items-center gap-1.5 font-body-sm text-body-sm">
+<span class="text-outline font-label-md text-label-md">CONCOMITANT:</span>
+<input class="bg-amber-50 text-amber-900 border border-amber-300 font-semibold px-2 py-0.5 rounded text-xs focus:ring-1 focus:ring-amber-500 focus:outline-none" id="concomitant-input" onkeyup="checkConcomitantInput(this.value)" title="Edit to test interactive herb-drug alert (e.g., Guduchi, Guggulu, Aspirin)" value="Aspirin 75mg OD"/>
+</div>
+<div class="h-4 w-px bg-outline-variant hidden sm:block"></div>
+<div class="flex items-center gap-1 font-body-sm text-body-sm">
+<span class="text-outline font-label-md text-label-md">STATION:</span>
+<span class="font-bold text-primary bg-primary-fixed px-2 py-0.5 rounded text-on-primary-fixed">Visit Day 14</span>
+</div>
+</div>
+<!-- Lock status & Fast Indicator -->
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1 font-code-xs text-code-xs px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200">
+<span class="material-symbols-outlined text-xs" data-icon="lock_open">lock_open</span>
+              PI Edit Mode [CRF-D14-UNCOMMITTED]
+            </span>
+<span class="font-code-xs text-code-xs text-outline">Site 01: All India Institute of Ayurveda, New Delhi</span>
+</div>
+</div>
+<!-- HIGH-PRIORITY HERB-DRUG INTERACTION ALERT PILL -->
+<div class="mt-2.5 bg-amber-50 border-l-4 border-amber-600 p-2.5 rounded-r flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-700 font-bold" data-icon="warning">warning</span>
+<div class="font-body-sm text-body-sm text-amber-950 font-semibold">
+<span class="underline decoration-amber-600 cursor-pointer" onclick="openHerbModal()">⚠️ Concomitant Aspirin Detected: Enhanced Bleeding Risk with Guduchi</span>
+<span class="font-normal text-amber-900 ml-1.5 text-xs">
+                (Tinospora cordifolia contains bioactive proberberine/diterpenoids exhibiting additive platelet anti-aggregation. Monitor prothrombin time and LFT elevation).
+              </span>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<button class="px-2 py-1 bg-amber-200 hover:bg-amber-300 text-amber-900 rounded font-label-md text-label-md font-semibold border border-amber-400" onclick="openHerbModal()">
+              Review NPvCC Dossier
+            </button>
+<button class="px-2 py-1 bg-white hover:bg-amber-100 text-amber-800 rounded font-label-md text-label-md border border-amber-300" onclick="openHerbModal()">
+              Acknowledge &amp; Justify
+            </button>
+</div>
+</div>
+</section>
+<!-- ================= DYNAMIC eCRF TWO-COLUMN WORKSPACE ================= -->
+<div class="flex-1 overflow-y-auto px-margin py-space-md custom-scrollbar space-y-space-md transition-all duration-300" id="ecrf-workspace-container">
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-md">
+<!-- ======================================================== -->
+<!-- COLUMN 1: TRADITIONAL AYURVEDIC PHENOTYPES & DIAGNOSTICS -->
+<!-- ======================================================== -->
+<div class="xl:col-span-6 space-y-space-md">
+<!-- Section Header Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md border-l-4 border-l-primary flex items-center justify-between">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="psychiatry">psychiatry</span>
+                  Section 1: Ayurvedic Phenotypes &amp; Ashtavidha Pariksha
+                </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Validated clinical markers compliant with AYUSH Good Clinical Practice &amp; CCRAS Guidelines.</p>
+</div>
+<span class="px-2 py-0.5 bg-surface-container font-code-xs text-code-xs text-outline rounded border border-outline-variant">GAMP 5 Category 4</span>
+</div>
+<!-- Agni Assessment Interactive Radio Cards -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md space-y-space-sm shadow-sm">
+<div class="flex items-center justify-between pb-1 border-b border-outline-variant">
+<label class="font-headline-md text-headline-md text-on-surface font-semibold flex items-center gap-1.5">
+<span>Agni Assessment (Digestive &amp; Metabolic Fire Capacity)</span>
+<span class="text-error font-bold">*</span>
+</label>
+<span class="font-code-xs text-code-xs text-primary font-semibold bg-primary-fixed px-2 py-0.5 rounded">eCRF Variable: AGNI_D14</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Evaluate subjective digestive power, post-prandial heaviness, and appetite rhythm over preceding 72 hours.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-1">
+<!-- Mandagni (Selected - Slugish metabolic fire) -->
+<label class="cursor-pointer border-2 border-primary bg-primary-container/10 p-space-sm rounded transition-all flex flex-col justify-between relative shadow-sm">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-primary ring-2 ring-primary ring-offset-1"></span>
+<span class="font-headline-md text-headline-md font-bold text-primary">Mandagni</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-semibold">Sluggish Metabolic Fire</span>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+                    Inability to digest even normal food quantities; gastric heaviness, lethargy, coated tongue. High Kapha association.
+                  </p>
+<div class="mt-2.5 pt-1.5 border-t border-primary/20 flex items-center justify-between font-code-xs text-code-xs text-primary">
+<span>Clinical Score: <strong>Stage 2 (Deficient)</strong></span>
+<span class="font-bold underline">Selected</span>
+</div>
+<input checked="" class="sr-only" name="agni_state" type="radio" value="mandagni"/>
+</label>
+<!-- Tikshnagni (Hyperactive) -->
+<label class="cursor-pointer border border-outline-variant bg-surface-container-lowest p-space-sm rounded hover:bg-surface-container transition-all flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full border-2 border-outline"></span>
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">Tikshnagni</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Hyperactive Fire</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+                    Intense hunger quickly recurring; burning retrosternal sensation, dry throat. High Pitta aggravation profile.
+                  </p>
+<div class="mt-2.5 pt-1.5 border-t border-outline-variant flex items-center justify-between font-code-xs text-code-xs text-outline">
+<span>Clinical Score: Stage 3</span>
+<span>Inactive</span>
+</div>
+<input class="sr-only" name="agni_state" type="radio" value="tikshnagni"/>
+</label>
+<!-- Vishamagni (Irregular) -->
+<label class="cursor-pointer border border-outline-variant bg-surface-container-lowest p-space-sm rounded hover:bg-surface-container transition-all flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full border-2 border-outline"></span>
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">Vishamagni</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Irregular / Fluctuating</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+                    Variable digestive strength, abdominal distension, erratic stool consistency. High Vata dominance pattern.
+                  </p>
+<div class="mt-2.5 pt-1.5 border-t border-outline-variant flex items-center justify-between font-code-xs text-code-xs text-outline">
+<span>Clinical Score: Stage 1</span>
+<span>Inactive</span>
+</div>
+<input class="sr-only" name="agni_state" type="radio" value="vishamagni"/>
+</label>
+<!-- Samagni (Balanced) -->
+<label class="cursor-pointer border border-outline-variant bg-surface-container-lowest p-space-sm rounded hover:bg-surface-container transition-all flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full border-2 border-outline"></span>
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">Samagni</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Equilibrated Fire</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+                    Optimal digestion, timely evacuation, clear sensory acuity. Baseline physiological equilibrium.
+                  </p>
+<div class="mt-2.5 pt-1.5 border-t border-outline-variant flex items-center justify-between font-code-xs text-code-xs text-outline">
+<span>Clinical Score: Stage 0</span>
+<span>Inactive</span>
+</div>
+<input class="sr-only" name="agni_state" type="radio" value="samagni"/>
+</label>
+</div>
+</div>
+<!-- Prakriti Score Sliders / Progress Gauges -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md space-y-space-md shadow-sm">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Constitutional Prakriti Distribution (Deha Prakriti)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Multi-axial phenotype scoring normalized to 100%.</p>
+</div>
+<span class="font-code-xs text-code-xs bg-surface-container-high px-2 py-1 rounded text-primary font-semibold">Total: 100% Verified</span>
+</div>
+<!-- Vata Slider / Bar -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<span class="font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
+                    Vata Dosha (Movement / Catabolic Force)
+                  </span>
+<span class="font-code-sm text-code-sm font-bold text-sky-900 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">40%</span>
+</div>
+<div class="w-full bg-surface-container h-3 rounded-full overflow-hidden border border-outline-variant flex">
+<div class="bg-sky-600 h-full rounded-full transition-all duration-300" style="width: 40%"></div>
+</div>
+<div class="flex justify-between font-code-xs text-code-xs text-outline">
+<span>Baseline: 38%</span>
+<span>Chamber Δ: +2% (Mild elevation)</span>
+</div>
+</div>
+<!-- Pitta Slider / Bar -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<span class="font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span>
+                    Pitta Dosha (Metabolic / Thermogenic Force)
+                  </span>
+<span class="font-code-sm text-code-sm font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded border border-amber-300">50%</span>
+</div>
+<div class="w-full bg-surface-container h-3 rounded-full overflow-hidden border border-outline-variant flex">
+<div class="bg-amber-600 h-full rounded-full transition-all duration-300" style="width: 50%"></div>
+</div>
+<div class="flex justify-between font-code-xs text-code-xs text-outline">
+<span>Baseline: 48%</span>
+<span>Chamber Δ: +2% (Dominant Phenotype)</span>
+</div>
+</div>
+<!-- Kapha Slider / Bar -->
+<div class="space-y-1">
+<div class="flex justify-between items-center text-body-sm font-body-sm">
+<span class="font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-700"></span>
+                    Kapha Dosha (Cohesive / Structural Force)
+                  </span>
+<span class="font-code-sm text-code-sm font-bold text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">10%</span>
+</div>
+<div class="w-full bg-surface-container h-3 rounded-full overflow-hidden border border-outline-variant flex">
+<div class="bg-emerald-700 h-full rounded-full transition-all duration-300" style="width: 10%"></div>
+</div>
+<div class="flex justify-between font-code-xs text-code-xs text-outline">
+<span>Baseline: 14%</span>
+<span>Chamber Δ: -4% (Depleted reserve)</span>
+</div>
+</div>
+</div>
+<!-- Pulse (Nadi Pariksha) & Tongue (Jihva) Diagnostic Selectors -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md space-y-space-md shadow-sm">
+<div class="border-b border-outline-variant pb-2">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Pulse (Nadi Pariksha) &amp; Tongue (Jihva) Examination</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Standardized tactile and visual descriptors under controlled conditions.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Pulse Selector -->
+<div class="space-y-1.5">
+<label class="font-label-md text-label-md text-on-surface flex items-center justify-between">
+<span>NADI GATI &amp; QUALITATIVE TACTILE VECTOR</span>
+<span class="text-primary font-code-xs text-code-xs">AYUSH-T09</span>
+</label>
+<div class="relative">
+<select class="w-full bg-surface border border-outline-variant rounded p-2 font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary appearance-none">
+<option selected="">Vata-Pitta Mandagati (Sluggish, serpentine-frogging rhythm)</option>
+<option>Sarpa Gati (Pure Vata - leech-like fast displacement)</option>
+<option>Manduka Gati (Pure Pitta - bounding jumping wave)</option>
+<option>Hamsa Gati (Kapha - slow, deliberate wave)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded text-xs text-on-surface-variant font-code-xs">
+                    Assessment: Deep radial palpation confirms Mandagati with diminished Kapha base pressure.
+                  </div>
+</div>
+<!-- Tongue Selector -->
+<div class="space-y-1.5">
+<label class="font-label-md text-label-md text-on-surface flex items-center justify-between">
+<span>JIHVA LAKSHANA (TONGUE COATING &amp; MARGINS)</span>
+<span class="text-primary font-code-xs text-code-xs">AYUSH-L14</span>
+</label>
+<div class="relative">
+<select class="w-full bg-surface border border-outline-variant rounded p-2 font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary appearance-none">
+<option selected="">Saburral coating on posterior margin (Ama indicative)</option>
+<option>Nirama Jihva (Clean, normal pink, dry free)</option>
+<option>Rakta-Varna Shushka (Dry crimson margin with Pitta fissures)</option>
+<option>Shveta Sandra Lepa (Thick uniform white Kapha mucus layer)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded text-xs text-on-surface-variant font-code-xs">
+                    Pathology: Persistent Ama accumulation localized in posterior root (Adho-Amashaya).
+                  </div>
+</div>
+</div>
+</div>
+<!-- MULTILINGUAL CLINICAL VOICE-TO-TEXT ASSISTANT CARD -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md space-y-3 shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<div class="flex items-center gap-2">
+<div class="p-1.5 bg-primary/10 rounded text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="mic">mic</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Clinical Observation &amp; Voice-to-Text Assistant</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">W3C Web Speech API with real-time Ayurvedic clinical transcription.</p>
+</div>
+</div>
+<!-- Language Selector Pill -->
+<div class="flex items-center gap-1 bg-surface-container p-1 rounded border border-outline-variant">
+<button class="px-2 py-0.5 rounded text-xs font-semibold bg-white text-primary shadow-xs border border-outline-variant" id="lang-btn-hi" onclick="setDictationLang('hi-IN')">
+        hi-IN (हिंदी)
+      </button>
+<button class="px-2 py-0.5 rounded text-xs font-semibold text-on-surface-variant hover:text-on-surface" id="lang-btn-en" onclick="setDictationLang('en-IN')">
+        en-IN (English)
+      </button>
+</div>
+</div>
+<!-- Speech Audio Waveform Visualizer Bar (Shown during dictation) -->
+<div class="hidden flex items-center justify-between bg-primary-container/10 border border-primary/20 rounded p-2.5" id="voice-wave-container">
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+</span>
+<span class="font-code-xs text-code-xs text-primary font-bold tracking-wider uppercase">Listening &amp; Transcribing (<span id="active-lang-display">hi-IN</span>)...</span>
+</div>
+<!-- Waveform Bars Animation -->
+<div class="flex items-center gap-1 h-5">
+<span class="w-1 bg-primary rounded-full wave-anim-1"></span>
+<span class="w-1 bg-secondary rounded-full wave-anim-2"></span>
+<span class="w-1 bg-primary rounded-full wave-anim-3"></span>
+<span class="w-1 bg-secondary-fixed-dim rounded-full wave-anim-4"></span>
+<span class="w-1 bg-primary rounded-full wave-anim-5"></span>
+<span class="w-1 bg-secondary rounded-full wave-anim-2"></span>
+<span class="w-1 bg-primary rounded-full wave-anim-1"></span>
+</div>
+</div>
+<!-- Observation Notes Textarea -->
+<div class="relative">
+<textarea class="w-full bg-surface border border-outline-variant rounded p-2.5 font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary placeholder:text-outline/70" id="clinical-notes-area" placeholder="Type or click the microphone to dictate clinical findings (e.g. scleral jaundice, epigastric tenderness, Agnimandya status)..." rows="3">Patient attends Day 14 follow-up. Reports mild post-prandial heaviness and generalized weakness. No hematuria or petechiae observed on physical exam.</textarea>
+<!-- Floating Mic Button Trigger -->
+<button class="absolute right-2 bottom-2.5 p-2 bg-primary text-on-primary hover:bg-primary-container rounded-full shadow-md flex items-center justify-center transition-transform active:scale-95 group" id="mic-trigger-btn" onclick="toggleVoiceRecognition()" title="Click to Speak (Speech-to-Text)">
+<span class="material-symbols-outlined text-sm text-white group-hover:scale-110 transition-transform" data-icon="mic" id="mic-icon">mic</span>
+</button>
+</div>
+<div class="flex items-center justify-between font-code-xs text-code-xs text-on-surface-variant">
+<span>Supported phrases: Pitta Lakshana, Jwara, Scleral Icterus, Vomiting, Raktapitta</span>
+<span class="text-secondary font-medium">Auto-synced to EMR Subject Note</span>
+</div>
+</div>
+</div>
+<!-- ======================================================== -->
+<!-- COLUMN 2: MODERN CLINICAL VITALS & LAB BIOMARKERS -->
+<!-- ======================================================== -->
+<div class="xl:col-span-6 space-y-space-md">
+<!-- Section Header Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md border-l-4 border-l-secondary flex items-center justify-between">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="vital_signs">vital_signs</span>
+                  Section 2: Clinical Vitals &amp; Lab Biomarkers (LOINC Validated)
+                </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Objective physiological telemetry and central lab biochemistry assays.</p>
+</div>
+<span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 border border-emerald-200 font-code-xs text-code-xs rounded font-semibold">21 CFR Part 11 Enforced</span>
+</div>
+<!-- High-Density Clinical Input Fields: Vitals -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md space-y-space-md shadow-sm">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Bedside Clinical Vitals (Calibrated Telemetry)</h3>
+<span class="font-code-xs text-code-xs text-outline">Calibration Ref: NIST-2026-X8</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+<!-- Blood Pressure -->
+<div class="border border-outline-variant rounded p-space-sm bg-surface">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant">BLOOD PRESSURE</span>
+<span class="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-code-xs text-code-xs font-semibold border border-emerald-200">Normal</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<input class="w-full font-code-sm text-code-sm font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded px-2 py-1 focus:border-primary focus:ring-1 focus:ring-primary" type="text" value="124/82"/>
+<span class="font-code-xs text-code-xs text-outline shrink-0">mmHg</span>
+</div>
+<div class="mt-1.5 flex items-center justify-between font-code-xs text-code-xs text-outline">
+<span>Baseline: 122/80</span>
+<span class="text-secondary font-medium">Δ +2/+2</span>
+</div>
+</div>
+<!-- Pulse -->
+<div class="border border-outline-variant rounded p-space-sm bg-surface">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant">HEART RATE / PULSE</span>
+<span class="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-code-xs text-code-xs font-semibold border border-emerald-200">Normocardia</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<input class="w-full font-code-sm text-code-sm font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded px-2 py-1 focus:border-primary focus:ring-1 focus:ring-primary" type="text" value="74"/>
+<span class="font-code-xs text-code-xs text-outline shrink-0">bpm</span>
+</div>
+<div class="mt-1.5 flex items-center justify-between font-code-xs text-code-xs text-outline">
+<span>Rhythm: Regular</span>
+<span class="text-secondary font-medium">Normal Wave</span>
+</div>
+</div>
+<!-- Respiratory Rate -->
+<div class="border border-outline-variant rounded p-space-sm bg-surface">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant">RESPIRATORY RATE</span>
+<span class="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-code-xs text-code-xs font-semibold border border-emerald-200">Eupnea</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<input class="w-full font-code-sm text-code-sm font-bold text-on-surface bg-surface-container-lowest border border-outline-variant rounded px-2 py-1 focus:border-primary focus:ring-1 focus:ring-primary" type="text" value="16"/>
+<span class="font-code-xs text-code-xs text-outline shrink-0">/min</span>
+</div>
+<div class="mt-1.5 flex items-center justify-between font-code-xs text-code-xs text-outline">
+<span>SPO2: 99% RA</span>
+<span class="text-secondary font-medium">Stable</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Liver Function Test Flags (Critical Safety Biomarkers) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md space-y-space-md shadow-sm">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface flex items-center gap-1.5">
+<span>Liver Function Test (LFT) Biomarkers</span>
+<span class="material-symbols-outlined text-error text-lg" data-icon="error">error</span>
+</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Automated Central Lab Interface (NABL Accredited #MC-2041).</p>
+</div>
+<span class="font-code-xs text-code-xs bg-red-100 text-error font-bold px-2 py-1 rounded border border-red-300 animate-pulse">
+                  CRITICAL ELEVATION ALERT
+                </span>
+</div>
+<!-- LFT Grid Cards -->
+<div class="space-y-space-sm">
+<!-- ALT Flagged Card -->
+<div class="p-space-sm rounded bg-red-50/70 border-2 border-error space-y-1 relative">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error animate-ping"></span>
+<span class="font-label-md text-label-md text-on-surface font-bold">ALT / SGPT (Alanine Aminotransferase)</span>
+</div>
+<span class="px-2 py-0.5 bg-error text-on-error font-code-xs text-code-xs rounded font-bold tracking-wider flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-xs" data-icon="crisis_alert">crisis_alert</span>
+                      HIGH CRIMSON FLAG (&gt;3x ULN)
+                    </span>
+</div>
+<div class="flex items-baseline justify-between pt-1">
+<div class="flex items-baseline gap-2">
+<span class="font-code-sm text-code-sm text-error font-extrabold text-lg">165 U/L</span>
+<span class="font-code-xs text-code-xs text-outline">Normal Ref: 7–56 U/L</span>
+</div>
+<span class="font-code-xs text-code-xs text-error font-bold bg-white px-2 py-0.5 rounded border border-red-200">
+                      Baseline: 34 U/L | Δ +385%
+                    </span>
+</div>
+<!-- Alert Tooltip / Regulatory Explanatory Box -->
+<div class="mt-2 bg-white p-2 rounded border border-red-200 text-xs font-body-sm text-on-surface space-y-1">
+<div class="flex items-center gap-1 text-error font-semibold">
+<span class="material-symbols-outlined text-sm" data-icon="report">report</span>
+<span>Investigator Action Protocol: DILI Evaluation Triggered</span>
+</div>
+<p class="text-on-surface-variant font-code-xs">
+                      Enzyme trajectory warrants CDSCO CT-16 review. Potential additive hepatobiliary friction between concentrated Guduchi bitter glycosides (giloin) and concurrent antiplatelet regimen.
+                    </p>
+</div>
+</div>
+<!-- AST Flagged Card -->
+<div class="p-space-sm rounded bg-red-50/50 border border-error/70 space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-bold">AST / SGOT (Aspartate Aminotransferase)</span>
+<span class="px-2 py-0.5 bg-error/90 text-on-error font-code-xs text-code-xs rounded font-bold tracking-wider">
+                      HIGH FLAG
+                    </span>
+</div>
+<div class="flex items-baseline justify-between pt-1">
+<div class="flex items-baseline gap-2">
+<span class="font-code-sm text-code-sm text-error font-extrabold text-base">142 U/L</span>
+<span class="font-code-xs text-code-xs text-outline">Normal Ref: 10–40 U/L</span>
+</div>
+<span class="font-code-xs text-code-xs text-error font-medium">Baseline: 29 U/L</span>
+</div>
+</div>
+<!-- Serum Bilirubin Card -->
+<div class="p-space-sm rounded bg-amber-50/60 border border-amber-300 space-y-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-bold">Serum Bilirubin (Total)</span>
+<span class="px-2 py-0.5 bg-amber-100 text-amber-900 border border-amber-300 font-code-xs text-code-xs rounded font-semibold">
+                      BORDERLINE ELEVATED
+                    </span>
+</div>
+<div class="flex items-baseline justify-between pt-1">
+<div class="flex items-baseline gap-2">
+<span class="font-code-sm text-code-sm text-amber-950 font-bold text-base">2.1 mg/dL</span>
+<span class="font-code-xs text-code-xs text-outline">Normal Ref: 0.1–1.2 mg/dL</span>
+</div>
+<span class="font-code-xs text-code-xs text-amber-900">Baseline: 0.8 mg/dL</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dosage Compliance Percentage Bar -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md space-y-space-sm shadow-sm">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">IP Accountability &amp; Dose Compliance</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Smart Blister Smart-Cap Telemetry &amp; Subject Diary Cross-Verification.</p>
+</div>
+<div class="text-right">
+<span class="font-code-sm text-code-sm font-bold text-secondary text-base">98.5%</span>
+<div class="font-code-xs text-code-xs text-secondary font-semibold">HIGH ADHERENCE</div>
+</div>
+</div>
+<!-- Compliance Progress Bar -->
+<div class="w-full bg-surface-container h-3.5 rounded-full overflow-hidden border border-outline-variant flex">
+<div class="bg-secondary h-full rounded-full transition-all duration-300" style="width: 98.5%"></div>
+</div>
+<div class="flex flex-wrap items-center justify-between font-code-xs text-code-xs text-on-surface-variant pt-1 border-t border-outline-variant">
+<span>Doses Administered: <strong>27 of 28 scheduled units</strong></span>
+<span>Missed Doses: <strong>1 (Day 8 PM)</strong></span>
+<span class="text-secondary font-medium">Protocol Compliance Threshold (&gt;80%): SATISFIED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= AUDIT LEDGER CONTEXT / INTEGRITY STRIP ================= -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-3 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+<div class="flex items-center gap-3">
+<span class="p-2 rounded bg-primary-container text-on-primary font-bold">ALCOA+</span>
+<div>
+<div class="font-bold text-on-surface">Data Provenance &amp; Cryptographic Signature Chain</div>
+<div class="font-code-xs text-code-xs text-outline">
+                Attributable: Dr. V. Sharma (PI) | Legible | Contemporaneous (14:32:09 IST) | Original Record | Accurate
+              </div>
+</div>
+</div>
+<div class="flex items-center gap-2 font-code-xs text-code-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-emerald-700" data-icon="lock">lock</span>
+<span>Block Hash: <strong class="text-primary font-mono" id="current-block-hash">0x7f9a88...c1e02</strong></span>
+<span class="px-2 py-0.5 rounded bg-surface-container border border-outline-variant">SHA-256 Validated</span>
+</div>
+</div>
+</div>
+<!-- ================= FOOTER ACTION TOOLBAR ================= -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant px-margin py-3 shrink-0 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg z-30">
+<!-- Left: Quick Context & Regulatory Sign Status -->
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container text-primary font-code-xs text-code-xs font-semibold border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+            2 uncommitted clinical fields require digital sign-off
+          </span>
+<span class="hidden md:inline font-code-xs text-code-xs text-outline">21 CFR §11.50 Electronic Signatures</span>
+</div>
+<!-- Right: Primary Actions -->
+<div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+<!-- Secondary Action: Save Draft -->
+<button class="px-3 py-2 bg-white text-on-surface border border-outline-variant rounded font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center gap-1.5" onclick="triggerToast('Local draft encrypted &amp; stored in IndexedDB.')">
+<span class="material-symbols-outlined text-sm" data-icon="save">save</span>
+            Save Local Draft
+          </button>
+<!-- Critical Danger Button: Report Adverse Event (AE / SAE) -->
+<button class="px-3.5 py-2 bg-error text-on-error rounded font-label-md text-label-md font-bold flex items-center gap-2 shadow hover:bg-red-700 active:scale-[0.98] transition-all" onclick="toggleDrawer('sla-drawer')">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+</span>
+<span class="material-symbols-outlined text-base" data-icon="warning">warning</span>
+<span>Report Adverse Event (AE / SAE)</span>
+<span class="bg-red-800 text-white font-code-xs text-code-xs px-1.5 py-0.5 rounded border border-red-500">CDSCO CT-16</span>
+</button>
+<!-- Primary CTA: Save Visit & Cryptographically Chain into ALCOA+ Ledger -->
+<button class="px-4 py-2 bg-primary text-on-primary rounded font-label-md text-label-md font-bold flex items-center gap-2 shadow-md hover:bg-primary-container active:scale-[0.98] transition-all border border-secondary-fixed" onclick="commitVisitRecord()">
+<span class="material-symbols-outlined text-base" data-icon="lock_clock">lock_clock</span>
+<span>Save Visit &amp; Cryptographically Chain into ALCOA+ Ledger</span>
+<span class="px-1.5 py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded text-xs font-code-xs font-bold">21 CFR</span>
+</button>
+</div>
+</footer>
+</main>
+</div>
+<!-- ======================================================== -->
+<!-- 1. QUICK-ACTION DRAWER: CDSCO FORM CT-16 & SUGAM DISPATCH -->
+<!-- ======================================================== -->
+<div class="fixed inset-y-0 right-0 w-full sm:w-[480px] bg-surface-container-lowest border-l border-outline-variant shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col" id="sla-drawer">
+<!-- Drawer Header -->
+<div class="px-6 py-4 bg-red-50 border-b border-red-200 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="p-2 bg-red-600 text-white rounded">
+<span class="material-symbols-outlined" data-icon="e911_emergency">e911_emergency</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-red-950">Statutory SAE Expedited Desk</h3>
+<p class="font-code-xs text-code-xs text-red-800">CDSCO Mandatory 24-Hour Reporting Window</p>
+</div>
+</div>
+<button class="text-red-800 hover:text-red-950 p-1 rounded hover:bg-red-100" onclick="toggleDrawer('sla-drawer')">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Drawer Body -->
+<div class="p-6 flex-1 overflow-y-auto space-y-5 custom-scrollbar text-on-surface">
+<!-- Live Ticker Inside Drawer -->
+<div class="bg-red-100/70 border border-red-300 rounded p-4 flex items-center justify-between">
+<div>
+<div class="font-code-xs text-code-xs text-red-800 font-semibold uppercase">Mandatory Window Remaining</div>
+<div class="font-mono text-2xl font-bold text-red-700 mt-0.5" id="drawer-timer">23:59:12</div>
+<div class="font-code-xs text-code-xs text-red-900 mt-1">Reg: New Drugs &amp; Clinical Trials Rules, 2019</div>
+</div>
+<div class="text-right">
+<span class="px-2 py-1 bg-red-700 text-white font-code-xs text-code-xs rounded font-bold">Active Protocol</span>
+<div class="font-code-xs text-code-xs text-outline mt-1.5">Site: AIIA Delhi</div>
+</div>
+</div>
+<!-- Case Summary Box -->
+<div class="border border-outline-variant rounded p-4 space-y-3 bg-surface">
+<div class="font-label-md text-label-md text-outline uppercase font-bold">Auto-Compiled Incident Parameters</div>
+<div class="space-y-1.5 font-code-xs text-code-xs">
+<div class="flex justify-between py-1 border-b border-outline-variant/60">
+<span class="text-on-surface-variant">Subject ID:</span>
+<span class="font-bold text-on-surface">AIIA-P089 (Arm: Guduchi Extract)</span>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/60">
+<span class="text-on-surface-variant">Trigger Event:</span>
+<span class="font-bold text-error">Grade 3 LFT Elevation (ALT 165 U/L) + Platelet Bleed Risk</span>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/60">
+<span class="text-on-surface-variant">Severity / Causality:</span>
+<span class="font-bold text-amber-900">Probable Herb-Drug Synergy (Naranjo Score: 6)</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-on-surface-variant">Pre-filled Form:</span>
+<span class="font-bold text-primary">CDSCO Form CT-16 (Draft v1.0)</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="space-y-3 pt-2">
+<!-- Download Pre-filled PDF -->
+<button class="w-full py-2.5 px-4 bg-surface-container hover:bg-surface-container-high text-primary border border-primary font-label-md text-label-md font-bold rounded flex items-center justify-center gap-2 shadow-xs transition-colors" onclick="simulateDownloadPdf()">
+<span class="material-symbols-outlined text-base text-primary" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span>Download Pre-filled CDSCO Form CT-16 (.PDF)</span>
+</button>
+<!-- Instant Statutory Dispatch to SUGAM Portal -->
+<button class="w-full py-3 px-4 bg-error hover:bg-red-700 text-on-error font-label-md text-label-md font-bold rounded flex items-center justify-center gap-2 shadow-md active:scale-[0.99] transition-all" id="sugam-dispatch-btn" onclick="dispatchToSugam()">
+<span class="material-symbols-outlined text-base" data-icon="send">send</span>
+<span>Instant Statutory Dispatch to CDSCO SUGAM Portal</span>
+</button>
+<p class="font-code-xs text-code-xs text-outline text-center">Cryptographically countersigned with PI Token (e-Sign 21 CFR §11.100)</p>
+</div>
+<!-- Real-time Status Dispatch Feedback -->
+<div class="hidden p-3 bg-emerald-50 border border-emerald-300 rounded font-code-xs text-code-xs space-y-1 text-emerald-950" id="sugam-receipt-card">
+<div class="flex items-center gap-1.5 font-bold text-emerald-800">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
+<span>CDSCO SUGAM Acknowledgment Received</span>
+</div>
+<div>ACK Ref: <strong class="text-emerald-900 font-mono">SUGAM-2026-SAE-094188</strong></div>
+<div>Time: <span id="sugam-ack-time"></span> | SLA Clock Paused.</div>
+</div>
+</div>
+</div>
+<!-- ======================================================== -->
+<!-- 2. HERB-DRUG CROSS-REACTION POINT-OF-CARE ALERT MODAL -->
+<!-- ======================================================== -->
+<div class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4" id="herb-modal">
+<div class="bg-surface-container-lowest border-2 border-amber-500 rounded-xl max-w-2xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-150">
+<!-- Modal Header -->
+<div class="px-6 py-4 bg-amber-500 text-amber-950 flex items-center justify-between border-b border-amber-600">
+<div class="flex items-center gap-2.5">
+<div class="p-2 bg-amber-900 text-amber-100 rounded-lg">
+<span class="material-symbols-outlined text-2xl" data-icon="shield_with_heart">shield_with_heart</span>
+</div>
+<div>
+<span class="font-code-xs text-code-xs font-bold uppercase tracking-wider bg-amber-900 text-amber-100 px-2 py-0.5 rounded">Point-of-Care Pharmacovigilance Alert</span>
+<h3 class="font-headline-lg text-headline-lg font-bold text-amber-950 mt-0.5">Herb-Drug Cross-Reaction Warning</h3>
+</div>
+</div>
+<button class="text-amber-950 hover:bg-amber-600/30 p-1.5 rounded-full" onclick="closeHerbModal()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Content -->
+<div class="p-6 space-y-4">
+<!-- Interaction Synopsis Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-body-sm text-body-sm bg-amber-50/70 p-3.5 rounded-lg border border-amber-200">
+<div>
+<span class="text-outline font-label-md text-label-md uppercase">Herbal Arm API:</span>
+<p class="font-bold text-on-surface">Guduchi (Tinospora cordifolia) 500mg BD</p>
+</div>
+<div>
+<span class="text-outline font-label-md text-label-md uppercase">Concomitant Allopathic API:</span>
+<p class="font-bold text-error">Aspirin 75mg OD (Antiplatelet)</p>
+</div>
+<div>
+<span class="text-outline font-label-md text-label-md uppercase">Severity Rating:</span>
+<p class="font-bold text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-base" data-icon="error">error</span>
+            CRITICAL (Antiplatelet Potentiation)
+          </p>
+</div>
+<div>
+<span class="text-outline font-label-md text-label-md uppercase">Regulatory Classification:</span>
+<p class="font-bold text-amber-900">GCP-ASU Schedule Y / Ayush Pv PI-Alert</p>
+</div>
+</div>
+<!-- Pharmacological Mechanism -->
+<div class="text-xs space-y-1 text-on-surface">
+<div class="font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="biotechnology">biotechnology</span>
+<span>Pharmacodynamic Mechanism:</span>
+</div>
+<p class="text-on-surface-variant font-body-sm leading-relaxed">
+          Tinospora cordifolia contains bioactive proberberine alkaloids and clerodane diterpenoids that synergistically inhibit thromboxane A2 synthase alongside cyclooxygenase-1 inhibition by Aspirin, dramatically increasing bleeding times and aggravating elevated transaminase trajectory.
+        </p>
+</div>
+<div class="bg-red-50 border-l-4 border-error p-2.5 rounded-r font-code-xs text-code-xs text-red-950">
+<strong>Statutory Action Required:</strong> Mandatory dose titration or patient arm re-assignment under GCP-ASU clinical trial norms. Overriding requires an immutable clinical justification logged to the 21 CFR Part 11 ledger.
+      </div>
+<!-- Mandatory Rationale Textarea -->
+<div class="space-y-1.5">
+<label class="font-label-md text-label-md font-bold text-on-surface flex items-center justify-between" for="herb-rationale-input">
+<span>PI Clinical Justification / Dose Titration Rationale:</span>
+<span class="text-error font-code-xs text-code-xs font-semibold">* Required to Enable Override</span>
+</label>
+<textarea class="w-full bg-surface border border-outline-variant rounded p-2.5 font-body-sm text-body-sm focus:border-amber-600 focus:ring-1 focus:ring-amber-600 placeholder:text-outline" id="herb-rationale-input" onkeyup="checkHerbRationale(this.value)" placeholder="Enter clinical justification to enable override (e.g., patient cardiovascular risk profile reviewed; co-monitoring PT/INR and transaminases at 72hr interval)..." rows="3"></textarea>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-6 py-3.5 bg-surface-container border-t border-outline-variant flex items-center justify-between gap-3">
+<button class="px-4 py-2 bg-white hover:bg-surface-container-high border border-outline text-on-surface rounded font-label-md text-label-md font-semibold transition-colors" onclick="closeHerbModal()">
+        Cancel &amp; Review Prescription
+      </button>
+<button class="px-5 py-2 bg-amber-600 text-white rounded font-label-md text-label-md font-bold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-amber-700 flex items-center gap-1.5 shadow transition-all" disabled="" id="herb-override-btn" onclick="submitHerbOverride()">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+<span>Acknowledge Warning &amp; Titrate Dose</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ======================================================== -->
+<!-- 3. DPDP GRANULAR CONSENT & REVOCATION DRAWER (Act 2023) -->
+<!-- ======================================================== -->
+<div class="fixed inset-y-0 right-0 w-full sm:w-[500px] bg-surface-container-lowest border-l border-outline-variant shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col" id="dpdp-drawer">
+<!-- Header -->
+<div class="px-6 py-4 bg-surface-container border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="p-2 bg-primary text-on-primary rounded">
+<span class="material-symbols-outlined" data-icon="policy">policy</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">DPDP Act 2023 Compliance Desk</h3>
+<p class="font-code-xs text-code-xs text-on-surface-variant">Digital Personal Data Protection Act, 2023 (Act No. 22 of 2023)</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded hover:bg-surface-container-high" onclick="toggleDrawer('dpdp-drawer')">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Body -->
+<div class="p-6 flex-1 overflow-y-auto space-y-5 custom-scrollbar font-body-sm text-body-sm text-on-surface">
+<!-- Consent Status Pill -->
+<div class="flex items-center justify-between p-3.5 bg-emerald-50 border border-emerald-300 rounded-lg">
+<div class="space-y-0.5">
+<span class="font-code-xs text-code-xs text-emerald-800 font-bold uppercase">Consent Instrument Status</span>
+<div class="font-bold text-emerald-950 flex items-center gap-1.5 text-xs" id="dpdp-status-text">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+          OBTAINED &amp; CRYPTOGRAPHICALLY TIME-STAMPED
+        </div>
+</div>
+<span class="px-2 py-1 bg-emerald-600 text-white font-code-xs text-code-xs rounded font-bold">VERIFIED</span>
+</div>
+<!-- Metadata Section -->
+<div class="space-y-2 border border-outline-variant rounded-lg p-3.5 bg-surface font-code-xs text-code-xs">
+<div class="flex justify-between pb-1 border-b border-outline-variant">
+<span class="text-on-surface-variant">Data Principal (Subject):</span>
+<span class="font-bold text-on-surface">AIIA-P089</span>
+</div>
+<div class="flex justify-between pb-1 border-b border-outline-variant">
+<span class="text-on-surface-variant">Statutory Notice ID:</span>
+<span class="font-bold font-mono text-primary">DPDP-2024-ND-8819</span>
+</div>
+<div class="flex justify-between pb-1 border-b border-outline-variant">
+<span class="text-on-surface-variant">Purpose of Processing:</span>
+<span class="font-semibold text-on-surface">Clinical Trial AIIA-GUD-2026 (Sec. 7 Compliance)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Data Fiduciary:</span>
+<span class="text-on-surface">All India Institute of Ayurveda, New Delhi</span>
+</div>
+</div>
+<!-- Granular Checkboxes -->
+<div class="space-y-2.5">
+<div class="font-label-md text-label-md uppercase font-bold text-outline">Granular Purpose Authorizations:</div>
+<label class="flex items-start gap-3 p-2.5 border border-outline-variant rounded hover:bg-surface-container transition-colors cursor-pointer">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-primary h-4 w-4 border-outline" type="checkbox"/>
+<div>
+<div class="font-semibold text-on-surface">Electronic Health Record (EHR) Processing</div>
+<p class="text-xs text-on-surface-variant">Storage and evaluation of bedside clinical vitals, eCRF questionnaires, and hospital lab feeds.</p>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2.5 border border-outline-variant rounded hover:bg-surface-container transition-colors cursor-pointer">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-primary h-4 w-4 border-outline" type="checkbox"/>
+<div>
+<div class="font-semibold text-on-surface">Pharmacovigilance Auto-Notification (NPvCC)</div>
+<p class="text-xs text-on-surface-variant">Automated encrypted telemetry sharing with National Pharmacovigilance Centre for ASU Drugs.</p>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2.5 border border-outline-variant rounded hover:bg-surface-container transition-colors cursor-pointer">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-primary h-4 w-4 border-outline" type="checkbox"/>
+<div>
+<div class="font-semibold text-on-surface">Genomic &amp; Prakriti Sequencing Data Repository</div>
+<p class="text-xs text-on-surface-variant">De-identified Ayurvedic constitutional phenotype &amp; bio-bank repository profiling.</p>
+</div>
+</label>
+</div>
+<!-- DANGER SECTION: Right to Withdraw Consent -->
+<div class="p-4 border-2 border-red-300 bg-red-50/70 rounded-lg space-y-3">
+<div class="flex items-center gap-2 text-error font-bold font-headline-md text-headline-md">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+<span>Data Principal Right to Withdraw (DPDP Act 2023 §6(4))</span>
+</div>
+<p class="text-xs text-red-950 font-body-sm leading-relaxed">
+        The Data Principal has the unconditional statutory right to withdraw consent at any stage of the trial. Exercising withdrawal will immediately trigger data quarantine across this workstation and suspend further CRF commitments.
+      </p>
+<button class="w-full py-2 px-3 bg-error hover:bg-red-700 text-on-error rounded font-label-md text-label-md font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors" onclick="executeConsentRevocation()">
+<span class="material-symbols-outlined text-sm" data-icon="block">block</span>
+<span>Revoke Consent &amp; Quarantine Data</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ======================================================== -->
+<!-- 4. FASTAPI CONNECTION HOOKS & SDK ACCORDION/DRAWER -->
+<!-- ======================================================== -->
+<div class="fixed inset-x-0 bottom-0 max-h-[85vh] bg-surface-container-lowest border-t-2 border-primary shadow-2xl z-50 transform translate-y-full transition-transform duration-300 flex flex-col" id="fastapi-drawer">
+<!-- Drawer Header -->
+<div class="px-margin py-3 bg-surface-container-high border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="p-1.5 bg-primary text-on-primary rounded font-mono text-xs font-bold">FastAPI</span>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-primary">CTMS Backend Connection Hooks &amp; TypeScript SDK</h3>
+<p class="font-code-xs text-code-xs text-on-surface-variant">Live endpoints authenticated via OAuth2 Bearer &amp; SHA-256 HMAC tokens.</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-code-xs text-code-xs rounded font-bold border border-emerald-300">
+        Backend: HTTP 200 ONLINE
+      </span>
+<button class="p-1 rounded text-on-surface hover:bg-surface-container" onclick="toggleDrawer('fastapi-drawer')">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<!-- Drawer Body -->
+<div class="p-margin flex-1 overflow-y-auto space-y-4 font-body-sm text-body-sm text-on-surface custom-scrollbar">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+<!-- Endpoint 1: api/safety.ts -->
+<div class="border border-outline-variant rounded-lg p-3 bg-surface space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-sky-100 text-sky-800 font-code-xs text-code-xs rounded font-bold font-mono">POST</span>
+<span class="font-mono text-xs font-bold text-primary">/api/safety/submit-ae</span>
+</div>
+<span class="font-code-xs text-code-xs text-outline">api/safety.ts</span>
+</div>
+<p class="font-code-xs text-code-xs text-on-surface-variant">
+          Hook: <code class="text-primary font-bold">submitAdverseEvent(payload, idempotencyKey)</code>
+</p>
+<div class="flex items-center gap-2 pt-1">
+<button class="px-2.5 py-1 bg-primary text-on-primary hover:bg-primary-container rounded font-code-xs text-code-xs font-semibold flex items-center gap-1" onclick="testApiEndpoint('safety')">
+<span class="material-symbols-outlined text-xs" data-icon="play_arrow">play_arrow</span>
+<span>Execute Test Call</span>
+</button>
+<span class="text-outline text-xs">Idempotency-Key: c9a4-2026-d14</span>
+</div>
+</div>
+<!-- Endpoint 2: api/audit.ts -->
+<div class="border border-outline-variant rounded-lg p-3 bg-surface space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-code-xs text-code-xs rounded font-bold font-mono">GET</span>
+<span class="font-mono text-xs font-bold text-primary">/api/audit/verify-chain</span>
+</div>
+<span class="font-code-xs text-code-xs text-outline">api/audit.ts</span>
+</div>
+<p class="font-code-xs text-code-xs text-on-surface-variant">
+          Hook: <code class="text-primary font-bold">verifyChain()</code> - Merkle proof validation across 21 CFR §11 ledger.
+        </p>
+<div class="flex items-center gap-2 pt-1">
+<button class="px-2.5 py-1 bg-secondary text-on-secondary hover:bg-secondary/90 rounded font-code-xs text-code-xs font-semibold flex items-center gap-1" onclick="testApiEndpoint('audit')">
+<span class="material-symbols-outlined text-xs" data-icon="verified_user">verified_user</span>
+<span>Verify Merkle Root</span>
+</button>
+<span class="text-outline text-xs">Ledger Blocks: 1,482</span>
+</div>
+</div>
+<!-- Endpoint 3: api/export.ts -->
+<div class="border border-outline-variant rounded-lg p-3 bg-surface space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-purple-100 text-purple-800 font-code-xs text-code-xs rounded font-bold font-mono">GET</span>
+<span class="font-mono text-xs font-bold text-primary">/api/export/cdisc-zip</span>
+</div>
+<span class="font-code-xs text-code-xs text-outline">api/export.ts</span>
+</div>
+<p class="font-code-xs text-code-xs text-on-surface-variant">
+          Hook: <code class="text-primary font-bold">downloadCdiscZip('AIIA-GUD-2026')</code> - CDISC ODM-XML &amp; Define.xml v2.1.
+        </p>
+<div class="flex items-center gap-2 pt-1">
+<button class="px-2.5 py-1 bg-surface-container-highest text-primary border border-outline hover:bg-surface-container rounded font-code-xs text-code-xs font-semibold flex items-center gap-1" onclick="testApiEndpoint('export')">
+<span class="material-symbols-outlined text-xs" data-icon="cloud_download">cloud_download</span>
+<span>Stream Bundle</span>
+</button>
+<span class="text-outline text-xs">CDISC SDTM v3.3</span>
+</div>
+</div>
+<!-- Endpoint 4: api/analytics.ts -->
+<div class="border border-outline-variant rounded-lg p-3 bg-surface space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-amber-100 text-amber-800 font-code-xs text-code-xs rounded font-bold font-mono">GET</span>
+<span class="font-mono text-xs font-bold text-primary">/api/analytics/portfolio-kpis</span>
+</div>
+<span class="font-code-xs text-code-xs text-outline">api/analytics.ts</span>
+</div>
+<p class="font-code-xs text-code-xs text-on-surface-variant">
+          Hook: <code class="text-primary font-bold">getPortfolioKPIs()</code> - Trial safety clusters &amp; DILI alerts.
+        </p>
+<div class="flex items-center gap-2 pt-1">
+<button class="px-2.5 py-1 bg-surface-container-highest text-primary border border-outline hover:bg-surface-container rounded font-code-xs text-code-xs font-semibold flex items-center gap-1" onclick="testApiEndpoint('analytics')">
+<span class="material-symbols-outlined text-xs" data-icon="query_stats">query_stats</span>
+<span>Fetch Telemetry</span>
+</button>
+<span class="text-outline text-xs">AIIA Cluster Site 01</span>
+</div>
+</div>
+</div>
+<!-- Live JSON Response Console -->
+<div class="bg-gray-950 text-emerald-400 p-3.5 rounded-lg font-mono text-xs space-y-1.5 shadow-inner border border-gray-800">
+<div class="flex items-center justify-between text-gray-400 border-b border-gray-800 pb-1">
+<span class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>FastAPI Mock Console Preview (HTTP 200 OK)</span>
+</span>
+<span class="text-gray-500" id="api-response-time">Latency: 28ms</span>
+</div>
+<pre class="overflow-x-auto custom-scrollbar pt-1 text-emerald-300 leading-relaxed font-code-xs" id="api-json-display">{
+  "status": "success",
+  "endpoint": "/api/safety/submit-ae",
+  "code": 200,
+  "transaction_hash": "0x7f9a8820c78a01f9bb990022c1e02",
+  "verified_alcoa": true,
+  "cdsco_dispatched": true
+}</pre>
+</div>
+</div>
+</div>
+<!-- Simple Toast Notification Element -->
+<div class="hidden fixed bottom-16 right-6 z-50 bg-inverse-surface text-inverse-on-surface px-4 py-2.5 rounded-lg shadow-xl font-body-sm text-body-sm flex items-center gap-2 border border-outline transition-all animate-in fade-in slide-in-from-bottom-3" id="toast-pill">
+<span class="material-symbols-outlined text-secondary-fixed text-lg" data-icon="check_circle">check_circle</span>
+<span id="toast-msg">Action processed successfully</span>
+</div>
+<!-- ================= JAVASCRIPT CONTROLLERS ================= -->
+<script>
+  // 1. WEBSOCKET COUNTDOWN TICKER CONTROLLER
+  let slaRemainingSeconds = 23 * 3600 + 59 * 60 + 12;
+  let slaInterval = null;
+  let slaState = 'active'; // 'active' | 'breached' | 'none'
+
+  function formatTime(totalSec) {
+    const h = Math.floor(totalSec / 3600).toString().padStart(2, '0');
+    const m = Math.floor((totalSec % 3600) / 60).toString().padStart(2, '0');
+    const s = (totalSec % 60).toString().padStart(2, '0');
+    return `${h}:${m}:${s}`;
+  }
+
+  function startSlaTimer() {
+    if (slaInterval) clearInterval(slaInterval);
+    slaInterval = setInterval(() => {
+      if (slaState === 'active') {
+        if (slaRemainingSeconds > 0) {
+          slaRemainingSeconds--;
+          updateSlaDisplays();
+        } else {
+          setSlaState('breached');
+        }
+      }
+    }, 1000);
+  }
+
+  function updateSlaDisplays() {
+    const timerStr = formatTime(slaRemainingSeconds);
+    const mainTimer = document.getElementById('sla-timer');
+    const drawerTimer = document.getElementById('drawer-timer');
+    if (mainTimer) mainTimer.innerText = timerStr;
+    if (drawerTimer) drawerTimer.innerText = timerStr;
+  }
+
+  function setSlaState(state) {
+    slaState = state;
+    const badge = document.getElementById('sla-badge');
+    const mainTimer = document.getElementById('sla-timer');
+    const dotPing = document.getElementById('sla-dot-ping');
+    const dot = document.getElementById('sla-dot');
+    const simMenu = document.getElementById('sla-sim-menu');
+    if (simMenu) simMenu.classList.add('hidden');
+
+    if (state === 'active') {
+      slaRemainingSeconds = 23 * 3600 + 59 * 60 + 12;
+      mainTimer.innerText = "23:59:12";
+      badge.className = "font-code-xs text-code-xs bg-red-700 text-white px-2 py-0.5 rounded font-semibold flex items-center gap-0.5";
+      badge.innerHTML = `<span class="material-symbols-outlined text-xs">alarm</span><span>T-24h Window Active</span>`;
+      dotPing.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75";
+      dot.className = "relative inline-flex rounded-full h-2 w-2 bg-red-600";
+      triggerToast('WS Event: Serious AE Registered. 24h SLA Active.');
+    } else if (state === 'breached') {
+      slaRemainingSeconds = 0;
+      mainTimer.innerText = "00:00:00";
+      badge.className = "font-code-xs text-code-xs bg-black text-red-400 px-2 py-0.5 rounded font-bold flex items-center gap-0.5 border border-red-500";
+      badge.innerHTML = `<span class="material-symbols-outlined text-xs">error</span><span>SLA BREACHED (CDSCO)</span>`;
+      dotPing.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-red-900 opacity-90";
+      dot.className = "relative inline-flex rounded-full h-2 w-2 bg-red-900";
+      triggerToast('CRITICAL: 24h SLA Breached. Notice queued for Ethics Committee.');
+    } else if (state === 'none') {
+      mainTimer.innerText = "--:--:--";
+      badge.className = "font-code-xs text-code-xs bg-emerald-700 text-white px-2 py-0.5 rounded font-semibold flex items-center gap-0.5";
+      badge.innerHTML = `<span class="material-symbols-outlined text-xs">check_circle</span><span>No Active SAE</span>`;
+      dotPing.className = "hidden";
+      dot.className = "relative inline-flex rounded-full h-2 w-2 bg-emerald-600";
+      triggerToast('WS Event: No pending regulatory SAE timers for AIIA-P089.');
+    }
+  }
+
+  startSlaTimer();
+
+  // 2. HERB-DRUG MODAL LOGIC
+  function openHerbModal() {
+    const modal = document.getElementById('herb-modal');
+    modal.classList.remove('hidden');
+  }
+
+  function closeHerbModal() {
+    const modal = document.getElementById('herb-modal');
+    modal.classList.add('hidden');
+  }
+
+  function checkConcomitantInput(val) {
+    const query = val.toLowerCase();
+    if (query.includes('aspirin') || query.includes('guduchi') || query.includes('guggulu') || query.includes('warfarin')) {
+      openHerbModal();
+    }
+  }
+
+  function checkHerbRationale(text) {
+    const btn = document.getElementById('herb-override-btn');
+    if (text.trim().length >= 8) {
+      btn.removeAttribute('disabled');
+      btn.classList.remove('opacity-40', 'cursor-not-allowed');
+    } else {
+      btn.setAttribute('disabled', 'true');
+      btn.classList.add('opacity-40', 'cursor-not-allowed');
+    }
+  }
+
+  function submitHerbOverride() {
+    const rationale = document.getElementById('herb-rationale-input').value;
+    closeHerbModal();
+    // Update ALCOA ledger Block Hash
+    const block = document.getElementById('current-block-hash');
+    const newHash = '0x8e' + Math.floor(Math.random()*1e9).toString(16) + '...overridden';
+    if (block) block.innerText = newHash;
+    triggerToast('Warning acknowledged. Clinical justification chained into ALCOA+ ledger.');
+  }
+
+  // 3. DPDP CONSENT & REVOCATION LOGIC
+  function executeConsentRevocation() {
+    if (confirm('DPDP Statutory Notice: Are you certain you wish to process consent revocation for Subject AIIA-P089 under DPDP Act 2023 §6(4)? This will immediately freeze eCRF data entry.')) {
+      toggleDrawer('dpdp-drawer');
+      // Show quarantine overlay
+      document.getElementById('dpdp-quarantine-overlay').classList.remove('hidden');
+      // Grey out inputs
+      const workspace = document.getElementById('ecrf-workspace-container');
+      workspace.classList.add('opacity-30', 'pointer-events-none');
+      // Update header badge
+      const badge = document.getElementById('dpdp-badge-status');
+      if (badge) badge.className = "w-2 h-2 rounded-full bg-error animate-pulse";
+      triggerToast('Subject AIIA-P089 consent revoked. Data Quarantined.');
+    }
+  }
+
+  function restoreConsent() {
+    document.getElementById('dpdp-quarantine-overlay').classList.add('hidden');
+    const workspace = document.getElementById('ecrf-workspace-container');
+    workspace.classList.remove('opacity-30', 'pointer-events-none');
+    const badge = document.getElementById('dpdp-badge-status');
+    if (badge) badge.className = "w-2 h-2 rounded-full bg-emerald-600";
+    triggerToast('Consent Instrument re-validated and logged to DPDP repository.');
+  }
+
+  // 4. MULTILINGUAL CLINICAL VOICE-TO-TEXT ASSISTANT
+  let dictationActive = false;
+  let currentLang = 'hi-IN';
+  const phrases = {
+    'hi-IN': [
+      ' रोगी को नेत्र-पीतता और तीव्र वमन (vomiting) की शिकायत है। अग्निमांद्य और उदर शूल विद्यमान।',
+      ' रोगी के यकृत प्रदेश (Right Hypochondrium) में हल्का स्पर्श-असह्यत्व। जिह्वा पर साम लक्षण।',
+      ' Day 14 पर पित्त वृद्धि और दौर्बल्य स्पष्ट। तिक्त रस आहार दिया जा रहा है।'
+    ],
+    'en-IN': [
+      ' Subject reports scleral icterus, acute post-prandial nausea, and mild epigastric discomfort over past 48 hours.',
+      ' Physical palpation reveals mild right upper quadrant tenderness. Clear signs of Pitta vitiation with coated tongue.',
+      ' Liver transaminases monitored closely due to additive Guduchi and antiplatelet interaction.'
+    ]
+  };
+
+  function setDictationLang(lang) {
+    currentLang = lang;
+    const hiBtn = document.getElementById('lang-btn-hi');
+    const enBtn = document.getElementById('lang-btn-en');
+    const display = document.getElementById('active-lang-display');
+    if (display) display.innerText = lang;
+
+    if (lang === 'hi-IN') {
+      hiBtn.className = "px-2 py-0.5 rounded text-xs font-semibold bg-white text-primary shadow-xs border border-outline-variant";
+      enBtn.className = "px-2 py-0.5 rounded text-xs font-semibold text-on-surface-variant hover:text-on-surface";
+    } else {
+      enBtn.className = "px-2 py-0.5 rounded text-xs font-semibold bg-white text-primary shadow-xs border border-outline-variant";
+      hiBtn.className = "px-2 py-0.5 rounded text-xs font-semibold text-on-surface-variant hover:text-on-surface";
+    }
+    triggerToast(`Dictation dialect set to: ${lang}`);
+  }
+
+  function toggleVoiceRecognition() {
+    const wave = document.getElementById('voice-wave-container');
+    const micBtn = document.getElementById('mic-trigger-btn');
+    const notesArea = document.getElementById('clinical-notes-area');
+
+    if (!dictationActive) {
+      dictationActive = true;
+      wave.classList.remove('hidden');
+      micBtn.classList.replace('bg-primary', 'bg-error');
+
+      // Check for real W3C Web Speech API support
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        try {
+          const recognition = new SpeechRecognition();
+          recognition.lang = currentLang;
+          recognition.continuous = false;
+          recognition.interimResults = false;
+
+          recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            notesArea.value += ' ' + transcript;
+            stopDictationUI();
+            triggerToast('Voice note transcribed via Web Speech API.');
+          };
+
+          recognition.onerror = function() {
+            simulateSpeechAppend();
+          };
+
+          recognition.start();
+        } catch(e) {
+          simulateSpeechAppend();
+        }
+      } else {
+        simulateSpeechAppend();
+      }
+    } else {
+      stopDictationUI();
+    }
+  }
+
+  function simulateSpeechAppend() {
+    setTimeout(() => {
+      const notesArea = document.getElementById('clinical-notes-area');
+      const list = phrases[currentLang];
+      const randomPhrase = list[Math.floor(Math.random() * list.length)];
+      notesArea.value += randomPhrase;
+      stopDictationUI();
+      triggerToast(`Transcribed clinical notes in ${currentLang}`);
+    }, 2200);
+  }
+
+  function stopDictationUI() {
+    dictationActive = false;
+    const wave = document.getElementById('voice-wave-container');
+    const micBtn = document.getElementById('mic-trigger-btn');
+    if (wave) wave.classList.add('hidden');
+    if (micBtn) micBtn.classList.replace('bg-error', 'bg-primary');
+  }
+
+  // 5. FASTAPI & DRAWER ACTIONS
+  function toggleDrawer(id) {
+    const drawer = document.getElementById(id);
+    if (!drawer) return;
+    const isClosed = drawer.classList.contains('translate-x-full') || drawer.classList.contains('translate-y-full');
+    if (isClosed) {
+      drawer.classList.remove('translate-x-full', 'translate-y-full');
+    } else {
+      if (id === 'fastapi-drawer') {
+        drawer.classList.add('translate-y-full');
+      } else {
+        drawer.classList.add('translate-x-full');
+      }
+    }
+  }
+
+  function toggleElement(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('hidden');
+  }
+
+  function simulateDownloadPdf() {
+    triggerToast('Generating pre-filled CDSCO Form CT-16 PDF with digital seal...');
+    setTimeout(() => {
+      triggerToast('CT-16-AIIA-P089.pdf ready for regulatory archive.');
+    }, 1200);
+  }
+
+  function dispatchToSugam() {
+    const btn = document.getElementById('sugam-dispatch-btn');
+    btn.innerHTML = `<span class="material-symbols-outlined text-base animate-spin">rotate_right</span><span>Dispatching to SUGAM Gateway...</span>`;
+    setTimeout(() => {
+      btn.innerHTML = `<span class="material-symbols-outlined text-base">verified</span><span>Dispatched &amp; Acknowledged</span>`;
+      btn.classList.replace('bg-error', 'bg-emerald-700');
+      const receipt = document.getElementById('sugam-receipt-card');
+      const time = document.getElementById('sugam-ack-time');
+      if (receipt) receipt.classList.remove('hidden');
+      if (time) time.innerText = new Date().toLocaleTimeString('en-IN') + ' IST';
+      triggerToast('SUGAM API: Form CT-16 Expedited Report acknowledged.');
+    }, 1500);
+  }
+
+  function testApiEndpoint(kind) {
+    const display = document.getElementById('api-json-display');
+    const timeDisplay = document.getElementById('api-response-time');
+    const lat = Math.floor(Math.random() * 30) + 15;
+    timeDisplay.innerText = `Latency: ${lat}ms`;
+
+    if (kind === 'safety') {
+      display.innerText = JSON.stringify({
+        endpoint: "/api/safety/submitAdverseEvent",
+        http_status: 200,
+        patient_id: "AIIA-P089",
+        trial: "AIIA-GUD-2026",
+        ae_type: "Hepatobiliary / Antiplatelet Synergism",
+        severity: "Grade 3",
+        regulatory_window: "24h CDSCO",
+        hash: "0x3f" + Math.floor(Math.random()*1e10).toString(16),
+        status: "COMMITTED"
+      }, null, 2);
+    } else if (kind === 'audit') {
+      display.innerText = JSON.stringify({
+        endpoint: "/api/audit/verifyChain",
+        http_status: 200,
+        merkle_root: "0x892a01fb99e",
+        blocks_verified: 1482,
+        unbroken_chain: true,
+        rfc3161_timestamp: new Date().toISOString(),
+        alcoa_plus_criteria: "COMPLIANT"
+      }, null, 2);
+    } else if (kind === 'export') {
+      display.innerText = JSON.stringify({
+        endpoint: "/api/export/downloadCdiscZip",
+        http_status: 200,
+        package: "AIIA-GUD-2026-SDTM.zip",
+        domains: ["DM", "AE", "LB", "VS", "SU"],
+        define_xml: "v2.1",
+        size_bytes: 489210,
+        download_url: "/stream/archive/0921.zip"
+      }, null, 2);
+    } else if (kind === 'analytics') {
+      display.innerText = JSON.stringify({
+        endpoint: "/api/analytics/getPortfolioKPIs",
+        http_status: 200,
+        enrolled: 120,
+        active_arms: 3,
+        adherence_median: "98.2%",
+        dili_flag_rate: "0.83%",
+        cluster_index: "AIIA-ND-01"
+      }, null, 2);
+    }
+    triggerToast(`FastAPI mock response updated for ${kind}.`);
+  }
+
+  function commitVisitRecord() {
+    triggerToast('Visit Day 14 record cryptographically signed & chained to ALCOA+ ledger (SHA-256).');
+  }
+
+  function triggerToast(msg) {
+    const pill = document.getElementById('toast-pill');
+    const text = document.getElementById('toast-msg');
+    if (!pill || !text) return;
+    text.innerText = msg;
+    pill.classList.remove('hidden');
+    setTimeout(() => {
+      pill.classList.add('hidden');
+    }, 3500);
+  }
+</script>
+</body></html>

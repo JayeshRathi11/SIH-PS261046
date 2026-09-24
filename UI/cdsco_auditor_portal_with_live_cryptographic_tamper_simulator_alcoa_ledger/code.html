@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AyuTrial-CTMS | CDSCO Regulatory Auditor Portal &amp; ALCOA+ Ledger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#b6ebfe",
+            "primary": "#003527",
+            "secondary-fixed": "#85f8c4",
+            "tertiary-fixed-dim": "#9acee1",
+            "surface": "#faf8ff",
+            "background": "#faf8ff",
+            "on-secondary-container": "#00714e",
+            "on-background": "#131b2e",
+            "surface-bright": "#faf8ff",
+            "on-tertiary-fixed": "#001f28",
+            "on-tertiary-fixed-variant": "#114d5d",
+            "surface-container-highest": "#dae2fd",
+            "on-primary-container": "#80bea6",
+            "on-tertiary": "#ffffff",
+            "surface-variant": "#dae2fd",
+            "error": "#ba1a1a",
+            "secondary": "#006c4a",
+            "secondary-container": "#82f5c1",
+            "surface-container-high": "#e2e7ff",
+            "primary-container": "#064e3b",
+            "on-primary": "#ffffff",
+            "error-container": "#ffdad6",
+            "inverse-surface": "#283044",
+            "on-surface": "#131b2e",
+            "on-secondary-fixed": "#002114",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#86bacc",
+            "surface-tint": "#2b6954",
+            "surface-dim": "#d2d9f4",
+            "inverse-on-surface": "#eef0ff",
+            "inverse-primary": "#95d3ba",
+            "on-primary-fixed": "#002117",
+            "surface-container-low": "#f2f3ff",
+            "primary-fixed-dim": "#95d3ba",
+            "on-surface-variant": "#404944",
+            "primary-fixed": "#b0f0d6",
+            "outline-variant": "#bfc9c3",
+            "on-secondary-fixed-variant": "#005137",
+            "outline": "#707974",
+            "on-error-container": "#93000a",
+            "tertiary": "#003340",
+            "on-primary-fixed-variant": "#0b513d",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#0d4b5b",
+            "secondary-fixed-dim": "#68dba9",
+            "surface-container": "#eaedff",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-compact": "1rem",
+            "space-xs": "0.25rem",
+            "gutter-dense": "0.5rem",
+            "gutter": "1rem",
+            "margin": "1.5rem",
+            "space-md": "0.75rem",
+            "space-lg": "1rem",
+            "space-xl": "1.5rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "label-md": ["Inter"],
+            "code-xs": ["JetBrains Mono"],
+            "headline-xl-mobile": ["Hanken Grotesk"],
+            "body-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-md": ["Hanken Grotesk"],
+            "headline-lg": ["Hanken Grotesk"],
+            "body-lg": ["Inter"],
+            "code-sm": ["JetBrains Mono"],
+            "headline-xl": ["Hanken Grotesk"]
+          },
+          "fontSize": {
+            "label-md": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600"}],
+            "code-xs": ["10px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+            "headline-xl-mobile": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "body-md": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+            "headline-md": ["16px", {"lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "headline-lg": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+            "body-lg": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "code-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+            "headline-xl": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    @keyframes pulseLedger {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px rgba(133, 248, 196, 0.7)); }
+      50% { opacity: 0.6; filter: drop-shadow(0 0 1px rgba(133, 248, 196, 0.2)); }
+    }
+    .live-pulse {
+      animation: pulseLedger 2s infinite ease-in-out;
+    }
+    @keyframes pulseRedGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.7), 0 0 18px rgba(186, 26, 26, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(186, 26, 26, 0.15), 0 0 28px rgba(186, 26, 26, 0.6); }
+    }
+    .pulse-red-glow {
+      animation: pulseRedGlow 1.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+    @keyframes flashCrimson {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .flash-crimson {
+      animation: flashCrimson 0.9s infinite ease-in-out;
+    }
+    .block-connector-line {
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TOP EMERGENCY AUDIT BREACH BANNER (Visible on Tamper) -->
+<div class="hidden bg-error text-on-error px-margin py-2.5 shadow-md flex items-center justify-between z-50 sticky top-0 transition-all duration-300 border-b border-error-container" id="topEmergencyBanner">
+<div class="flex items-center gap-space-md flex-1">
+<span class="material-symbols-outlined text-[22px] animate-bounce shrink-0" data-icon="report" style="font-variation-settings: 'FILL' 1;">report</span>
+<div class="space-y-0.5">
+<div class="font-headline-md text-[14px] font-bold tracking-wide flex items-center gap-2">
+        CRITICAL ALCOA+ INTEGRITY BREACH: Hash Mismatch detected at Block #3!
+        <span class="bg-surface-container-lowest text-error px-1.5 py-0.2 text-code-xs font-mono font-bold rounded">21 CFR PART 11 NON-COMPLIANCE</span>
+</div>
+<p class="font-code-xs text-[11px] opacity-95">
+        Database modified post-write. Expected Hash: <span class="font-bold underline">0x8c7b89f2e34a719d3bb2...</span> | Actual Hash: <span class="font-bold underline text-surface-bright">0x9c12e841f0a823e59b10...</span> (ALT altered: 165 ➔ 35 U/L)
+      </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-lowest text-error hover:bg-surface rounded font-label-md text-label-md font-bold transition shadow-sm active:scale-95" onclick="restoreCleanState()">
+<span class="material-symbols-outlined text-[16px]" data-icon="restore">restore</span>
+      Restore Cryptographic Integrity
+    </button>
+</div>
+</div>
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-margin h-14 bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-40">
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">AyuTrial-CTMS | NPvCC Portal</span>
+<span class="ml-2 font-code-xs text-code-xs px-space-xs py-0.5 rounded bg-surface-container border border-outline-variant text-primary font-semibold">21 CFR PART 11</span>
+</div>
+</div>
+<!-- Search on left -->
+<div class="relative hidden lg:flex items-center">
+<span class="material-symbols-outlined absolute left-2.5 text-outline" data-icon="search">search</span>
+<input class="pl-8 pr-3 py-1 text-body-sm font-body-sm w-64 rounded border border-outline-variant bg-surface-container-low focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Audit block # / Merkle root..." type="text"/>
+</div>
+</div>
+<!-- Navigation links & Persona Switcher -->
+<div class="flex items-center gap-space-md">
+<nav class="hidden xl:flex items-center gap-space-md">
+<a class="text-on-surface-variant hover:text-primary pb-1 font-body-sm text-body-sm transition-colors duration-150" href="#">Active Trials</a>
+<a class="text-on-surface-variant hover:text-primary pb-1 font-body-sm text-body-sm transition-colors duration-150" href="#">eCRF Matrix</a>
+<a class="text-on-surface-variant hover:text-primary pb-1 font-body-sm text-body-sm transition-colors duration-150" href="#">Safety Signals</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-semibold font-body-sm text-body-sm" href="#">Regulatory Audit</a>
+</nav>
+<!-- Trailing Persona & Actions -->
+<div class="flex items-center gap-space-sm pl-space-sm border-l border-outline-variant">
+<!-- CDSCO Auditor Badge Pill -->
+<div class="flex items-center gap-space-xs bg-primary-container text-on-primary px-space-sm py-1 rounded border border-primary text-label-md font-label-md">
+<span class="material-symbols-outlined text-secondary-fixed text-[16px]" data-icon="gavel" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<span class="hidden md:inline">CDSCO Auditor</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed ml-0.5"></span>
+</div>
+<!-- Primary Action Hackathon Trigger -->
+<button class="inline-flex items-center gap-1.5 px-space-md py-1.5 rounded bg-primary hover:bg-primary-container text-secondary-fixed border border-secondary font-label-md text-label-md font-bold active:scale-[0.98] transition shadow-sm" id="topNavTamperBtn" onclick="toggleTamperSimulation()">
+<span class="material-symbols-outlined text-[17px]" data-icon="security" id="topNavTamperIcon">security</span>
+<span id="topNavTamperText">Inspect Cryptographic Ledger &amp; Simulate Tamper</span>
+</button>
+<button class="hidden sm:inline-flex items-center gap-1 px-space-sm py-1.5 rounded border border-outline-variant bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md transition">
+<span class="material-symbols-outlined text-[16px]" data-icon="file_download">file_download</span>
+<span class="hidden lg:inline">CDSCO Export</span>
+</button>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary relative" title="Alerts">
+<span class="material-symbols-outlined text-[18px]" data-icon="warning">warning</span>
+<span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error" id="navAlertDot"></span>
+</button>
+<div class="w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-label-md text-label-md font-bold ml-1 border border-outline-variant" title="CDSCO Auditor Enclave Session">
+            VS
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-14 bottom-0 w-64 flex flex-col justify-between p-space-md bg-surface-container-low border-r border-outline-variant z-30">
+<div>
+<!-- Header / Registry Identity -->
+<div class="p-space-sm mb-space-md bg-surface-container-lowest rounded border border-outline-variant flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded bg-primary-container flex items-center justify-center text-secondary-fixed">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+</div>
+<div class="overflow-hidden">
+<div class="font-headline-md text-headline-md font-semibold text-primary truncate leading-tight">AIIA CTMS Registry</div>
+<div class="font-code-xs text-code-xs text-on-surface-variant truncate">Protocol AIIA-CT-2024-09</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="space-y-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container hover:text-on-surface transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="clinical_notes">clinical_notes</span>
+<span>Trial State Machine</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container hover:text-on-surface transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span>eCRF Workspace</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container hover:text-on-surface transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="emergency">emergency</span>
+<span>NPvCC Adverse Reactions</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm bg-primary-container text-on-primary rounded font-label-md text-label-md border-l-4 border-secondary-fixed transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-secondary-fixed" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-semibold">ALCOA+ Audit Ledger</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container hover:text-on-surface transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="medication">medication</span>
+<span>Herb-Drug Interactions</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container hover:text-on-surface transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="file_download">file_download</span>
+<span>Regulatory Export Hub</span>
+</a>
+</nav>
+<!-- Hackathon Sandbox Banner CTA -->
+<div class="mt-space-lg p-space-sm rounded bg-surface-container-highest border border-outline-variant space-y-2">
+<div class="flex items-center gap-1.5 text-primary font-headline-md text-[13px] font-bold">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="science">science</span>
+    Judge Demo Sandbox
+  </div>
+<p class="text-code-xs text-on-surface-variant leading-relaxed">
+    Inject rogue DB mutation &amp; watch Merkle anchor chain immediately break and freeze.
+  </p>
+<button class="w-full py-1.5 text-center text-code-xs font-bold rounded bg-primary text-secondary-fixed hover:bg-primary-container transition" id="sidebarTamperBtn" onclick="toggleTamperSimulation()">
+    Toggle Tamper State
+  </button>
+</div>
+</div>
+<!-- Sidebar Footer Tabs -->
+<div class="border-t border-outline-variant pt-space-md space-y-1">
+<a class="flex items-center gap-space-sm px-space-md py-1.5 text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span>System Health &amp; 21 CFR</span>
+</a>
+<div class="px-space-md pt-2">
+<div class="flex items-center justify-between text-code-xs font-code-xs text-outline">
+<span>GAMP 5 Cat 4</span>
+<span class="text-secondary font-semibold">VALIDATED</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN WORKSPACE CANVAS -->
+<main class="ml-64 p-space-xl flex-1 flex flex-col gap-space-xl max-w-[1680px]">
+<!-- SECTION 1: Chain Verification & Merkle Anchor Header (with Requested Dual Badges) -->
+<section class="bg-surface-container-lowest rounded-lg border border-outline-variant p-space-lg shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg border-b border-outline-variant pb-space-lg">
+<div>
+<div class="flex items-center gap-space-sm flex-wrap mb-1">
+<h1 class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight">Cryptographic ALCOA+ Audit Ledger</h1>
+</div>
+<!-- DUAL INTEGRITY BADGES SPECIFIED IN EDIT REQUEST -->
+<div class="flex items-center gap-space-sm flex-wrap mt-2">
+<!-- Dual Badge 1: Linear Hash Chain -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed/30 text-on-secondary-container border border-secondary text-label-md font-label-md font-bold transition-all duration-300" id="dualLinearChainBadge">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="check_circle" id="dualLinearChainIcon" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span id="dualLinearChainText">Linear Hash Chain: VERIFIED_SECURE</span>
+</div>
+<!-- Dual Badge 2: Isolated Witness Merkle Anchor -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed border border-on-tertiary-fixed-variant text-label-md font-label-md font-bold transition-all duration-300" id="dualWitnessMerkleBadge">
+<span class="material-symbols-outlined text-[16px] text-on-tertiary-fixed-variant" data-icon="shield" id="dualWitnessMerkleIcon" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span id="dualWitnessMerkleText">Isolated Witness Merkle Anchor: VALIDATED (0x7f83b165...)</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-primary font-code-xs text-code-xs border border-outline-variant font-semibold">
+    CDSCO Enclave v4.9
+  </span>
+</div>
+<p class="text-on-surface-variant font-body-sm text-body-sm mt-2">
+  Real-time Byzantine-fault-tolerant append-only cryptographic event stream anchored to isolated hardware security enclave.
+</p>
+</div>
+<!-- Actions in Hero -->
+<div class="flex items-center gap-space-md flex-wrap">
+<!-- Main Primary Action Button -->
+<button class="flex items-center gap-2 px-space-lg py-2.5 rounded bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md font-bold transition-all duration-150 active:scale-[0.99] shadow-sm border border-secondary-fixed" id="heroTamperBtn" onclick="toggleTamperSimulation()">
+<span class="material-symbols-outlined text-secondary-fixed" data-icon="security" id="heroTamperIcon">security</span>
+<span id="heroTamperText">Inspect Cryptographic Ledger &amp; Simulate Tamper</span>
+<span class="text-code-xs font-code-xs bg-primary px-1.5 py-0.5 rounded text-secondary-fixed">⌥T</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-2.5 rounded bg-surface-container hover:bg-surface-container-high border border-outline-variant text-primary font-label-md text-label-md font-semibold transition-all duration-150" id="verifyLedgerBtn" onclick="runLiveVerification()">
+<span class="material-symbols-outlined text-[17px]" data-icon="sync" id="verifyBtnIcon">sync</span>
+<span id="verifyBtnText">Verify Chain</span>
+</button>
+</div>
+</div>
+<!-- Anchor Meta Matrix -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md pt-space-md">
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant transition-colors" id="metaMerkleCard">
+<div class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Witness Merkle Root Anchor</div>
+<div class="text-code-xs font-code-xs text-primary font-semibold truncate mt-1 select-all" id="metaWitnessMerkleValue" title="0x7f83b165c92f40b2a9e3d81b957648b29c5421df608a">
+    0x7f83b165c92f40b2a9e3d81b...
+  </div>
+<div class="text-code-xs font-code-xs text-outline mt-0.5" id="metaWitnessMerkleStatus">Isolated audit enclave mirror • Block Height: #4</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant">
+<div class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Consensus Engine &amp; Nonce</div>
+<div class="flex items-center justify-between mt-1">
+<span class="font-code-sm text-code-sm text-primary font-semibold">RAFT-SHA256v2</span>
+<span class="text-code-xs font-code-xs bg-surface-container px-1.5 py-0.5 rounded text-on-surface font-mono">Nonce: 948201</span>
+</div>
+<div class="text-code-xs font-code-xs text-outline mt-0.5">Epoch: 2024-Q1 • Synchronized with CDSCO Node</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant">
+<div class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Regulatory SLA Window</div>
+<div class="flex items-center gap-1.5 mt-1">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+<span class="text-label-md font-label-md text-primary font-bold">SAE CDSCO SLA: T-24h ACTIVE</span>
+</div>
+<div class="text-code-xs font-code-xs text-outline mt-0.5">14h 12m remaining for Block #4 audit sign-off</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant">
+<div class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Lead Regulatory Custodian</div>
+<div class="flex items-center justify-between mt-1">
+<span class="text-body-sm font-body-sm font-semibold text-primary">Dr. V. Sharma (PI - AIIA)</span>
+<span class="text-code-xs font-code-xs text-secondary font-semibold">21 CFR Valid</span>
+</div>
+<div class="text-code-xs font-code-xs text-outline mt-0.5">Cert ID: CDSCO-REG-IN-2024-8891</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Interactive Tamper Control Bar with Switch (Requested in PRD) -->
+<section class="bg-surface-container-lowest rounded-lg border-2 border-outline-variant p-space-md shadow-sm">
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded bg-primary text-secondary-fixed flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px]" data-icon="bug_report">bug_report</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md text-primary font-bold">Live Auditor Tamper Simulation Control</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-code-xs text-code-xs font-bold border border-outline-variant">
+            DEMO DRILLDOWN
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 max-w-3xl">
+          Toggle the switch to simulate an unauthorized DBA accessing the PostgreSQL/MySQL cluster behind the application and directly editing patient lab records (re-writing ALT liver biomarker from 165 U/L down to 35 U/L). Observe instantaneous cryptographic rupture.
+        </p>
+</div>
+</div>
+<!-- Toggle Switch Control -->
+<div class="flex items-center gap-space-md shrink-0 w-full lg:w-auto justify-end bg-surface-container-low p-space-sm rounded-lg border border-outline-variant">
+<label class="flex items-center gap-3 cursor-pointer select-none">
+<span class="text-label-md font-label-md font-bold text-on-surface" id="toggleSwitchLabel">
+          Simulate Unauthorized DBA Data Manipulation
+        </span>
+<div class="relative">
+<input class="sr-only" id="tamperCheckbox" onchange="handleTamperToggle(this.checked)" type="checkbox"/>
+<div class="block w-14 h-7 rounded-full bg-outline-variant transition-colors" id="toggleTrack"></div>
+<div class="dot absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform duration-200" id="toggleThumb"></div>
+</div>
+</label>
+<button class="hidden text-code-xs font-bold px-2.5 py-1.5 rounded bg-secondary text-on-secondary hover:opacity-90 active:scale-95 transition" id="restoreActionBtn" onclick="restoreCleanState()">
+        Reset to 100% Secure
+      </button>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Sequential Blockchain Ledger Visualizer with Interactive Connectors -->
+<section class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold flex items-center gap-2">
+  Sequential Cryptographic Transaction Blocks
+  <span class="text-code-xs font-code-xs font-normal text-outline">(Click any block to inspect cryptographic proofs)</span>
+</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Append-only chronological state machine for trial protocol AIIA-CT-2024-09.</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 text-code-xs font-code-xs text-on-surface-variant bg-surface-container-low px-2.5 py-1 rounded border border-outline-variant font-mono" id="chainConnectorStatusPill">
+<span class="w-2 h-2 rounded-full bg-secondary" id="chainPillDot"></span>
+<span id="chainPillText">Chain Status: 100% VERIFIED SECURE</span>
+</span>
+</div>
+</div>
+<!-- Chain Grid with Inter-block Connectors -->
+<div class="grid grid-cols-1 xl:grid-cols-4 gap-space-md relative items-stretch">
+<!-- Block #1 (Genesis Block) -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-space-md flex flex-col justify-between relative shadow-sm hover:border-primary transition-all cursor-pointer group" onclick="openBlockDrawer(1)">
+<div class="border-l-4 border-primary pl-space-sm mb-space-sm flex items-center justify-between">
+<div>
+<span class="font-label-md text-label-md font-bold text-primary">BLOCK #1 (GENESIS)</span>
+<div class="text-code-xs font-code-xs text-outline">Genesis Protocol Root</div>
+</div>
+<span class="font-code-xs text-code-xs px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">IMMUTABLE</span>
+</div>
+<div class="space-y-space-sm text-body-sm font-body-sm">
+<div class="p-space-xs bg-surface-container-low rounded border border-outline-variant">
+<div class="text-code-xs font-code-xs text-outline">Payload Identifier</div>
+<div class="font-code-xs text-code-xs font-semibold text-primary truncate">GENESIS_BLOCK_HASH_AIIA_CTMS_2026</div>
+</div>
+<div class="grid grid-cols-2 gap-1 text-code-xs font-code-xs">
+<div><span class="text-outline">Nonce:</span> <span class="font-semibold text-on-surface">849201</span></div>
+<div><span class="text-outline">Merkle:</span> <span class="font-semibold text-on-surface">0x000...00</span></div>
+</div>
+<div class="space-y-1">
+<div class="text-code-xs font-code-xs text-outline">Previous Hash:</div>
+<div class="font-code-xs text-code-xs text-on-surface-variant truncate bg-surface-container px-1 py-0.5 rounded">0x000000000000000000000000</div>
+</div>
+<div class="space-y-1">
+<div class="text-code-xs font-code-xs text-outline">Current Hash:</div>
+<div class="font-code-xs text-code-xs text-primary font-semibold truncate bg-secondary-fixed/20 px-1 py-0.5 rounded">0x4a12ec91d0f8812c4ab1</div>
+</div>
+</div>
+<div class="pt-space-sm mt-space-sm border-t border-outline-variant flex items-center justify-between text-code-xs font-code-xs text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span> 2024-01-10 09:00:00 UTC</span>
+<span class="text-secondary font-semibold group-hover:underline flex items-center gap-0.5">Inspect <span class="material-symbols-outlined text-[12px]" data-icon="arrow_forward">arrow_forward</span></span>
+</div>
+</div>
+<!-- Block #2 (Enrollment) -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-space-md flex flex-col justify-between relative shadow-sm hover:border-primary transition-all cursor-pointer group" onclick="openBlockDrawer(2)">
+<div class="border-l-4 border-primary pl-space-sm mb-space-sm flex items-center justify-between">
+<div>
+<span class="font-label-md text-label-md font-bold text-primary">BLOCK #2 (ENROLLMENT)</span>
+<div class="text-code-xs font-code-xs text-outline">Trial Enrollment AIIA-P089</div>
+</div>
+<span class="font-code-xs text-code-xs px-1.5 py-0.5 rounded bg-surface-container text-secondary font-semibold">ACTIVE</span>
+</div>
+<div class="space-y-space-sm text-body-sm font-body-sm">
+<div class="p-space-xs bg-surface-container-low rounded border border-outline-variant">
+<div class="text-code-xs font-code-xs text-outline">Subject &amp; Signer</div>
+<div class="font-label-md text-label-md font-semibold text-primary truncate">Subject: AIIA-P089 (Ashwagandha)</div>
+<div class="font-code-xs text-code-xs text-on-surface-variant truncate">Signer: Dr. V. Sharma (PI)</div>
+</div>
+<div class="grid grid-cols-2 gap-1 text-code-xs font-code-xs">
+<div><span class="text-outline">Consent:</span> <span class="font-semibold text-secondary">AV-Audio OK</span></div>
+<div><span class="text-outline">GCP Sign:</span> <span class="font-semibold text-on-surface">Verified</span></div>
+</div>
+<div class="space-y-1">
+<div class="text-code-xs font-code-xs text-outline">Previous Hash (Block #1):</div>
+<div class="font-code-xs text-code-xs text-on-surface-variant truncate bg-surface-container px-1 py-0.5 rounded">0x4a12ec91d0f8812c4ab1</div>
+</div>
+<div class="space-y-1">
+<div class="text-code-xs font-code-xs text-outline">Current Hash:</div>
+<div class="font-code-xs text-code-xs text-primary font-semibold truncate bg-secondary-fixed/20 px-1 py-0.5 rounded">0x8c7b89f2e34a719d3bb2</div>
+</div>
+</div>
+<div class="pt-space-sm mt-space-sm border-t border-outline-variant flex items-center justify-between text-code-xs font-code-xs text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span> 2024-01-14 11:22:18 UTC</span>
+<span class="text-secondary font-semibold group-hover:underline flex items-center gap-0.5">Inspect <span class="material-symbols-outlined text-[12px]" data-icon="arrow_forward">arrow_forward</span></span>
+</div>
+</div>
+<!-- Block #3 (eCRF Day 14 Biomarkers - Tamper Target) -->
+<div class="bg-surface-container-lowest rounded-lg border-2 border-primary-container p-space-md flex flex-col justify-between relative shadow-sm transition-all duration-300 cursor-pointer group" id="block3Card" onclick="openBlockDrawer(3)">
+<div class="border-l-4 border-secondary-fixed pl-space-sm mb-space-sm flex items-center justify-between" id="block3HeaderBorder">
+<div>
+<span class="font-label-md text-label-md font-bold text-primary" id="block3Title">BLOCK #3 (eCRF DAY 14)</span>
+<div class="text-code-xs font-code-xs text-outline" id="block3Sub">Vitals &amp; Lab Biomarkers Logged</div>
+</div>
+<span class="font-code-xs text-code-xs px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-bold" id="block3Badge">VERIFIED SEAL</span>
+</div>
+<div class="space-y-space-sm text-body-sm font-body-sm">
+<div class="p-space-xs bg-surface-container-low rounded border border-outline-variant transition-colors" id="block3Payload">
+<div class="flex justify-between items-center text-code-xs font-code-xs text-outline mb-1">
+<span>Clinical Biomarkers</span>
+<span class="text-error font-semibold" id="altTag">ALT ELEVATED (165 U/L)</span>
+</div>
+<div class="font-code-xs text-code-xs space-y-0.5">
+<div class="flex justify-between">
+<span class="text-outline">ALT (SGPT):</span>
+<span class="font-bold text-error" id="altValueDisplay">165 U/L (Normal &lt; 45)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">AST (SGOT):</span>
+<span class="font-semibold text-primary" id="astValueDisplay">142 U/L</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Ayush Prakriti:</span>
+<span class="font-semibold text-primary">Mandagni / Pitta</span>
+</div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="text-code-xs font-code-xs text-outline">Previous Hash (Block #2):</div>
+<div class="font-code-xs text-code-xs text-on-surface-variant truncate bg-surface-container px-1 py-0.5 rounded">0x8c7b89f2e34a719d3bb2</div>
+</div>
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="text-code-xs font-code-xs text-outline">Current Hash:</span>
+<span class="text-code-xs font-code-xs text-secondary font-semibold" id="hashCalcStatus">Hash Match OK</span>
+</div>
+<div class="font-code-xs text-code-xs text-primary font-semibold truncate bg-secondary-fixed/20 px-1 py-0.5 rounded transition-colors" id="block3HashDisplay">
+        0x8c7b89f2e34a719d3bb2...
+      </div>
+</div>
+</div>
+<div class="pt-space-sm mt-space-sm border-t border-outline-variant flex items-center justify-between text-code-xs font-code-xs text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span> 2024-01-28 14:15:02 UTC</span>
+<span class="text-secondary font-semibold group-hover:underline flex items-center gap-0.5" id="block3FooterState">Inspect <span class="material-symbols-outlined text-[12px]" data-icon="arrow_forward">arrow_forward</span></span>
+</div>
+</div>
+<!-- INTER-BLOCK CONNECTOR VISUALIZER (BETWEEN BLOCK 3 and 4) -->
+<!-- Block #4 (SAE Escalation) -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-space-md flex flex-col justify-between relative shadow-sm hover:border-error transition-all duration-300 cursor-pointer group" id="block4Card" onclick="openBlockDrawer(4)">
+<!-- Broken Connector Badge Floating at Left of Block 4 -->
+<div class="hidden absolute -left-3 top-1/2 -translate-y-1/2 z-20 bg-error text-on-error font-code-xs text-[10px] font-bold px-2 py-1 rounded shadow-lg border border-white flex items-center gap-1 whitespace-nowrap" id="brokenConnectorBadge">
+<span class="material-symbols-outlined text-[12px]" data-icon="link_off">link_off</span>
+    HASH CORRUPT
+  </div>
+<div class="border-l-4 border-error pl-space-sm mb-space-sm flex items-center justify-between">
+<div>
+<span class="font-label-md text-label-md font-bold text-error">BLOCK #4 (SAE ESCALATION)</span>
+<div class="text-code-xs font-code-xs text-outline">Suspected DILI &amp; Bleeding</div>
+</div>
+<span class="font-code-xs text-code-xs px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-bold" id="block4Badge">HOSPITALIZATION</span>
+</div>
+<div class="space-y-space-sm text-body-sm font-body-sm">
+<div class="p-space-xs bg-error-container/20 rounded border border-error/30" id="block4Payload">
+<div class="text-code-xs font-code-xs text-error font-semibold">Event Classification</div>
+<div class="font-body-sm text-body-sm text-on-surface font-semibold">Serious Adverse Event (Grade 3)</div>
+<div class="text-code-xs font-code-xs text-on-surface-variant mt-1">Causality: Probable Ashwagandha + NSAID</div>
+</div>
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="text-code-xs font-code-xs text-outline">Previous Hash (Block #3):</span>
+<span class="text-code-xs font-code-xs font-bold text-secondary" id="block4PrevHashStatus">Linked OK</span>
+</div>
+<div class="font-code-xs text-code-xs text-on-surface-variant truncate bg-surface-container px-1 py-0.5 rounded" id="block4PrevHashDisplay">
+        0x8c7b89f2e34a719d3bb2...
+      </div>
+</div>
+<div class="space-y-1">
+<div class="text-code-xs font-code-xs text-outline">Current Block Hash:</div>
+<div class="font-code-xs text-code-xs text-error font-semibold truncate bg-error-container/30 px-1 py-0.5 rounded">
+        0xd931ab04f71a0988cc20...
+      </div>
+</div>
+</div>
+<div class="pt-space-sm mt-space-sm border-t border-outline-variant flex items-center justify-between text-code-xs font-code-xs text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span> 2024-01-29 08:30:10 UTC</span>
+<span class="text-error font-semibold group-hover:underline flex items-center gap-0.5" id="block4FooterState">CDSCO SLA: Active</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: Live FastAPI Client Endpoints Demonstration & Output Preview -->
+<section class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden shadow-sm">
+<div class="bg-surface-container-low p-space-md border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-secondary-fixed">
+<span class="material-symbols-outlined text-[18px]" data-icon="api">api</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary font-bold">CDSCO Auditor FastAPI Integration Client</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time programmatic endpoints for automated regulatory audit compliance.</p>
+</div>
+</div>
+<!-- Endpoint Tabs -->
+<div class="flex items-center gap-1 bg-surface-container p-1 rounded border border-outline-variant text-code-xs font-code-xs">
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-primary font-bold shadow-xs" id="tabVerifyBtn" onclick="switchApiTab('verify')">
+        GET /api/v1/audit/verify-chain
+      </button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-primary" id="tabMerkleBtn" onclick="switchApiTab('merkle')">
+        GET /api/v1/audit/merkle-root
+      </button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-primary" id="tabBlockBtn" onclick="switchApiTab('block3')">
+        GET /api/v1/audit/block/3
+      </button>
+</div>
+</div>
+<div class="p-space-md bg-surface-container-low flex flex-col md:flex-row items-start justify-between gap-space-md">
+<div class="w-full">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="font-code-xs text-[10px] font-bold px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container">200 OK</span>
+<span class="font-code-xs text-[11px] text-primary font-bold" id="apiEndpointUrl">GET https://aiia-ctms.cdsco.gov.in/api/v1/audit/verify-chain</span>
+</div>
+<span class="font-code-xs text-[10px] text-outline" id="apiLatencyText">Latency: 14ms • Isolated Enclave Node #1</span>
+</div>
+<!-- JSON Terminal Box -->
+<pre class="bg-surface-container-lowest p-space-md rounded border border-outline-variant font-code-xs text-code-xs text-on-surface overflow-x-auto selection:bg-secondary-fixed" id="apiJsonDisplay">{
+  "status": "VERIFIED",
+  "protocol": "AIIA-CT-2024-09",
+  "blocks_verified": 4,
+  "fault_block": null,
+  "merkle_root": "0x7f83b165c92f40b2a9e3d81b957648b29c5421df608a",
+  "witness_enclave_status": "MATCH_CONFIRMED",
+  "alcoa_plus_compliant": true,
+  "latency_ms": 14,
+  "timestamp_utc": "2024-01-29T08:35:12.802Z"
+}</pre>
+</div>
+</div>
+</section>
+<!-- SECTION 5: ALCOA+ Data Integrity Verification Matrix -->
+<section class="bg-surface-container-lowest rounded-lg border border-outline-variant p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div>
+<h4 class="font-headline-md text-headline-md text-primary font-bold">ALCOA+ Data Integrity Verification Matrix</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">WHO TRS 996 / US FDA 21 CFR Part 11 Audit Framework</p>
+</div>
+<span class="font-code-xs text-code-xs bg-surface-container-high px-2 py-1 rounded text-primary font-bold">GAMP 5 Category 4</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-sm">
+<!-- Attributable -->
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">Attributable</span>
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="verified_user">verified_user</span>
+</div>
+<div class="text-code-xs font-code-xs text-outline mt-1">Signer Identity Binding</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+  Cryptographically bound to hardware token: <span class="font-code-xs text-code-xs text-primary font-semibold">Dr. V. Sharma (PI-8891)</span>.
+</p>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant text-code-xs font-code-xs text-secondary font-semibold">
+  PKI Signature Valid
+</div>
+</div>
+<!-- Legible -->
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">Legible</span>
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="visibility">visibility</span>
+</div>
+<div class="text-code-xs font-code-xs text-outline mt-1">Data Preservation</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+  Human-readable JSON-LD clinical schemas paired with raw binary payloads for lifetime durability.
+</p>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant text-code-xs font-code-xs text-secondary font-semibold">
+  UTF-8 Schema Verified
+</div>
+</div>
+<!-- Contemporaneous -->
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">Contemporaneous</span>
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="schedule">schedule</span>
+</div>
+<div class="text-code-xs font-code-xs text-outline mt-1">Time Synchronicity</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+  Atomic NTP UTC timestamps committed within 120ms of clinical encounter logging at bedside tablet.
+</p>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant text-code-xs font-code-xs text-secondary font-semibold">
+  Stratum-1 Clocks OK
+</div>
+</div>
+<!-- Original -->
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">Original</span>
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="fingerprint">fingerprint</span>
+</div>
+<div class="text-code-xs font-code-xs text-outline mt-1">Source Provenance</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+  First-instance immutable raw instrument outputs stored with zero intermediary data mutability.
+</p>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant text-code-xs font-code-xs text-secondary font-semibold">
+  Direct Lab Bridge
+</div>
+</div>
+<!-- Accurate -->
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant flex flex-col justify-between transition-colors" id="alcoaAccurateCard">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">Accurate</span>
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="fact_check" id="accurateStatusIcon">fact_check</span>
+</div>
+<div class="text-code-xs font-code-xs text-outline mt-1">Mathematical Precision</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2" id="accurateStatusDesc">
+  Full double-data entry reconciliation with statistical anomaly detection algorithms active.
+</p>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-outline-variant text-code-xs font-code-xs text-secondary font-semibold" id="accurateStatusBadge">
+  Hash Consistency 100%
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BLOCK DRILLDOWN DRAWER MODAL (Requested in PRD item 3) -->
+<div class="hidden fixed inset-0 z-50 overflow-hidden bg-on-surface/40 backdrop-blur-xs flex justify-end" id="blockDrawerModal">
+<div class="w-full max-w-2xl bg-surface-container-lowest h-full shadow-2xl border-l border-outline-variant flex flex-col justify-between overflow-y-auto transform transition-transform duration-300 translate-x-0" id="drawerContent">
+<!-- Drawer Header -->
+<div class="p-space-lg border-b border-outline-variant flex items-center justify-between bg-surface-container-low">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded bg-primary text-secondary-fixed flex items-center justify-center font-bold font-mono" id="drawerBlockBadge">
+          #3
+        </div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-primary" id="drawerBlockTitle">Cryptographic Block Inspection</h3>
+<p class="font-code-xs text-code-xs text-outline" id="drawerBlockTimestamp">Block Height #3 • Committed 2024-01-28 14:15:02 UTC</p>
+</div>
+</div>
+<button class="p-1 hover:bg-surface-container rounded text-outline hover:text-primary" onclick="closeBlockDrawer()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Drawer Body -->
+<div class="p-space-lg space-y-space-lg flex-1">
+<!-- Status Notice if tampered -->
+<div class="hidden p-space-sm rounded bg-error-container border border-error text-on-error-container font-code-xs" id="drawerTamperNotice">
+<div class="font-bold flex items-center gap-1 text-error">
+<span class="material-symbols-outlined text-[16px]" data-icon="error">error</span>
+          SHA-256 Checksum Mismatch Detected on this Block!
+        </div>
+<div>The unencrypted record payload does not hash to the sealed Merkle leaf.</div>
+</div>
+<!-- 1. Full SHA-256 Payload Digest -->
+<div class="space-y-1">
+<span class="text-label-md font-label-md text-primary font-bold uppercase">1. Full SHA-256 Payload Digest</span>
+<div class="p-space-sm bg-surface-container-low rounded border border-outline-variant font-code-xs space-y-1">
+<div>
+<span class="text-outline">Committed Sealed Hash:</span>
+<div class="font-bold text-primary break-all bg-surface-container-lowest p-1 rounded mt-0.5" id="drawerSealedHash">
+              0x8c7b89f2e34a719d3bb2a0018f34bc98e5781a93b4510cdb281f90ac832b
+            </div>
+</div>
+<div>
+<span class="text-outline">Computed Hash from Current Raw DB Record:</span>
+<div class="font-bold text-secondary break-all bg-surface-container-lowest p-1 rounded mt-0.5" id="drawerComputedHash">
+              0x8c7b89f2e34a719d3bb2a0018f34bc98e5781a93b4510cdb281f90ac832b
+            </div>
+</div>
+</div>
+</div>
+<!-- 2. Merkle Tree Proof Branch -->
+<div class="space-y-1">
+<span class="text-label-md font-label-md text-primary font-bold uppercase">2. Merkle Tree Proof Branch</span>
+<div class="p-space-sm bg-surface-container-low rounded border border-outline-variant font-code-xs space-y-1 text-on-surface">
+<div class="flex justify-between"><span class="text-outline">Root Anchor:</span> <span class="font-mono text-primary font-semibold">0x7f83b165c92f40b2a9e3d81b957648b29c5421df608a</span></div>
+<div class="flex justify-between"><span class="text-outline">Leaf Node Hash:</span> <span class="font-mono" id="drawerLeafHash">0x8c7b89f2e34a...</span></div>
+<div class="flex justify-between"><span class="text-outline">Proof Sibling (H_12):</span> <span class="font-mono text-outline">0x4a12ec91d0f8...</span></div>
+<div class="flex justify-between"><span class="text-outline">Audit Path:</span> <span class="text-secondary font-bold" id="drawerAuditPath">Valid [L -&gt; R -&gt; Root]</span></div>
+</div>
+</div>
+<!-- 3. Consensus & Node Signatures -->
+<div class="space-y-1">
+<span class="text-label-md font-label-md text-primary font-bold uppercase">3. Nonce &amp; Consensus Signatures</span>
+<div class="p-space-sm bg-surface-container-low rounded border border-outline-variant font-code-xs grid grid-cols-2 gap-2">
+<div><span class="text-outline">Consensus Engine:</span> <div class="font-bold text-primary">Raft v2.4 (Byzantine Safe)</div></div>
+<div><span class="text-outline">Quorum Nonce:</span> <div class="font-bold text-on-surface" id="drawerNonce">948201</div></div>
+<div><span class="text-outline">Signer 1 (PI Enclave):</span> <div class="font-semibold text-secondary">Dr. V. Sharma (PI-8891) ✓</div></div>
+<div><span class="text-outline">Signer 2 (CDSCO Node):</span> <div class="font-semibold text-secondary">CDSCO-DEL-SVR-01 ✓</div></div>
+</div>
+</div>
+<!-- 4. Side-by-side Payload Diff -->
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-primary font-bold uppercase">4. Side-by-Side Payload Diff</span>
+<span class="text-code-xs text-outline">JSON Immutable Ledger Delta</span>
+</div>
+<div class="grid grid-cols-2 gap-2 text-code-xs">
+<div class="p-space-xs bg-surface-container-lowest border border-outline-variant rounded">
+<div class="font-bold text-primary pb-1 border-b border-outline-variant mb-1">Sealed Block #3 Payload</div>
+<pre class="font-mono text-[10px] text-on-surface overflow-x-auto" id="drawerSealedJson">{
+  "subject_id": "AIIA-P089",
+  "visit": "Day 14",
+  "biomarkers": {
+    "alt_sgpt": 165,
+    "ast_sgot": 142,
+    "bilirubin": 1.2
+  },
+  "signed_by": "PI-8891",
+  "timestamp": 1706451302
+}</pre>
+</div>
+<div class="p-space-xs bg-surface-container-lowest border border-outline-variant rounded" id="drawerCurrentPayloadBox">
+<div class="font-bold text-secondary pb-1 border-b border-outline-variant mb-1" id="drawerCurrentJsonHeader">Current Raw DB State</div>
+<pre class="font-mono text-[10px] text-on-surface overflow-x-auto" id="drawerCurrentJson">{
+  "subject_id": "AIIA-P089",
+  "visit": "Day 14",
+  "biomarkers": {
+    "alt_sgpt": 165,
+    "ast_sgot": 142,
+    "bilirubin": 1.2
+  },
+  "signed_by": "PI-8891",
+  "timestamp": 1706451302
+}</pre>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer -->
+<div class="p-space-md bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
+<button class="px-space-md py-1.5 rounded border border-outline-variant text-on-surface font-label-md text-label-md hover:bg-surface-container" onclick="closeBlockDrawer()">
+        Close Pane
+      </button>
+<button class="px-space-md py-1.5 rounded bg-error text-on-error font-label-md text-label-md font-semibold hover:opacity-90" id="drawerTamperToggleAction" onclick="toggleTamperSimulation(); syncDrawerData();">
+        Tamper ALT on this Block
+      </button>
+</div>
+</div>
+</div>
+<!-- Interactive Vanilla JS State Machine & Tamper Logic -->
+<script>
+  let isTampered = false;
+  let isVerifying = false;
+  let activeBlockId = 3;
+
+  function handleTamperToggle(checked) {
+    if (checked !== isTampered) {
+      toggleTamperSimulation();
+    }
+  }
+
+  function toggleTamperSimulation() {
+    isTampered = !isTampered;
+    applyTamperState(isTampered);
+  }
+
+  function restoreCleanState() {
+    isTampered = false;
+    applyTamperState(false);
+  }
+
+  function applyTamperState(tampered) {
+    const checkbox = document.getElementById('tamperCheckbox');
+    const toggleTrack = document.getElementById('toggleTrack');
+    const toggleThumb = document.getElementById('toggleThumb');
+    const restoreActionBtn = document.getElementById('restoreActionBtn');
+    const topEmergencyBanner = document.getElementById('topEmergencyBanner');
+    const navAlertDot = document.getElementById('navAlertDot');
+
+    // Dual Badges
+    const dualLinearChainBadge = document.getElementById('dualLinearChainBadge');
+    const dualLinearChainIcon = document.getElementById('dualLinearChainIcon');
+    const dualLinearChainText = document.getElementById('dualLinearChainText');
+
+    const dualWitnessMerkleBadge = document.getElementById('dualWitnessMerkleBadge');
+    const dualWitnessMerkleIcon = document.getElementById('dualWitnessMerkleIcon');
+    const dualWitnessMerkleText = document.getElementById('dualWitnessMerkleText');
+
+    // Hero buttons & titles
+    const heroTamperBtn = document.getElementById('heroTamperBtn');
+    const heroTamperIcon = document.getElementById('heroTamperIcon');
+    const heroTamperText = document.getElementById('heroTamperText');
+
+    const topNavTamperBtn = document.getElementById('topNavTamperBtn');
+    const topNavTamperIcon = document.getElementById('topNavTamperIcon');
+    const topNavTamperText = document.getElementById('topNavTamperText');
+
+    // Block #3 & #4 DOM
+    const block3Card = document.getElementById('block3Card');
+    const block3HeaderBorder = document.getElementById('block3HeaderBorder');
+    const block3Title = document.getElementById('block3Title');
+    const block3Badge = document.getElementById('block3Badge');
+    const block3Payload = document.getElementById('block3Payload');
+    const altValueDisplay = document.getElementById('altValueDisplay');
+    const altTag = document.getElementById('altTag');
+    const hashCalcStatus = document.getElementById('hashCalcStatus');
+    const block3HashDisplay = document.getElementById('block3HashDisplay');
+    const block3FooterState = document.getElementById('block3FooterState');
+
+    const block4Card = document.getElementById('block4Card');
+    const block4PrevHashDisplay = document.getElementById('block4PrevHashDisplay');
+    const block4PrevHashStatus = document.getElementById('block4PrevHashStatus');
+    const brokenConnectorBadge = document.getElementById('brokenConnectorBadge');
+
+    // Meta Matrix
+    const metaWitnessMerkleValue = document.getElementById('metaWitnessMerkleValue');
+    const metaWitnessMerkleStatus = document.getElementById('metaWitnessMerkleStatus');
+
+    // Connector Status Pill
+    const chainConnectorStatusPill = document.getElementById('chainConnectorStatusPill');
+    const chainPillDot = document.getElementById('chainPillDot');
+    const chainPillText = document.getElementById('chainPillText');
+
+    // ALCOA Accurate Card
+    const alcoaAccurateCard = document.getElementById('alcoaAccurateCard');
+    const accurateStatusIcon = document.getElementById('accurateStatusIcon');
+    const accurateStatusBadge = document.getElementById('accurateStatusBadge');
+    const accurateStatusDesc = document.getElementById('accurateStatusDesc');
+
+    // Drawer button if open
+    const drawerTamperToggleAction = document.getElementById('drawerTamperToggleAction');
+
+    checkbox.checked = tampered;
+
+    if (tampered) {
+      // Toggle UI switch styles
+      toggleTrack.classList.remove('bg-outline-variant');
+      toggleTrack.classList.add('bg-error');
+      toggleThumb.classList.add('translate-x-7');
+      restoreActionBtn.classList.remove('hidden');
+
+      // Top Emergency Banner
+      topEmergencyBanner.classList.remove('hidden');
+      navAlertDot.classList.add('animate-ping');
+
+      // Dual Badges Update to Tamper State
+      dualLinearChainBadge.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container text-on-error-container border-2 border-error text-label-md font-label-md font-bold transition-all duration-300 flash-crimson';
+      dualLinearChainIcon.innerText = 'gpp_bad';
+      dualLinearChainIcon.className = 'material-symbols-outlined text-[16px] text-error';
+      dualLinearChainText.innerText = 'Linear Hash Chain: TAMPER_DETECTED (FAULT @ BLOCK #3)';
+
+      dualWitnessMerkleBadge.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error text-on-error border-2 border-white text-label-md font-label-md font-bold transition-all duration-300 flash-crimson shadow-md';
+      dualWitnessMerkleIcon.innerText = 'warning';
+      dualWitnessMerkleIcon.className = 'material-symbols-outlined text-[16px] text-on-error';
+      dualWitnessMerkleText.innerText = 'Isolated Witness Merkle Anchor: TAMPER_DETECTED (WITNESS_ROOT_MISMATCH)';
+
+      // Meta Matrix Witness Merkle
+      metaWitnessMerkleValue.innerText = 'TAMPER_DETECTED (WITNESS_ROOT_MISMATCH)';
+      metaWitnessMerkleValue.className = 'text-code-xs font-code-xs text-error font-bold truncate mt-1 flash-crimson';
+      metaWitnessMerkleStatus.innerText = 'CDSCO Hardware Enclave alert dispatched • Chain Halted';
+      metaWitnessMerkleStatus.className = 'text-code-xs font-code-xs text-error font-bold mt-0.5';
+
+      // Chain Status Pill
+      chainConnectorStatusPill.className = 'inline-flex items-center gap-1.5 text-code-xs font-code-xs text-error bg-error-container px-2.5 py-1 rounded border border-error font-mono font-bold';
+      chainPillDot.className = 'w-2 h-2 rounded-full bg-error animate-ping';
+      chainPillText.innerText = 'CHAIN INTEGRITY: COMPROMISED AT HEIGHT #3';
+
+      // Hero buttons
+      heroTamperBtn.className = 'flex items-center gap-2 px-space-lg py-2.5 rounded bg-error text-on-error font-label-md text-label-md font-bold transition-all duration-150 active:scale-[0.99] shadow-sm border border-white';
+      heroTamperIcon.innerText = 'restart_alt';
+      heroTamperText.innerText = 'Restore Integrity (Re-sync Witness Enclave)';
+
+      topNavTamperBtn.className = 'inline-flex items-center gap-1.5 px-space-md py-1.5 rounded bg-error hover:bg-error/90 text-on-error border border-white font-label-md text-label-md font-bold active:scale-[0.98] transition shadow-sm animate-pulse';
+      topNavTamperIcon.innerText = 'restart_alt';
+      topNavTamperText.innerText = 'Restore Cryptographic Integrity';
+
+      // BLOCK #3 Tampered Look
+      block3Card.classList.remove('border-primary-container');
+      block3Card.classList.add('border-error', 'bg-error-container/20', 'pulse-red-glow');
+      block3HeaderBorder.className = 'border-l-4 border-error pl-space-sm mb-space-sm flex items-center justify-between';
+      block3Title.className = 'font-label-md text-label-md font-bold text-error';
+      block3Badge.className = 'font-code-xs text-code-xs px-2 py-0.5 rounded bg-error text-on-error font-bold animate-pulse';
+      block3Badge.innerText = 'CRYPTOGRAPHIC SEAL BROKEN';
+
+      block3Payload.className = 'p-space-xs bg-error-container/40 rounded border border-error text-error';
+      altValueDisplay.innerText = '35 U/L (MALICIOUS ALTERATION)';
+      altValueDisplay.className = 'font-bold text-error underline font-mono';
+      altTag.innerText = 'TAMPERED VIA RAW SQL';
+      altTag.className = 'text-error font-bold animate-pulse';
+
+      hashCalcStatus.innerText = 'HASH MISMATCH!';
+      hashCalcStatus.className = 'text-code-xs font-code-xs text-error font-bold';
+
+      block3HashDisplay.innerText = '0x9c12e841f0a823e59b10... (COMPUTED != STORED)';
+      block3HashDisplay.className = 'font-code-xs text-code-xs text-error font-semibold truncate bg-error-container px-1 py-0.5 rounded border border-error';
+
+      block3FooterState.innerHTML = '<span class="text-error font-bold flex items-center gap-0.5">Tampered <span class="material-symbols-outlined text-[12px]">arrow_forward</span></span>';
+
+      // BLOCK #4 Broken Link
+      block4Card.classList.add('border-dashed', 'border-error');
+      brokenConnectorBadge.classList.remove('hidden');
+      block4PrevHashStatus.innerText = 'ORPHAN LINK';
+      block4PrevHashStatus.className = 'text-code-xs font-code-xs font-bold text-error';
+      block4PrevHashDisplay.innerText = 'BROKEN POINTER: (Invalid Parent Hash)';
+      block4PrevHashDisplay.className = 'font-code-xs text-code-xs text-error font-mono truncate bg-error-container px-1 py-0.5 rounded border border-error/50 font-bold';
+
+      // Checklist update
+      alcoaAccurateCard.className = 'p-space-sm rounded bg-error-container/40 border-2 border-error flex flex-col justify-between transition-colors';
+      accurateStatusIcon.innerText = 'error';
+      accurateStatusIcon.className = 'material-symbols-outlined text-error text-[16px]';
+      accurateStatusBadge.className = 'mt-space-md pt-space-xs border-t border-error/30 text-code-xs font-code-xs text-error font-bold';
+      accurateStatusBadge.innerText = 'FAILED: SHA-256 Checksum Broken';
+      accurateStatusDesc.innerText = 'Rogue database write discovered! Merkle path to isolated witness hardware enclave invalidated.';
+
+      if (drawerTamperToggleAction) {
+        drawerTamperToggleAction.innerText = 'Restore Clean State (165 U/L)';
+        drawerTamperToggleAction.className = 'px-space-md py-1.5 rounded bg-secondary text-on-secondary font-label-md text-label-md font-semibold hover:opacity-90';
+      }
+
+      // Update API response display
+      updateApiDisplay();
+
+    } else {
+      // Restore Untampered state
+      toggleTrack.classList.remove('bg-error');
+      toggleTrack.classList.add('bg-outline-variant');
+      toggleThumb.classList.remove('translate-x-7');
+      restoreActionBtn.classList.add('hidden');
+
+      topEmergencyBanner.classList.add('hidden');
+      navAlertDot.classList.remove('animate-ping');
+
+      // Dual Badges Default
+      dualLinearChainBadge.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed/30 text-on-secondary-container border border-secondary text-label-md font-label-md font-bold transition-all duration-300';
+      dualLinearChainIcon.innerText = 'check_circle';
+      dualLinearChainIcon.className = 'material-symbols-outlined text-[16px] text-secondary';
+      dualLinearChainText.innerText = 'Linear Hash Chain: VERIFIED_SECURE';
+
+      dualWitnessMerkleBadge.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed border border-on-tertiary-fixed-variant text-label-md font-label-md font-bold transition-all duration-300';
+      dualWitnessMerkleIcon.innerText = 'shield';
+      dualWitnessMerkleIcon.className = 'material-symbols-outlined text-[16px] text-on-tertiary-fixed-variant';
+      dualWitnessMerkleText.innerText = 'Isolated Witness Merkle Anchor: VALIDATED (0x7f83b165...)';
+
+      // Meta Matrix Witness Merkle
+      metaWitnessMerkleValue.innerText = '0x7f83b165c92f40b2a9e3d81b...';
+      metaWitnessMerkleValue.className = 'text-code-xs font-code-xs text-primary font-semibold truncate mt-1 select-all';
+      metaWitnessMerkleStatus.innerText = 'Isolated audit enclave mirror • Block Height: #4';
+      metaWitnessMerkleStatus.className = 'text-code-xs font-code-xs text-outline mt-0.5';
+
+      // Chain Status Pill
+      chainConnectorStatusPill.className = 'inline-flex items-center gap-1.5 text-code-xs font-code-xs text-on-surface-variant bg-surface-container-low px-2.5 py-1 rounded border border-outline-variant font-mono';
+      chainPillDot.className = 'w-2 h-2 rounded-full bg-secondary';
+      chainPillText.innerText = 'Chain Status: 100% VERIFIED SECURE';
+
+      // Hero buttons
+      heroTamperBtn.className = 'flex items-center gap-2 px-space-lg py-2.5 rounded bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md font-bold transition-all duration-150 active:scale-[0.99] shadow-sm border border-secondary-fixed';
+      heroTamperIcon.innerText = 'security';
+      heroTamperText.innerText = 'Inspect Cryptographic Ledger & Simulate Tamper';
+
+      topNavTamperBtn.className = 'inline-flex items-center gap-1.5 px-space-md py-1.5 rounded bg-primary hover:bg-primary-container text-secondary-fixed border border-secondary font-label-md text-label-md font-bold active:scale-[0.98] transition shadow-sm';
+      topNavTamperIcon.innerText = 'security';
+      topNavTamperText.innerText = 'Inspect Cryptographic Ledger & Simulate Tamper';
+
+      // BLOCK #3 Normal
+      block3Card.classList.remove('border-error', 'bg-error-container/20', 'pulse-red-glow');
+      block3Card.classList.add('border-primary-container');
+      block3HeaderBorder.className = 'border-l-4 border-secondary-fixed pl-space-sm mb-space-sm flex items-center justify-between';
+      block3Title.className = 'font-label-md text-label-md font-bold text-primary';
+      block3Badge.className = 'font-code-xs text-code-xs px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-bold';
+      block3Badge.innerText = 'VERIFIED SEAL';
+
+      block3Payload.className = 'p-space-xs bg-surface-container-low rounded border border-outline-variant transition-colors';
+      altValueDisplay.innerText = '165 U/L (Normal < 45)';
+      altValueDisplay.className = 'font-bold text-error';
+      altTag.innerText = 'ALT ELEVATED (165 U/L)';
+      altTag.className = 'text-error font-semibold';
+
+      hashCalcStatus.innerText = 'Hash Match OK';
+      hashCalcStatus.className = 'text-code-xs font-code-xs text-secondary font-semibold';
+
+      block3HashDisplay.innerText = '0x8c7b89f2e34a719d3bb2...';
+      block3HashDisplay.className = 'font-code-xs text-code-xs text-primary font-semibold truncate bg-secondary-fixed/20 px-1 py-0.5 rounded transition-colors';
+
+      block3FooterState.innerHTML = '<span class="text-secondary font-semibold group-hover:underline flex items-center gap-0.5">Inspect <span class="material-symbols-outlined text-[12px]">arrow_forward</span></span>';
+
+      // BLOCK #4 Normal
+      block4Card.classList.remove('border-dashed', 'border-error');
+      brokenConnectorBadge.classList.add('hidden');
+      block4PrevHashStatus.innerText = 'Linked OK';
+      block4PrevHashStatus.className = 'text-code-xs font-code-xs font-bold text-secondary';
+      block4PrevHashDisplay.innerText = '0x8c7b89f2e34a719d3bb2...';
+      block4PrevHashDisplay.className = 'font-code-xs text-code-xs text-on-surface-variant truncate bg-surface-container px-1 py-0.5 rounded';
+
+      // Checklist restore
+      alcoaAccurateCard.className = 'p-space-sm rounded bg-surface-container-low border border-outline-variant flex flex-col justify-between transition-colors';
+      accurateStatusIcon.innerText = 'fact_check';
+      accurateStatusIcon.className = 'material-symbols-outlined text-secondary text-[16px]';
+      accurateStatusBadge.className = 'mt-space-md pt-space-xs border-t border-outline-variant text-code-xs font-code-xs text-secondary font-semibold';
+      accurateStatusBadge.innerText = 'Hash Consistency 100%';
+      accurateStatusDesc.innerText = 'Full double-data entry reconciliation with statistical anomaly detection algorithms active.';
+
+      if (drawerTamperToggleAction) {
+        drawerTamperToggleAction.innerText = 'Tamper ALT on this Block';
+        drawerTamperToggleAction.className = 'px-space-md py-1.5 rounded bg-error text-on-error font-label-md text-label-md font-semibold hover:opacity-90';
+      }
+
+      updateApiDisplay();
+    }
+
+    syncDrawerData();
+  }
+
+  // BLOCK INSPECTION DRAWER LOGIC
+  function openBlockDrawer(blockNum) {
+    activeBlockId = blockNum;
+    const modal = document.getElementById('blockDrawerModal');
+    modal.classList.remove('hidden');
+    syncDrawerData();
+  }
+
+  function closeBlockDrawer() {
+    const modal = document.getElementById('blockDrawerModal');
+    modal.classList.add('hidden');
+  }
+
+  function syncDrawerData() {
+    const drawerBlockBadge = document.getElementById('drawerBlockBadge');
+    const drawerBlockTitle = document.getElementById('drawerBlockTitle');
+    const drawerBlockTimestamp = document.getElementById('drawerBlockTimestamp');
+    const drawerTamperNotice = document.getElementById('drawerTamperNotice');
+    const drawerSealedHash = document.getElementById('drawerSealedHash');
+    const drawerComputedHash = document.getElementById('drawerComputedHash');
+    const drawerLeafHash = document.getElementById('drawerLeafHash');
+    const drawerAuditPath = document.getElementById('drawerAuditPath');
+    const drawerNonce = document.getElementById('drawerNonce');
+    const drawerCurrentJsonHeader = document.getElementById('drawerCurrentJsonHeader');
+    const drawerCurrentJson = document.getElementById('drawerCurrentJson');
+    const drawerCurrentPayloadBox = document.getElementById('drawerCurrentPayloadBox');
+
+    drawerBlockBadge.innerText = `#${activeBlockId}`;
+    
+    if (activeBlockId === 3) {
+      drawerBlockTitle.innerText = 'Block #3: eCRF Day 14 Biomarkers';
+      drawerBlockTimestamp.innerText = 'Block Height #3 • Committed 2024-01-28 14:15:02 UTC';
+      drawerNonce.innerText = '884920';
+      drawerLeafHash.innerText = '0x8c7b89f2e34a719d3bb2...';
+
+      if (isTampered) {
+        drawerTamperNotice.classList.remove('hidden');
+        drawerComputedHash.innerText = '0x9c12e841f0a823e59b10a99182cd98aa45ef0192837bc901a182746182937102';
+        drawerComputedHash.className = 'font-bold text-error break-all bg-error-container/40 p-1 rounded mt-0.5 font-mono';
+        drawerAuditPath.innerText = 'BROKEN (Merkle Parent Mismatch)';
+        drawerAuditPath.className = 'text-error font-bold';
+        drawerCurrentJsonHeader.innerText = 'Current Database Record (TAMPERED)';
+        drawerCurrentJsonHeader.className = 'font-bold text-error pb-1 border-b border-error mb-1';
+        drawerCurrentPayloadBox.className = 'p-space-xs bg-error-container/20 border-2 border-error rounded';
+        drawerCurrentJson.innerText = `{\n  "subject_id": "AIIA-P089",\n  "visit": "Day 14",\n  "biomarkers": {\n    "alt_sgpt": 35,  <-- [MUTATED BY DBA]\n    "ast_sgot": 142,\n    "bilirubin": 1.2\n  },\n  "signed_by": "PI-8891",\n  "timestamp": 1706451302\n}`;
+      } else {
+        drawerTamperNotice.classList.add('hidden');
+        drawerComputedHash.innerText = '0x8c7b89f2e34a719d3bb2a0018f34bc98e5781a93b4510cdb281f90ac832b';
+        drawerComputedHash.className = 'font-bold text-secondary break-all bg-surface-container-lowest p-1 rounded mt-0.5 font-mono';
+        drawerAuditPath.innerText = 'Valid [L -> R -> Root]';
+        drawerAuditPath.className = 'text-secondary font-bold';
+        drawerCurrentJsonHeader.innerText = 'Current Raw DB State';
+        drawerCurrentJsonHeader.className = 'font-bold text-secondary pb-1 border-b border-outline-variant mb-1';
+        drawerCurrentPayloadBox.className = 'p-space-xs bg-surface-container-lowest border border-outline-variant rounded';
+        drawerCurrentJson.innerText = `{\n  "subject_id": "AIIA-P089",\n  "visit": "Day 14",\n  "biomarkers": {\n    "alt_sgpt": 165,\n    "ast_sgot": 142,\n    "bilirubin": 1.2\n  },\n  "signed_by": "PI-8891",\n  "timestamp": 1706451302\n}`;
+      }
+    } else if (activeBlockId === 4) {
+      drawerBlockTitle.innerText = 'Block #4: SAE Grade 3 Escalation';
+      drawerBlockTimestamp.innerText = 'Block Height #4 • Committed 2024-01-29 08:30:10 UTC';
+      drawerNonce.innerText = '948201';
+      drawerLeafHash.innerText = '0xd931ab04f71a0988cc20...';
+      drawerTamperNotice.classList.add('hidden');
+      drawerComputedHash.innerText = '0xd931ab04f71a0988cc2098492019284729183746201948372619482019283746';
+      drawerComputedHash.className = 'font-bold text-secondary break-all bg-surface-container-lowest p-1 rounded mt-0.5 font-mono';
+      drawerAuditPath.innerText = isTampered ? 'PARENT_HASH_INVALID (Block #3 broken)' : 'Valid [R -> Root]';
+      drawerAuditPath.className = isTampered ? 'text-error font-bold' : 'text-secondary font-bold';
+      drawerCurrentJson.innerText = `{\n  "event": "SAE_GRADE_3",\n  "subject_id": "AIIA-P089",\n  "diagnosis": "Drug-Induced Liver Injury (DILI)",\n  "action_taken": "Drug Withdrawn & Enoxaparin Held",\n  "cdsco_sla_deadline": 1706596210\n}`;
+    } else {
+      drawerBlockTitle.innerText = `Block #${activeBlockId}: Protocol State`;
+      drawerBlockTimestamp.innerText = `Block Height #${activeBlockId} • Verified`;
+      drawerTamperNotice.classList.add('hidden');
+      drawerAuditPath.innerText = 'Valid [Genesis Path]';
+      drawerAuditPath.className = 'text-secondary font-bold';
+    }
+  }
+
+  // FASTAPI ENDPOINT CLIENT DEMO TABS
+  let currentApiTab = 'verify';
+  function switchApiTab(tab) {
+    currentApiTab = tab;
+    const tabVerifyBtn = document.getElementById('tabVerifyBtn');
+    const tabMerkleBtn = document.getElementById('tabMerkleBtn');
+    const tabBlockBtn = document.getElementById('tabBlockBtn');
+    const url = document.getElementById('apiEndpointUrl');
+
+    tabVerifyBtn.className = 'px-2.5 py-1 rounded text-on-surface-variant hover:text-primary';
+    tabMerkleBtn.className = 'px-2.5 py-1 rounded text-on-surface-variant hover:text-primary';
+    tabBlockBtn.className = 'px-2.5 py-1 rounded text-on-surface-variant hover:text-primary';
+
+    if (tab === 'verify') {
+      tabVerifyBtn.className = 'px-2.5 py-1 rounded bg-surface-container-lowest text-primary font-bold shadow-xs';
+      url.innerText = 'GET https://aiia-ctms.cdsco.gov.in/api/v1/audit/verify-chain';
+    } else if (tab === 'merkle') {
+      tabMerkleBtn.className = 'px-2.5 py-1 rounded bg-surface-container-lowest text-primary font-bold shadow-xs';
+      url.innerText = 'GET https://aiia-ctms.cdsco.gov.in/api/v1/audit/merkle-root';
+    } else if (tab === 'block3') {
+      tabBlockBtn.className = 'px-2.5 py-1 rounded bg-surface-container-lowest text-primary font-bold shadow-xs';
+      url.innerText = 'GET https://aiia-ctms.cdsco.gov.in/api/v1/audit/block/3';
+    }
+    updateApiDisplay();
+  }
+
+  function updateApiDisplay() {
+    const jsonDisplay = document.getElementById('apiJsonDisplay');
+    const latency = document.getElementById('apiLatencyText');
+
+    if (currentApiTab === 'verify') {
+      if (isTampered) {
+        latency.innerText = 'Latency: 9ms • ALERT_TRIGGERED';
+        jsonDisplay.innerText = JSON.stringify({
+          status: "TAMPER_DETECTED",
+          protocol: "AIIA-CT-2024-09",
+          fault_block: 3,
+          error: "SHA256_MISMATCH_POST_WRITE",
+          expected_hash: "0x8c7b89f2e34a719d3bb2a0018f34bc98e5781a93b4510cdb281f90ac832b",
+          actual_hash: "0x9c12e841f0a823e59b10a99182cd98aa45ef0192837bc901a182746182937102",
+          isolated_witness_merkle: "WITNESS_ROOT_MISMATCH",
+          alcoa_plus_compliant: false,
+          latency_ms: 9,
+          cdsco_notification_sent: true
+        }, null, 2);
+      } else {
+        latency.innerText = 'Latency: 14ms • Isolated Enclave Node #1';
+        jsonDisplay.innerText = JSON.stringify({
+          status: "VERIFIED",
+          protocol: "AIIA-CT-2024-09",
+          blocks_verified: 4,
+          fault_block: null,
+          merkle_root: "0x7f83b165c92f40b2a9e3d81b957648b29c5421df608a",
+          witness_enclave_status: "MATCH_CONFIRMED",
+          alcoa_plus_compliant: true,
+          latency_ms: 14,
+          timestamp_utc: new Date().toISOString()
+        }, null, 2);
+      }
+    } else if (currentApiTab === 'merkle') {
+      jsonDisplay.innerText = JSON.stringify({
+        enclave_provider: "AWS Nitro Enclave / CDSCO Hardware Module",
+        active_merkle_root: isTampered ? "MISMATCH_ALERT_FROZEN" : "0x7f83b165c92f40b2a9e3d81b957648b29c5421df608a",
+        epoch_round: 948201,
+        signatures: [
+          { node: "cdsco-delhi-validator-01", status: isTampered ? "FLAGGED_REJECTED" : "SIGNED" },
+          { node: "aiia-lead-enclave", status: isTampered ? "FLAGGED_REJECTED" : "SIGNED" }
+        ]
+      }, null, 2);
+    } else if (currentApiTab === 'block3') {
+      jsonDisplay.innerText = JSON.stringify({
+        block_height: 3,
+        type: "eCRF_DAY_14_LABS",
+        immutable_hash: "0x8c7b89f2e34a719d3bb2a0018f34bc98e5781a93b4510cdb281f90ac832b",
+        current_db_alt_sgpt: isTampered ? 35 : 165,
+        tamper_flag: isTampered,
+        signer_pki: "CN=Dr. V. Sharma, O=AIIA, C=IN"
+      }, null, 2);
+    }
+  }
+
+  function runLiveVerification() {
+    if (isVerifying) return;
+    isVerifying = true;
+
+    const icon = document.getElementById('verifyBtnIcon');
+    const text = document.getElementById('verifyBtnText');
+
+    icon.classList.add('animate-spin');
+    text.innerText = 'Calculating Merkle Roots...';
+
+    setTimeout(() => {
+      icon.classList.remove('animate-spin');
+      text.innerText = isTampered ? 'Verification: Tamper Found at #3' : 'Chain 100% Verified';
+      setTimeout(() => {
+        text.innerText = 'Verify Chain';
+        isVerifying = false;
+      }, 2500);
+    }, 900);
+  }
+</script>
+</body></html>

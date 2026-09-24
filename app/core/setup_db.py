@@ -51,8 +51,25 @@ async def apply_permission_boundary() -> None:
     log.info("Permission boundary applied.")
 
 
+async def migrate_columns() -> None:
+    statements = [
+        "ALTER TYPE trial_status_enum ADD VALUE IF NOT EXISTS 'FROZEN';",
+        "ALTER TABLE clinical_trials ADD COLUMN IF NOT EXISTS iec_clearance_number VARCHAR(100);",
+        "ALTER TABLE trial_patients ADD COLUMN IF NOT EXISTS site_id UUID REFERENCES trial_sites(id) ON DELETE SET NULL;",
+        "ALTER TABLE ecrf_records ADD COLUMN IF NOT EXISTS site_id UUID REFERENCES trial_sites(id) ON DELETE SET NULL;",
+    ]
+    async with engine.begin() as conn:
+        for stmt in statements:
+            try:
+                await conn.execute(text(stmt))
+                log.info("Migration executed: %s", stmt)
+            except Exception as exc:  # noqa: BLE001
+                log.warning("Migration skipped '%s': %s", stmt, exc)
+
+
 async def main() -> None:
     await create_tables()
+    await migrate_columns()
     await apply_permission_boundary()
     await engine.dispose()
     log.info("Database setup complete.")
