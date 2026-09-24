@@ -42,3 +42,6 @@ UI/**/screen.png
 Thumbs.db
 .vscode/
 .idea/
+
+# Local documentation & scratchpads (untracked)
+docs/
