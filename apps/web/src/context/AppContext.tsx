@@ -1,8 +1,9 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-export type Role = "doctor" | "coordinator" | "npvcc" | "auditor";
+export type Role = "doctor" | "coordinator" | "npvcc" | "auditor" | "admin";
 export type Site = "SITE-01" | "SITE-02";
 export type Tab =
   | "state_machine"
@@ -18,7 +19,98 @@ export interface ToastItem {
   type: "info" | "success" | "error";
 }
 
+export interface UserPersona {
+  id: string;
+  name: string;
+  title: string;
+  email: string;
+  role: Role;
+  roleHeader: string;
+  siteId: Site;
+  siteLabel: string;
+  description: string;
+  token: string;
+  avatarColor: string;
+  avatarIcon: string;
+}
+
+export const PRESET_PERSONAS: Record<Role, UserPersona> = {
+  doctor: {
+    id: "USER-PI-01",
+    name: "Dr. Jayesh Rathi",
+    title: "Principal Investigator (PI / Doctor)",
+    email: "dr.jayesh.rathi@aiia.gov.in",
+    role: "doctor",
+    roleHeader: "DOCTOR",
+    siteId: "SITE-01",
+    siteLabel: "SITE-01 (AIIA New Delhi Apex Centre)",
+    description: "Bedside eCRF, AyuScribe Voice AI, Herb-Drug Adverse Reporting",
+    token: "mock-jwt-bearer-dr-jayesh-rathi-2026",
+    avatarColor: "bg-[#064e3b] text-[#85f8c4]",
+    avatarIcon: "stethoscope",
+  },
+  coordinator: {
+    id: "USER-CRC-01",
+    name: "Priya Sharma, MSc",
+    title: "Clinical Research Coordinator (CRC)",
+    email: "priya.sharma@aiia.gov.in",
+    role: "coordinator",
+    roleHeader: "CLINICAL_RESEARCH_COORDINATOR",
+    siteId: "SITE-01",
+    siteLabel: "SITE-01 (AIIA New Delhi Apex Centre)",
+    description: "CTRI Linking, Subject Screening, Offline Batch Sync",
+    token: "mock-jwt-bearer-priya-sharma-2026",
+    avatarColor: "bg-[#004d61] text-[#97f0ff]",
+    avatarIcon: "clinical_notes",
+  },
+  npvcc: {
+    id: "USER-NPVCC-01",
+    name: "Dr. K. Vaidya",
+    title: "NPvCC Medical Safety Officer (National Reviewer)",
+    email: "k.vaidya@npvcc.nic.in",
+    role: "npvcc",
+    roleHeader: "NPVCC_OFFICER",
+    siteId: "SITE-01",
+    siteLabel: "Global Oversight (National Pharmacovigilance)",
+    description: "24h SAE Countdown Triage, MedDRA Coding, Form CT-16 Dispatch",
+    token: "mock-jwt-bearer-dr-k-vaidya-2026",
+    avatarColor: "bg-[#7c2d12] text-[#ffedd5]",
+    avatarIcon: "emergency",
+  },
+  auditor: {
+    id: "USER-AUD-01",
+    name: "Inspector R. K. Verma",
+    title: "CDSCO Regulatory Auditor (Central Inspection Team)",
+    email: "rk.verma@cdsco.gov.in",
+    role: "auditor",
+    roleHeader: "REGULATORY_AUDITOR",
+    siteId: "SITE-01",
+    siteLabel: "Pan-India Regulatory Audit",
+    description: "ALCOA+ Cryptographic Ledger, Merkle Witness Proof, Live Tamper Test",
+    token: "mock-jwt-bearer-inspector-rk-verma-2026",
+    avatarColor: "bg-[#4a154b] text-[#fbcfe8]",
+    avatarIcon: "verified_user",
+  },
+  admin: {
+    id: "USER-DSMB-01",
+    name: "Prof. Anand Joshi",
+    title: "DSMB Chairman / Executive Admin",
+    email: "anand.joshi@dsmb-ayush.org",
+    role: "admin",
+    roleHeader: "SUPER_ADMIN",
+    siteId: "SITE-01",
+    siteLabel: "Global Portfolio Governance",
+    description: "Multi-Center Portfolio KPIs, SPC Anomaly Alerts, Export Hub",
+    token: "mock-jwt-bearer-prof-anand-joshi-2026",
+    avatarColor: "bg-[#1e1b4b] text-[#c7d2fe]",
+    avatarIcon: "monitoring",
+  },
+};
+
 interface AppContextType {
+  currentUser: UserPersona;
+  isAuthenticated: boolean;
+  isMounted: boolean;
   currentRole: Role;
   currentSite: Site;
   activeTab: Tab;
@@ -33,6 +125,8 @@ interface AppContextType {
   slaCountdown: string;
   toasts: ToastItem[];
   activeBlockDrawer: number | null;
+  login: (persona: UserPersona) => void;
+  logout: () => void;
   changePersona: (role: Role) => void;
   switchSite: (site: Site) => void;
   switchTab: (tab: Tab) => void;
@@ -57,6 +151,10 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const router = useRouter();
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<UserPersona>(PRESET_PERSONAS.doctor);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
   const [currentRole, setCurrentRole] = useState<Role>("doctor");
   const [currentSite, setCurrentSite] = useState<Site>("SITE-01");
   const [activeTab, setActiveTab] = useState<Tab>("ecrf_desk");
@@ -72,11 +170,42 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [sugamAckTime, setSugamAckTime] = useState<string | null>(null);
   const [slaCountdown, setSlaCountdown] = useState<string>("23:58:41");
   const [toasts, setToasts] = useState<ToastItem[]>([]);
-  const [activeBlockDrawer, setActiveBlockDrawer] = useState<number | null>(
-    null
-  );
+  const [activeBlockDrawer, setActiveBlockDrawer] = useState<number | null>(null);
 
-  // Live timer tick
+  // SSR-Safe Session Rehydration from localStorage
+  useEffect(() => {
+    setIsMounted(true);
+    try {
+      const stored = localStorage.getItem("ayutrial_session");
+      if (stored) {
+        const session: UserPersona = JSON.parse(stored);
+        if (session && session.role) {
+          setCurrentUser(session);
+          setCurrentRole(session.role);
+          setCurrentSite(session.siteId || "SITE-01");
+          setIsAuthenticated(true);
+          const roleToTab: Record<Role, Tab> = {
+            doctor: "ecrf_desk",
+            coordinator: "state_machine",
+            npvcc: "npvcc_desk",
+            auditor: "alcoa_ledger",
+            admin: "regulatory_export",
+          };
+          setActiveTab(roleToTab[session.role] || "ecrf_desk");
+        }
+      } else {
+        // Default seed session into storage for seamless first load
+        localStorage.setItem(
+          "ayutrial_session",
+          JSON.stringify(PRESET_PERSONAS.doctor)
+        );
+      }
+    } catch {
+      // Fallback safely
+    }
+  }, []);
+
+  // Live statutory countdown ticker
   useEffect(() => {
     let secondsRemaining = 23 * 3600 + 58 * 60 + 41;
     const interval = setInterval(() => {
@@ -106,26 +235,74 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     }, 3800);
   };
 
-  const changePersona = (role: Role) => {
-    setCurrentRole(role);
+  const login = (persona: UserPersona) => {
+    setCurrentUser(persona);
+    setCurrentRole(persona.role);
+    setCurrentSite(persona.siteId);
+    setIsAuthenticated(true);
+    try {
+      localStorage.setItem("ayutrial_session", JSON.stringify(persona));
+    } catch {
+      // ignore
+    }
+
     const roleToTab: Record<Role, Tab> = {
       doctor: "ecrf_desk",
       coordinator: "state_machine",
       npvcc: "npvcc_desk",
       auditor: "alcoa_ledger",
+      admin: "regulatory_export",
+    };
+    setActiveTab(roleToTab[persona.role] || "ecrf_desk");
+
+    showToast(`Session authenticated under 21 CFR §11.10: Welcome, ${persona.name}`, "success");
+    setTimeout(() => {
+      router.push("/");
+    }, 300);
+  };
+
+  const logout = () => {
+    try {
+      localStorage.removeItem("ayutrial_session");
+    } catch {
+      // ignore
+    }
+    setIsAuthenticated(false);
+    showToast("Session terminated under 21 CFR §11.10 security policies", "info");
+    router.push("/login");
+  };
+
+  const changePersona = (role: Role) => {
+    const persona = PRESET_PERSONAS[role] || PRESET_PERSONAS.doctor;
+    setCurrentUser(persona);
+    setCurrentRole(role);
+    setCurrentSite(persona.siteId);
+    try {
+      localStorage.setItem("ayutrial_session", JSON.stringify(persona));
+    } catch {
+      // ignore
+    }
+
+    const roleToTab: Record<Role, Tab> = {
+      doctor: "ecrf_desk",
+      coordinator: "state_machine",
+      npvcc: "npvcc_desk",
+      auditor: "alcoa_ledger",
+      admin: "regulatory_export",
     };
     setActiveTab(roleToTab[role]);
-    const labels: Record<Role, string> = {
-      doctor: "Principal Investigator (PI)",
-      coordinator: "Clinical Research Coordinator",
-      npvcc: "NPvCC Medical Officer",
-      auditor: "CDSCO Regulatory Auditor",
-    };
-    showToast(`Switched active persona: ${labels[role]}`);
+    showToast(`Switched active persona: ${persona.name} (${persona.title})`);
   };
 
   const switchSite = (site: Site) => {
     setCurrentSite(site);
+    const updatedUser = { ...currentUser, siteId: site };
+    setCurrentUser(updatedUser);
+    try {
+      localStorage.setItem("ayutrial_session", JSON.stringify(updatedUser));
+    } catch {
+      // ignore
+    }
     const label =
       site === "SITE-01" ? "SITE-01: AIIA New Delhi" : "SITE-02: IPGT&RA Jamnagar";
     showToast(`Multi-center scope switched to: ${label}`);
@@ -139,9 +316,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       npvcc_desk: "npvcc",
       alcoa_ledger: "auditor",
       herb_drug: "doctor",
-      regulatory_export: "auditor",
+      regulatory_export: "admin",
     };
-    setCurrentRole(tabToRole[tab]);
+    const newRole = tabToRole[tab];
+    if (newRole && newRole !== currentRole) {
+      changePersona(newRole);
+    }
   };
 
   const runDemoStep = (stepNum: number) => {
@@ -299,7 +479,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const dispatchToSugam = () => {
     setTimeout(() => {
       const now = new Date();
-      const istTime = now.toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" }) + " IST";
+      const istTime =
+        now.toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" }) + " IST";
       setSugamDispatched(true);
       setSugamAckTime(istTime);
       showToast(
@@ -315,6 +496,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <AppContext.Provider
       value={{
+        currentUser,
+        isAuthenticated,
+        isMounted,
         currentRole,
         currentSite,
         activeTab,
@@ -329,6 +513,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         slaCountdown,
         toasts,
         activeBlockDrawer,
+        login,
+        logout,
         changePersona,
         switchSite,
         switchTab,

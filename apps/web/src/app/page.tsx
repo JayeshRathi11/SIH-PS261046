@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
-import { AppProvider, useApp } from "@/context/AppContext";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useApp } from "@/context/AppContext";
 import { StatutoryBanner } from "@/components/layout/StatutoryBanner";
 import { HeaderNav } from "@/components/layout/HeaderNav";
 import { SideNav } from "@/components/layout/SideNav";
@@ -16,13 +17,14 @@ import { HerbDrugMatrix } from "@/components/doctor/HerbDrugMatrix";
 import { ExportHub } from "@/components/export/ExportHub";
 
 const MainWorkspaceContent: React.FC = () => {
-  const { activeTab, currentRole, currentSite } = useApp();
+  const { activeTab, currentRole, currentSite, currentUser } = useApp();
 
   const roleTitles: Record<string, string> = {
     doctor: "Principal Investigator (PI) Bedside Examination Desk",
     coordinator: "Clinical Research Coordinator (CRC) Study Operations",
     npvcc: "National Pharmacovigilance Centre for Ayurveda (NPvCC) Incident Triage",
     auditor: "CDSCO Regulatory Auditor & ALCOA+ Cryptographic Ledger",
+    admin: "Executive DSMB & Multi-Center Analytics Desk",
   };
 
   return (
@@ -32,9 +34,13 @@ const MainWorkspaceContent: React.FC = () => {
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[#006c4a]"></span>
           <span className="text-xs font-bold text-[#003527]">
-            {roleTitles[currentRole]}
+            {roleTitles[currentRole] || roleTitles.doctor}
           </span>
           <span className="text-neutral-300">|</span>
+          <span className="text-[11px] font-mono text-neutral-500">
+            Active Clinician: <strong>{currentUser?.name || "Dr. Jayesh Rathi"}</strong> ({currentUser?.roleHeader || "DOCTOR"})
+          </span>
+          <span className="text-neutral-300">•</span>
           <span className="text-[11px] font-mono text-neutral-500">
             Scope: {currentSite === "SITE-01" ? "AIIA New Delhi" : "IPGT&RA Jamnagar"}
           </span>
@@ -85,17 +91,35 @@ const MainWorkspaceContent: React.FC = () => {
 };
 
 export default function Home() {
-  return (
-    <AppProvider>
-      <div className="flex flex-col min-h-screen">
-        <StatutoryBanner />
-        <HeaderNav />
-        <PitchStepper />
-        <div className="flex-1 flex overflow-hidden">
-          <SideNav />
-          <MainWorkspaceContent />
+  const { isAuthenticated, isMounted } = useApp();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isMounted && !isAuthenticated) {
+      router.push("/login");
+    }
+  }, [isMounted, isAuthenticated, router]);
+
+  if (!isMounted) {
+    return (
+      <div className="min-h-screen bg-[#002117] flex items-center justify-center text-emerald-400 font-mono text-sm">
+        <div className="flex items-center gap-3">
+          <span className="w-5 h-5 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin"></span>
+          <span>Initializing AyuTrial-CTMS Secure Workstation...</span>
         </div>
       </div>
-    </AppProvider>
+    );
+  }
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <StatutoryBanner />
+      <HeaderNav />
+      <PitchStepper />
+      <div className="flex-1 flex overflow-hidden">
+        <SideNav />
+        <MainWorkspaceContent />
+      </div>
+    </div>
   );
 }

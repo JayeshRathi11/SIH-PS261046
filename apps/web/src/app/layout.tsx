@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AppProvider } from "@/context/AppContext";
 
 export const metadata: Metadata = {
   title: "AyuTrial-CTMS | NPvCC Clinical Portal & CDSCO Workstation",
@@ -27,7 +28,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background text-on-surface antialiased min-h-screen flex flex-col font-sans selection:bg-secondary-container selection:text-on-secondary-fixed">
-        {children}
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );

@@ -1,16 +1,18 @@
 "use client";
 
 import React from "react";
-import { useApp, Role, Site, Tab } from "@/context/AppContext";
+import { useApp, Role, Site, Tab, PRESET_PERSONAS } from "@/context/AppContext";
 
 export const HeaderNav: React.FC = () => {
   const {
+    currentUser,
     currentRole,
     currentSite,
     activeTab,
     changePersona,
     switchSite,
     switchTab,
+    logout,
   } = useApp();
 
   return (
@@ -113,9 +115,20 @@ export const HeaderNav: React.FC = () => {
           <span className="material-symbols-outlined text-sm">verified_user</span>
           Regulatory Audit
         </button>
+        <button
+          onClick={() => switchTab("regulatory_export")}
+          className={`pb-1 transition-colors flex items-center gap-1 cursor-pointer font-medium ${
+            activeTab === "regulatory_export"
+              ? "text-[#003527] border-b-2 border-[#003527] font-semibold"
+              : "text-[#404944] hover:text-[#003527]"
+          }`}
+        >
+          <span className="material-symbols-outlined text-sm">download</span>
+          Export Hub
+        </button>
       </nav>
 
-      {/* Global Telemetry & Persona Selector */}
+      {/* Global Telemetry, Persona Selector & Logout */}
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Latency & Encryption Status */}
         <div className="hidden 2xl:flex items-center gap-2 border-r border-[#bfc9c3]/60 pr-3 font-mono text-[10px]">
@@ -127,20 +140,49 @@ export const HeaderNav: React.FC = () => {
           </span>
         </div>
 
-        {/* Persona Role Switcher */}
-        <div className="flex items-center gap-1.5 bg-[#f2f3ff] px-2 py-1 rounded border border-[#bfc9c3]/60">
-          <span className="material-symbols-outlined text-sm text-[#006c4a]">badge</span>
+        {/* Persona Selector with User Badge */}
+        <div className="flex items-center gap-2 bg-[#f2f3ff] px-2 py-1 rounded border border-[#bfc9c3]/60">
+          <div
+            className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-[10px] ${
+              currentUser?.avatarColor || "bg-[#064e3b] text-[#85f8c4]"
+            }`}
+          >
+            <span className="material-symbols-outlined text-xs">
+              {currentUser?.avatarIcon || "person"}
+            </span>
+          </div>
+
+          <div className="hidden sm:flex flex-col">
+            <span className="text-xs font-bold text-[#003527] leading-tight">
+              {currentUser?.name || "Dr. Jayesh Rathi"}
+            </span>
+            <span className="text-[9px] font-mono text-[#006c4a]">
+              {currentUser?.roleHeader || "DOCTOR"}
+            </span>
+          </div>
+
           <select
             value={currentRole}
             onChange={(e) => changePersona(e.target.value as Role)}
-            className="bg-transparent border-0 text-xs font-semibold text-[#003527] focus:ring-0 cursor-pointer p-0 pr-6"
+            className="bg-transparent border-0 text-xs font-semibold text-[#003527] focus:ring-0 cursor-pointer p-0 pr-6 ml-1"
           >
-            <option value="doctor">Dr. V. Sharma (PI - AIIA Delhi)</option>
-            <option value="coordinator">Coord. R. Patel (CRC - Multi-Center)</option>
-            <option value="npvcc">Dr. A. Joshi (NPvCC Medical Officer)</option>
-            <option value="auditor">Inspector S. Rao (CDSCO Regulatory Auditor)</option>
+            <option value="doctor">Dr. Jayesh Rathi (PI / Doctor)</option>
+            <option value="coordinator">Priya Sharma, MSc (CRC)</option>
+            <option value="npvcc">Dr. K. Vaidya (NPvCC Officer)</option>
+            <option value="auditor">Inspector R. K. Verma (CDSCO Auditor)</option>
+            <option value="admin">Prof. Anand Joshi (DSMB / Admin)</option>
           </select>
         </div>
+
+        {/* Switch Persona / Sign Out Trigger */}
+        <button
+          onClick={logout}
+          title="Sign Out / Switch Clinical Workstation (21 CFR §11.10)"
+          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-red-200/80 bg-red-50/50 hover:bg-red-100/70 text-[#ba1a1a] text-xs font-semibold transition-colors cursor-pointer shadow-2xs"
+        >
+          <span className="material-symbols-outlined text-sm">logout</span>
+          <span className="hidden md:inline">Sign Out</span>
+        </button>
       </div>
     </header>
   );

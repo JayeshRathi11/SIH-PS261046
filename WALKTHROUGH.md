@@ -59,6 +59,7 @@ Before executing the startup sequence, verify the host workstation satisfies all
 Ensure the following local network ports are accessible and not bound to conflicting services:
 
 - **Next.js 14 Frontend Workstation:** `http://localhost:3000`
+- **Dedicated Clinical Authentication Portal:** `http://localhost:3000/login`
 - **FastAPI Core Backend Application:** `http://localhost:8000`
 - **Interactive Swagger Documentation:** `http://localhost:8000/docs`
 - **OpenAPI 3.1 Specification JSON:** `http://localhost:8000/openapi.json`
@@ -161,16 +162,41 @@ npm run dev
 Follow this step-by-step operational script during hackathon evaluation or live demonstration. Each step is timed to maximize impact and prove regulatory compliance.
 
 ```
-       0:00                 1:00              2:00              3:00              4:00               5:30         6:00
-      ┌───┴───────────────────┴─────────────────┴─────────────────┴─────────────────┴──────────────────┴────────────┐
-      │ Step 1: CTRI Linking  │ Step 2: eCRF &  │ Step 3: Herb-   │ Step 4: T-24h   │ Step 5: ALCOA+   │ Step 6:     │
-      │ Protocol Governance   │ AyuScribe Voice │ Drug Conflict   │ SLA & Form CT-16│ Tamper Simulator │ CDISC / FHIR│
-      └───────────────────────┴─────────────────┴─────────────────┴─────────────────┴──────────────────┴────────────┘
+       0:00        0:30                1:30              2:30              3:30              4:30               5:30         6:00
+      ┌───┴───────────┴───────────────────┴─────────────────┴─────────────────┴─────────────────┴──────────────────┴────────────┐
+      │ Step 0: Auth  │ Step 1: CTRI Link │ Step 2: eCRF &  │ Step 3: Herb-   │ Step 4: T-24h   │ Step 5: ALCOA+   │ Step 6:     │
+      │ 1-Click Roles │ Protocol Gov      │ AyuScribe Voice │ Drug Conflict   │ SLA & Form CT-16│ Tamper Simulator │ CDISC / FHIR│
+      └───────────────┴───────────────────┴─────────────────┴─────────────────┴─────────────────┴──────────────────┴────────────┘
 ```
 
 ---
 
-### Step 1: Protocol State Machine & CTRI Prospective Linking (Minute 0:00 – 1:00)
+### Step 0: Instant 1-Click Clinical Persona Authentication (Minute 0:00 – 0:30)
+
+- **Target Persona / Role:** Any evaluation persona (Default: **`Principal Investigator (PI / Doctor)`**).
+- **Navigation:** Open workstation at `http://localhost:3000` (or `http://localhost:3000/login`).
+- **Visuals on Display:**
+  1. Highlight the official **Ministry of Ayush & AIIA Apex Centre** institutional branding.
+  2. Point out the statutory compliance badges: **NDCT Rules 2019**, **US FDA 21 CFR Part 11**, **DPDP Act 2023**, and **GCP-ASU Compliant**.
+  3. Showcase the 5 pre-configured clinical personas:
+     * **Dr. Jayesh Rathi** (`DOCTOR` | `SITE-01`)
+     * **Priya Sharma, MSc** (`CLINICAL_RESEARCH_COORDINATOR` | `SITE-01`)
+     * **Dr. K. Vaidya** (`NPVCC_OFFICER` | Global Oversight)
+     * **Inspector R. K. Verma** (`REGULATORY_AUDITOR` | Pan-India Audit)
+     * **Prof. Anand Joshi** (`SUPER_ADMIN` | Global Portfolio)
+- **Action & Form Interaction:**
+  1. Click Card 1: **"Dr. Jayesh Rathi (PI / Doctor)"**.
+  2. Observe the instant 1-click authentication: the form fields populate and a 300ms session transition occurs.
+  3. Toast Notification: `Session authenticated under 21 CFR §11.10: Welcome, Dr. Jayesh Rathi`.
+  4. Redirection: Immediately transitions to the main clinical trial workspace `/`.
+  5. Point out the top navigation bar: displays the active clinician avatar, full name, role badge, multi-center site toggle, and the **"Sign Out"** trigger to switch personas at any point.
+- **Wait Time:** Instant (< 300ms).
+- **What to Explain to Judges:**
+  > *"Under US FDA 21 CFR §11.10 and CDSCO NDCT Rules 2019, clinical trial workflows require strict, verifiable electronic identity controls. AyuTrial-CTMS features a dedicated authentication workstation with 1-click persona switching specifically engineered for evaluators—allowing seamless transitions between Principal Investigators, Clinical Coordinators, Pharmacovigilance Officers, and Regulatory Auditors without administrative friction or re-login delays."*
+
+---
+
+### Step 1: Protocol State Machine & CTRI Prospective Linking (Minute 0:30 – 1:30)
 
 - **Target Persona / Role:** Click top-right Role Selector and choose **`Clinical Research Coordinator (CRC)`** or **`Ethics Admin`**.
 - **Navigation:** Open left navigation bar and click **"Protocol Hub"** (or use Demo Stepper `[Step 1]`).
@@ -628,6 +654,16 @@ pytest tests/ -v
 ================================ 79 passed in 4.12s ================================
 ```
 All 79 test cases—covering WebSocket broadcasting, cryptographic Merkle tree hashing, Herb-Drug interaction matrix, ReportLab Form CT-16 generation, and DPDP anonymization—must pass green.
+
+### 5.6 Session Troubleshooting & Workstation Cache Invalidation
+- **Resetting Active Persona:** If an evaluator wishes to re-test the authentication portal or switch personas from scratch:
+  1. Click the red **"Sign Out"** button located in the top-right header next to the active user badge.
+  2. The workstation clears `localStorage.ayutrial_session`, emits a session termination notice, and routes cleanly back to `/login`.
+- **Manual Hard Reset via Browser Console:** If local state is ever corrupted:
+  ```javascript
+  localStorage.clear();
+  window.location.href = '/login';
+  ```
 
 ---
 

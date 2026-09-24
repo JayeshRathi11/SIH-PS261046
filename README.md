@@ -85,7 +85,8 @@ cd apps/web
 npm install
 npm run dev
 ```
-* **Next.js Workstation:** `http://localhost:3000`
+* **Next.js Main Workstation:** `http://localhost:3000`
+* **1-Click Clinical Auth Portal:** `http://localhost:3000/login`
 
 ### Step 4: Run the Complete Test Suite
 ```bash
@@ -109,12 +110,13 @@ SIH-PS261046/
 ├── apps/
 │   └── web/                            # Next.js 14 App Router Frontend Workstation
 │       ├── src/
-│       │   ├── app/                    # Layout, theme tokens, and master workstation
+│       │   ├── app/                    # Layout, theme tokens, /login & master workstation
 │       │   ├── components/             # Modular clinical, auditor, and export components
-│       │   ├── context/                # Global reactive state (Role, Site, Tamper simulation)
+│       │   ├── context/                # Global reactive state (1-Click Personas, Role, Site, Tamper)
 │       │   └── lib/                    # API client & WebSocket connector
 │       └── package.json
 ├── tests/                              # Pytest End-to-End & Integration Test Suite (79 Tests)
+├── WALKTHROUGH.md                      # Publication-Grade Operator Manual & 6-Min Pitch SOP
 ├── COMPLETED_FEATURES.md               # Formal engineering sprint entries (#001 - #009)
 └── README.md                           # Master Documentation & Setup Guide
 ```
