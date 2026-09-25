@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { api } from "@/lib/api";
 
 export type Role = "doctor" | "coordinator" | "npvcc" | "auditor" | "admin";
 export type Site = "SITE-01" | "SITE-02";
@@ -11,7 +12,8 @@ export type Tab =
   | "npvcc_desk"
   | "alcoa_ledger"
   | "herb_drug"
-  | "regulatory_export";
+  | "regulatory_export"
+  | "analytics";
 
 export interface ToastItem {
   id: string;
@@ -114,6 +116,12 @@ interface AppContextType {
   currentRole: Role;
   currentSite: Site;
   activeTab: Tab;
+  activeTrialId: string | null;
+  activePatientId: string | null;
+  activeAeId: string | null;
+  setActiveTrialId: (id: string | null) => void;
+  setActivePatientId: (id: string | null) => void;
+  setActiveAeId: (id: string | null) => void;
   currentStep: number;
   isTampered: boolean;
   dictationActive: boolean;
@@ -171,6 +179,46 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const [slaCountdown, setSlaCountdown] = useState<string>("23:58:41");
   const [toasts, setToasts] = useState<ToastItem[]>([]);
   const [activeBlockDrawer, setActiveBlockDrawer] = useState<number | null>(null);
+  const [activeTrialId, setActiveTrialId] = useState<string | null>(
+    "35113a2b-9fda-4e2c-89a8-ac2f0f25e1af"
+  );
+  const [activePatientId, setActivePatientId] = useState<string | null>(
+    "8331d3f7-9578-44d8-abb2-898d995386f4"
+  );
+  const [activeAeId, setActiveAeId] = useState<string | null>(
+    "deebbc58-adc7-4d64-a685-6935f2b8e959"
+  );
+
+  // Dynamic Trial and Patient ID resolution from live API
+  useEffect(() => {
+    let isSubscribed = true;
+    const fetchDynamicEntities = async () => {
+      try {
+        const trials = await api.getTrials();
+        if (isSubscribed && Array.isArray(trials) && trials.length > 0) {
+          const match = trials.find((t: any) => t.protocol_id === "AIIA-GUD-2026") || trials[0];
+          if (match?.id) setActiveTrialId(match.id);
+        }
+      } catch {
+        // Fallback to pre-seeded ID
+      }
+
+      try {
+        const patients = await api.getPatients();
+        if (isSubscribed && Array.isArray(patients) && patients.length > 0) {
+          const match = patients.find((p: any) => p.usubjid === "AIIA-P089") || patients[0];
+          if (match?.id) setActivePatientId(match.id);
+        }
+      } catch {
+        // Fallback to pre-seeded ID
+      }
+    };
+
+    fetchDynamicEntities();
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
 
   // SSR-Safe Session Rehydration from localStorage
   useEffect(() => {
@@ -189,7 +237,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
             coordinator: "state_machine",
             npvcc: "npvcc_desk",
             auditor: "alcoa_ledger",
-            admin: "regulatory_export",
+            admin: "analytics",
           };
           setActiveTab(roleToTab[session.role] || "ecrf_desk");
         }
@@ -251,7 +299,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       coordinator: "state_machine",
       npvcc: "npvcc_desk",
       auditor: "alcoa_ledger",
-      admin: "regulatory_export",
+      admin: "analytics",
     };
     setActiveTab(roleToTab[persona.role] || "ecrf_desk");
 
@@ -288,7 +336,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       coordinator: "state_machine",
       npvcc: "npvcc_desk",
       auditor: "alcoa_ledger",
-      admin: "regulatory_export",
+      admin: "analytics",
     };
     setActiveTab(roleToTab[role]);
     showToast(`Switched active persona: ${persona.name} (${persona.title})`);
@@ -317,6 +365,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
       alcoa_ledger: "auditor",
       herb_drug: "doctor",
       regulatory_export: "admin",
+      analytics: "admin",
     };
     const newRole = tabToRole[tab];
     if (newRole && newRole !== currentRole) {
@@ -502,6 +551,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
         currentRole,
         currentSite,
         activeTab,
+        activeTrialId,
+        activePatientId,
+        activeAeId,
+        setActiveTrialId,
+        setActivePatientId,
+        setActiveAeId,
         currentStep,
         isTampered,
         dictationActive,

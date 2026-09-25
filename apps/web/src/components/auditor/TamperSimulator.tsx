@@ -8,7 +8,7 @@ import { api } from "@/lib/api";
 
 export const TamperSimulator: React.FC = () => {
   const { isTampered, toggleTamperSimulation, showToast } = useApp();
-  const [activeApiTab, setActiveApiTab] = useState<"verify" | "merkle" | "block3">("verify");
+  const [activeApiTab, setActiveApiTab] = useState<"verify" | "witness" | "block3">("verify");
   const [isVerifying, setIsVerifying] = useState<boolean>(false);
   const [apiResult, setApiResult] = useState<any>(null);
 
@@ -198,14 +198,14 @@ export const TamperSimulator: React.FC = () => {
               GET /api/v1/audit/verify-chain
             </button>
             <button
-              onClick={() => setActiveApiTab("merkle")}
+              onClick={() => setActiveApiTab("witness")}
               className={`px-2.5 py-1 rounded cursor-pointer ${
-                activeApiTab === "merkle"
+                activeApiTab === "witness"
                   ? "bg-white text-[#003527] font-bold shadow-xs"
                   : "text-[#404944] hover:text-[#003527]"
               }`}
             >
-              GET /api/v1/audit/merkle-root
+              POST /api/v1/audit/notarize-witness
             </button>
             <button
               onClick={() => setActiveApiTab("block3")}
@@ -251,18 +251,16 @@ export const TamperSimulator: React.FC = () => {
               2
             )}
 
-          {activeApiTab === "merkle" &&
+          {activeApiTab === "witness" &&
             JSON.stringify(
               {
-                enclave_provider: "AWS Nitro Enclave / CDSCO Hardware Security Module",
-                active_merkle_root: isTampered
+                status: isTampered ? "WITNESS_ROOT_REJECTED" : "NOTARIZED",
+                merkle_root: isTampered
                   ? "MISMATCH_ALERT_FROZEN"
-                  : "0x7f83b165c92f40b2a9e3d81b957648b29c5421df608a",
-                epoch_round: 948201,
-                signatures: [
-                  { node: "cdsco-delhi-validator-01", status: isTampered ? "FLAGGED_REJECTED" : "SIGNED" },
-                  { node: "aiia-lead-enclave", status: isTampered ? "FLAGGED_REJECTED" : "SIGNED" },
-                ],
+                  : (apiResult?.local_merkle_root || "50ea5bd8f7c0794585f4e3eadac31f0b66fa10697b64eae4f9439a73c9ff7f1c"),
+                isolated_witness_enclave: "AWS Nitro Enclave / CDSCO Hardware Security Module",
+                witness_epoch_status: isTampered ? "SEVERED_HASH_CHAIN" : "ANCHOR_LOCKED",
+                alcoa_plus_witness: isTampered ? false : true,
               },
               null,
               2

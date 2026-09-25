@@ -126,6 +126,17 @@ export const HeaderNav: React.FC = () => {
           <span className="material-symbols-outlined text-sm">download</span>
           Export Hub
         </button>
+        <button
+          onClick={() => switchTab("analytics")}
+          className={`pb-1 transition-colors flex items-center gap-1 cursor-pointer font-medium ${
+            activeTab === "analytics"
+              ? "text-[#003527] border-b-2 border-[#003527] font-semibold"
+              : "text-[#404944] hover:text-[#003527]"
+          }`}
+        >
+          <span className="material-symbols-outlined text-sm">monitoring</span>
+          DSMB Analytics
+        </button>
       </nav>
 
       {/* Global Telemetry, Persona Selector & Logout */}

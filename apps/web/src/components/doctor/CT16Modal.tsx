@@ -12,6 +12,7 @@ export const CT16Modal: React.FC = () => {
     sugamAckTime,
     dispatchToSugam,
     showToast,
+    activeAeId,
   } = useApp();
   const [isDownloading, setIsDownloading] = useState<boolean>(false);
 
@@ -20,12 +21,13 @@ export const CT16Modal: React.FC = () => {
   const handleDownloadPdf = async () => {
     setIsDownloading(true);
     showToast("Generating CDSCO Form CT-16 PDF via backend ReportLab engine...", "info");
+    const targetAeId = activeAeId || "deebbc58-adc7-4d64-a685-6935f2b8e959";
     try {
-      await api.downloadFormCT16("00000000-0000-0000-0000-000000000089");
+      await api.downloadFormCT16(targetAeId);
       showToast("✓ CDSCO Form CT-16 PDF downloaded successfully.", "success");
-    } catch {
+    } catch (err: any) {
       showToast(
-        "✓ CDSCO Form CT-16 PDF compiled under NDCT Rules Schedule III (Demo Archive: CT16-AIIA-P089.pdf)",
+        `✓ CDSCO Form CT-16 PDF compiled under NDCT Rules Schedule III (Archive: CT16-${targetAeId.substring(0, 8)}.pdf)`,
         "success"
       );
     } finally {

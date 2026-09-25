@@ -8,7 +8,16 @@ export const HerbDrugAlertModal: React.FC<{
   isOpen: boolean;
   onClose: () => void;
 }> = ({ isOpen, onClose }) => {
-  const { openCT16Modal, showToast, currentRole, currentSite, clinicalNotes, currentUser } = useApp();
+  const {
+    openCT16Modal,
+    showToast,
+    currentRole,
+    currentSite,
+    clinicalNotes,
+    currentUser,
+    activePatientId,
+    setActiveAeId,
+  } = useApp();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [conflicts, setConflicts] = useState<any[] | null>(null);
 
@@ -16,8 +25,9 @@ export const HerbDrugAlertModal: React.FC<{
 
   const handleReportAdverseEvent = async () => {
     setIsSubmitting(true);
+    const targetPatientId = activePatientId || "8331d3f7-9578-44d8-abb2-898d995386f4";
     const payload = {
-      patient_id: "00000000-0000-0000-0000-000000000089",
+      patient_id: targetPatientId,
       severity: "HOSPITALIZATION",
       clinical_notes: clinicalNotes,
       ayurvedic_intervention: "Guduchi Extract 500mg BD",
@@ -27,11 +37,14 @@ export const HerbDrugAlertModal: React.FC<{
 
     try {
       const res = await api.submitAdverseEvent(payload, currentRole, currentSite);
+      if (res?.id) {
+        setActiveAeId(res.id);
+      }
       if (res.herb_drug_conflicts && res.herb_drug_conflicts.length > 0) {
         setConflicts(res.herb_drug_conflicts);
       }
       showToast(
-        "⚠️ Serious Adverse Event registered with CDSCO 24h statutory countdown!",
+        `⚠️ Serious Adverse Event registered (${res?.id ? res.id.substring(0, 8) : "Active"}) with CDSCO 24h statutory countdown!`,
         "error"
       );
     } catch {

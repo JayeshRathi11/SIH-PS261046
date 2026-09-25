@@ -15,6 +15,7 @@ import { NPvCCTriageDesk } from "@/components/npvcc/NPvCCTriageDesk";
 import { TamperSimulator } from "@/components/auditor/TamperSimulator";
 import { HerbDrugMatrix } from "@/components/doctor/HerbDrugMatrix";
 import { ExportHub } from "@/components/export/ExportHub";
+import { ExecutiveDashboard } from "@/components/analytics/ExecutiveDashboard";
 
 const MainWorkspaceContent: React.FC = () => {
   const { activeTab, currentRole, currentSite, currentUser } = useApp();
@@ -64,6 +65,7 @@ const MainWorkspaceContent: React.FC = () => {
         {activeTab === "alcoa_ledger" && <TamperSimulator />}
         {activeTab === "herb_drug" && <HerbDrugMatrix />}
         {activeTab === "regulatory_export" && <ExportHub />}
+        {activeTab === "analytics" && <ExecutiveDashboard />}
       </main>
 
       {/* Regulatory Footer */}

@@ -3,8 +3,25 @@ import urllib.error
 import json
 import time
 
-PATIENT_ID = "d1fb346f-7b6f-4de4-a9b1-c9482323affe"
-TRIAL_ID = "fdce8312-da6f-4535-b3af-f5b1c9f6e256"
+# Dynamically resolve active trial and demo patient
+try:
+    with urllib.request.urlopen("http://127.0.0.1:8000/api/v1/trials") as resp:
+        trials = json.loads(resp.read().decode())
+        match_t = next((t for t in trials if t.get("protocol_id") == "AIIA-GUD-2026"), trials[0])
+        TRIAL_ID = match_t["id"]
+except Exception:
+    TRIAL_ID = "35113a2b-9fda-4e2c-89a8-ac2f0f25e1af"
+
+try:
+    with urllib.request.urlopen("http://127.0.0.1:8000/api/v1/patients") as resp:
+        patients = json.loads(resp.read().decode())
+        match_p = next((p for p in patients if p.get("usubjid") == "AIIA-P089"), patients[0])
+        PATIENT_ID = match_p["id"]
+except Exception:
+    PATIENT_ID = "8331d3f7-9578-44d8-abb2-898d995386f4"
+
+print(f"Dynamically Resolved Active Trial ID: {TRIAL_ID}")
+print(f"Dynamically Resolved Demo Patient ID: {PATIENT_ID}")
 
 print("="*75)
 print("A. CRYPTOGRAPHIC ALCOA+ AUDIT VERIFICATION")

@@ -51,6 +51,13 @@ export const SideNav: React.FC = () => {
       label: "Interoperability & Export",
       sublabel: "CDISC SDTM & HL7 FHIR",
     },
+    {
+      id: "analytics",
+      icon: "monitoring",
+      label: "Executive DSMB Analytics",
+      sublabel: "Multi-Center KPIs & SPC",
+      badge: "DSMB",
+    },
   ];
 
   const roleDisplay: Record<string, string> = {
@@ -58,6 +65,7 @@ export const SideNav: React.FC = () => {
     coordinator: "Research Coordinator",
     npvcc: "NPvCC Medical Officer",
     auditor: "CDSCO Auditor",
+    admin: "Executive DSMB Chair",
   };
 
   return (

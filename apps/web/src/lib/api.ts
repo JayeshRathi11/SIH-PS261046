@@ -128,10 +128,12 @@ export async function downloadBlob(endpoint: string, filename: string): Promise<
 export const api = {
   // Audit
   verifyChain: () => apiFetch("/audit/verify-chain"),
-  getMerkleRoot: () => apiFetch("/audit/merkle-root"),
+  getAuditVerification: () => apiFetch("/audit/verify-chain"),
+  notarizeWitness: () => apiFetch("/audit/notarize-witness", { method: "POST" }),
 
   // Analytics
   getPortfolioKPIs: () => apiFetch("/analytics/portfolio-kpis"),
+  getProtocolDeviations: (trialId: string) => apiFetch(`/analytics/protocol-deviations/${trialId}`),
 
   // Concurrency Locking
   acquireLock: (recordId: string, fieldName: string, userId: string) =>
@@ -155,6 +157,8 @@ export const api = {
     }),
 
   // eCRF & Patients
+  getTrials: () => apiFetch("/trials"),
+  getPatients: () => apiFetch("/patients"),
   saveECRF: (patientId: string, payload: any, role?: string, siteId?: string) =>
     apiFetch(`/patients/${patientId}/ecrf`, {
       method: "POST",
@@ -177,6 +181,13 @@ export const api = {
     apiFetch(`/trials/${trialId}/advance-status`, {
       method: "PUT",
       role,
+      body: JSON.stringify(payload),
+    }),
+
+  // Offline Sync
+  syncOfflineBatch: (payload: any) =>
+    apiFetch("/sync/offline-batch", {
+      method: "POST",
       body: JSON.stringify(payload),
     }),
 

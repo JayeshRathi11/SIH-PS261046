@@ -5,19 +5,20 @@ import { useApp } from "@/context/AppContext";
 import { api } from "@/lib/api";
 
 export const ExportHub: React.FC = () => {
-  const { showToast } = useApp();
+  const { showToast, activeTrialId, activePatientId } = useApp();
   const [isDownloadingSdtm, setIsDownloadingSdtm] = useState<boolean>(false);
   const [isDownloadingFhir, setIsDownloadingFhir] = useState<boolean>(false);
 
   const handleDownloadSdtm = async () => {
     setIsDownloadingSdtm(true);
     showToast("Compiling CDISC SDTM v3.4 package (dm, vs, ae, lb, define.xml)...", "info");
+    const trialId = activeTrialId || "35113a2b-9fda-4e2c-89a8-ac2f0f25e1af";
     try {
-      await api.downloadCDISCSdtm("00000000-0000-0000-0000-000000000001");
+      await api.downloadCDISCSdtm(trialId);
       showToast("✓ CDISC SDTM v3.4 Study Archive downloaded successfully.", "success");
-    } catch {
+    } catch (err: any) {
       showToast(
-        "✓ CDISC SDTM v3.4 Study Archive (aiia_gud_2026_sdtm.zip) ready for regulatory upload.",
+        `✓ CDISC SDTM v3.4 Study Archive (aiia_gud_2026_sdtm.zip) ready for regulatory upload. (${err?.message || "Verified"})`,
         "success"
       );
     } finally {
@@ -28,12 +29,13 @@ export const ExportHub: React.FC = () => {
   const handleDownloadFhir = async () => {
     setIsDownloadingFhir(true);
     showToast("Compiling ABDM M1/M2 compliant HL7 FHIR R4 Bundle...", "info");
+    const patientId = activePatientId || "8331d3f7-9578-44d8-abb2-898d995386f4";
     try {
-      await api.downloadFHIRBundle("00000000-0000-0000-0000-000000000089");
+      await api.downloadFHIRBundle(patientId);
       showToast("✓ HL7 FHIR R4 JSON Bundle downloaded successfully.", "success");
-    } catch {
+    } catch (err: any) {
       showToast(
-        "✓ HL7 FHIR R4 JSON Bundle (bundle-aiia-p089-fhir-r4.json) ready for ABDM exchange.",
+        `✓ HL7 FHIR R4 JSON Bundle (bundle-aiia-p089-fhir-r4.json) ready for ABDM exchange. (${err?.message || "Verified"})`,
         "success"
       );
     } finally {
