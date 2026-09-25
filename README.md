@@ -108,16 +108,26 @@ SIH-PS261046/
 │   ├── schemas/                        # Pydantic v2 validation contracts
 │   └── services/                       # Business logic (Merkle, CDISC, FHIR, MedDRA, voice)
 ├── apps/
-│   └── web/                            # Next.js 14 App Router Frontend Workstation
+│   └── web/                            # Next.js 16 App Router Frontend Workstation
 │       ├── src/
 │       │   ├── app/                    # Layout, theme tokens, /login & master workstation
 │       │   ├── components/             # Modular clinical, auditor, and export components
 │       │   ├── context/                # Global reactive state (1-Click Personas, Role, Site, Tamper)
 │       │   └── lib/                    # API client & WebSocket connector
 │       └── package.json
+├── docs/                               # Consolidated Master Documentation & Guides
+│   ├── FULL_SYSTEM_ARCHITECTURE_PLAYBOOK.md
+│   ├── MASTER_CLINICAL_LIFECYCLE_GUIDE.md
+│   ├── ui-architecture-spec.md
+│   ├── WALKTHROUGH.md
+│   └── COMPLETED_FEATURES.md
+├── scripts/                            # Operational & Verification Scripts
+│   └── live_demo_test.py
 ├── tests/                              # Pytest End-to-End & Integration Test Suite (79 Tests)
-├── WALKTHROUGH.md                      # Publication-Grade Operator Manual & 6-Min Pitch SOP
-├── COMPLETED_FEATURES.md               # Formal engineering sprint entries (#001 - #009)
+├── Dockerfile                          # FastAPI Backend Production Container
+├── docker-compose.yml                  # PostgreSQL & Backend Orchestration
+├── pyproject.toml                      # Python Project Metadata
+├── requirements.txt                    # Backend Dependencies
 └── README.md                           # Master Documentation & Setup Guide
 ```
 

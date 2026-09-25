@@ -1,11 +1,3 @@
-# Temporary Audit Scratchpads & Pitch Content
-SYSTEM_AUDIT_SCRATCHPAD.md
-SIH_PRESENTATION_CONTENT.md
-ISSUES_AND_MISMATCHES*.md
-temp_*
-*.tmp
-*.log
-
 # Environments & Dependencies
 .venv/
 venv/
@@ -28,7 +20,7 @@ htmlcov/
 .env.*.local
 !.env.example
 
-# Large media/binaries
+# Large media & binaries
 *.png
 *.jpg
 *.jpeg
@@ -37,12 +29,22 @@ htmlcov/
 !apps/web/public/**
 UI/
 
+# Scratchpads & Debug dumps
+*.scratchpad.md
+*SCRATCHPAD*.md
+*ISSUES*.md
+*.tmp
+*.bak
+*.orig
+*.log
+recordings/
+temp_*
+
 # OS & Editor files
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
 
-# Local documentation & scratchpads
-docs/
+# App local runtime state
 app/data/witness_merkle_store.txt
