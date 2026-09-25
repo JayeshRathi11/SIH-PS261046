@@ -30,28 +30,36 @@ export const HeaderNav: React.FC = () => {
         </div>
       </div>
 
-      {/* Center: Floating Segmented Pill for Trial Sites */}
-      <div className="hidden md:flex items-center bg-slate-100 p-1 rounded-full border border-slate-200/80 shadow-xs">
-        <button
-          onClick={() => switchSite("SITE-01")}
-          className={`px-3 py-1 text-xs rounded-full transition-all cursor-pointer ${
-            currentSite === "SITE-01"
-              ? "bg-white text-emerald-800 shadow-sm font-semibold"
-              : "text-slate-600 hover:text-slate-900 font-medium"
-          }`}
-        >
-          SITE-01 AIIA
-        </button>
-        <button
-          onClick={() => switchSite("SITE-02")}
-          className={`px-3 py-1 text-xs rounded-full transition-all cursor-pointer ${
-            currentSite === "SITE-02"
-              ? "bg-white text-emerald-800 shadow-sm font-semibold"
-              : "text-slate-600 hover:text-slate-900 font-medium"
-          }`}
-        >
-          SITE-02 Jamnagar
-        </button>
+      {/* Center: Fixed Site Badge & Hidden Multi-Site Toggle */}
+      <div className="hidden md:flex items-center">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs font-semibold text-emerald-800">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+          SITE-01: AIIA New Delhi (Apex Centre)
+        </div>
+        {/* HIDDEN FOR CORE DEMO: Multi-site interactive switch toggle
+        <div className="flex items-center bg-slate-100 p-1 rounded-full border border-slate-200/80 shadow-xs ml-2">
+          <button
+            onClick={() => switchSite("SITE-01")}
+            className={`px-3 py-1 text-xs rounded-full transition-all cursor-pointer ${
+              currentSite === "SITE-01"
+                ? "bg-white text-emerald-800 shadow-sm font-semibold"
+                : "text-slate-600 hover:text-slate-900 font-medium"
+            }`}
+          >
+            SITE-01 AIIA
+          </button>
+          <button
+            onClick={() => switchSite("SITE-02")}
+            className={`px-3 py-1 text-xs rounded-full transition-all cursor-pointer ${
+              currentSite === "SITE-02"
+                ? "bg-white text-emerald-800 shadow-sm font-semibold"
+                : "text-slate-600 hover:text-slate-900 font-medium"
+            }`}
+          >
+            SITE-02 Jamnagar
+          </button>
+        </div>
+        */}
       </div>
 
       {/* Right: Latency Badge, Profile Pill & Sign Out */}

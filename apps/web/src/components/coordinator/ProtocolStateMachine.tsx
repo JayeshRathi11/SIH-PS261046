@@ -110,6 +110,7 @@ export const ProtocolStateMachine: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2">
+          {/* HIDDEN FOR CORE DEMO: Offline sync runs as an invisible background daemon
           <button
             onClick={handlePushOfflineBatch}
             className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 shadow-xs transition-all active:scale-95 cursor-pointer"
@@ -117,6 +118,7 @@ export const ProtocolStateMachine: React.FC = () => {
             <span className="material-symbols-outlined text-sm font-bold">sync</span>
             <span>Sync Bedside Offline Batch</span>
           </button>
+          */}
         </div>
       </div>
 

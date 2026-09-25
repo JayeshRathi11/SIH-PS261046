@@ -72,6 +72,32 @@ export const NPvCCTriageDesk: React.FC = () => {
         </div>
       </div>
 
+      {/* HIDDEN FOR CORE DEMO: Semantic Case Similarity Search Bar & Vector Clustering
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-sm text-sky-600">travel_explore</span>
+            <h3 className="text-xs font-bold text-slate-900 tracking-tight">
+              BioBERT Semantic Case Similarity &amp; Historical Signal Search
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono text-sky-800 bg-sky-50 border border-sky-200 px-2.5 py-0.5 rounded-full font-semibold">
+            Cosine Vector Space (768-dim)
+          </span>
+        </div>
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Search similar multicenter adverse events via BioBERT embeddings..."
+            className="w-full text-xs p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none"
+          />
+        </div>
+        <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-500">
+          Historical similar cases (AIIA-GUD-2024, IPGTRA-2025) clustered via cosine similarity &gt; 0.85
+        </div>
+      </div>
+      */}
+
       {/* BioBERT MedDRA Coding Pipeline Bento */}
       <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
         <div className="flex items-center justify-between border-b border-slate-100 pb-3">

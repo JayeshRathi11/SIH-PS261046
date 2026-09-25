@@ -115,6 +115,24 @@ export const DynamicECRF: React.FC = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                 DPDP Consent Obtained
               </span>
+
+              {/* HIDDEN FOR CORE DEMO: Telegram adherence webhook telemetry
+              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-50 border border-sky-200 text-[10px] font-semibold text-sky-800 font-mono">
+                <span className="h-1.5 w-1.5 rounded-full bg-sky-500"></span>
+                Telegram Dose Compliance (98.2%)
+              </div>
+              */}
+
+              {/* HIDDEN FOR CORE DEMO: DPDP Act Purge / Right to Erasure Action Button
+              <button
+                type="button"
+                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-rose-50 border border-rose-200 text-[10px] font-semibold text-rose-700 hover:bg-rose-100 transition-colors cursor-pointer"
+                title="Trigger irreversible cryptographic purge cascade (DPDP Act 2023 §12)"
+              >
+                <span className="material-symbols-outlined text-xs">delete_forever</span>
+                <span>Purge Patient (DPDP Act)</span>
+              </button>
+              */}
             </div>
             <div className="text-xs text-slate-500 flex items-center gap-2 mt-1 flex-wrap">
               <span>Prakriti: <strong className="text-slate-800">Pitta-Kapha</strong></span>
