@@ -27,7 +27,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-background text-on-surface antialiased min-h-screen flex flex-col font-sans selection:bg-secondary-container selection:text-on-secondary-fixed">
+      <body className="bg-[#fbfbfa] text-slate-900 antialiased min-h-screen flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
         <AppProvider>{children}</AppProvider>
       </body>
     </html>

@@ -44,79 +44,83 @@ export const TamperSimulator: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      {/* Metric Cards Grid */}
+      {/* Metric Cards Bento Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <div className="bg-white p-3.5 rounded border border-[#bfc9c3]/60 shadow-xs">
-          <div className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider">
+        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono">
             Total Blocks
           </div>
-          <div className="text-xl font-bold text-[#003527] font-mono mt-0.5">
+          <div className="text-xl font-bold text-slate-900 font-mono mt-1">
             {apiResult?.total_blocks || 4} Blocks
           </div>
-          <div className="text-[10px] text-[#006c4a] font-medium flex items-center gap-1 mt-1">
-            <span className="material-symbols-outlined text-xs">verified</span>
-            Continuous Chain
+          <div className="text-[10px] text-emerald-700 font-semibold flex items-center gap-1.5 mt-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            Continuous Linear Chain
           </div>
         </div>
 
-        <div className="bg-white p-3.5 rounded border border-[#bfc9c3]/60 shadow-xs">
-          <div className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider">
+        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono">
             Enclave Merkle Root
           </div>
-          <div className="text-xs font-bold text-[#006c4a] font-mono truncate mt-1">
+          <div className="text-xs font-bold text-emerald-800 font-mono truncate mt-1.5">
             {isTampered ? "0xMISMATCH_ALERT" : (apiResult?.witness_merkle_root || "0x7f83b165c92f...")}
           </div>
-          <div className="text-[10px] text-neutral-500 mt-1">
+          <div className="text-[10px] text-slate-500 mt-1">
             AWS Nitro / CDSCO HSM
           </div>
         </div>
 
-        <div className="bg-white p-3.5 rounded border border-[#bfc9c3]/60 shadow-xs">
-          <div className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider">
+        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono">
             Tamper Detection
           </div>
           <div
-            className={`text-sm font-bold font-mono mt-1 ${
-              isTampered ? "text-[#ba1a1a]" : "text-[#006c4a]"
+            className={`text-sm font-bold font-mono mt-1.5 flex items-center gap-1.5 ${
+              isTampered ? "text-rose-700" : "text-emerald-700"
             }`}
           >
+            <span className={`w-2 h-2 rounded-full ${isTampered ? "bg-rose-500 animate-ping" : "bg-emerald-500"}`}></span>
             {isTampered ? "ALARM TRIGGERED" : "ARMED & SECURE"}
           </div>
-          <div className="text-[10px] text-neutral-500 mt-1">
-            Linear SHA-256 Check
+          <div className="text-[10px] text-slate-500 mt-1">
+            Linear SHA-256 Validation
           </div>
         </div>
 
-        <div className="bg-white p-3.5 rounded border border-[#bfc9c3]/60 shadow-xs">
-          <div className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider">
+        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono">
             21 CFR Part 11
           </div>
-          <div className="text-xl font-bold text-[#003527] font-mono mt-0.5">100% Valid</div>
-          <div className="text-[10px] text-[#006c4a] font-medium flex items-center gap-1 mt-1">
+          <div className="text-xl font-bold text-slate-900 font-mono mt-1">100% Valid</div>
+          <div className="text-[10px] text-emerald-700 font-semibold flex items-center gap-1.5 mt-1.5">
             <span className="material-symbols-outlined text-xs">shield</span>
-            GAMP 5 Cat.4 Attested
+            <span>GAMP 5 Cat.4 Attested</span>
           </div>
         </div>
       </div>
 
       {/* Interactive Tamper Testing Control Box */}
-      <div className="bg-white p-4 rounded border border-[#bfc9c3]/60 shadow-xs space-y-3">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#bfc9c3]/30 pb-3">
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 pb-4">
           <div>
-            <h3 className="text-xs font-bold text-[#003527] flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-sm">security</span>
+            <div className="text-[11px] font-semibold tracking-wider text-emerald-800 bg-emerald-50/80 px-2.5 py-0.5 rounded-full border border-emerald-200/60 inline-flex items-center gap-1.5 mb-1">
+              ▪ ALCOA+ Cryptographic Ledger
+            </div>
+            <h3 className="text-sm font-bold text-slate-900 tracking-tight mt-0.5 flex items-center gap-2">
+              <span className="material-symbols-outlined text-emerald-700 text-base">security</span>
               <span>Regulatory Cryptographic Tamper Simulator &amp; Forensic Defense</span>
             </h3>
-            <p className="text-[11px] text-[#404944]">
+            <p className="text-[11px] text-slate-500 mt-0.5">
               Simulate an unauthorized rogue DBA mutating audit-trailed clinical labs in PostgreSQL
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <button
               onClick={runLiveVerification}
               disabled={isVerifying}
-              className="bg-[#006c4a] hover:bg-[#005137] text-white px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95 cursor-pointer disabled:opacity-50"
+              className="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-all active:scale-95 cursor-pointer disabled:opacity-50"
             >
               <span
                 className={`material-symbols-outlined text-sm ${
@@ -125,18 +129,19 @@ export const TamperSimulator: React.FC = () => {
               >
                 refresh
               </span>
-              <span>{isVerifying ? "Querying Backend /verify-chain..." : "Verify Entire Chain"}</span>
+              <span>{isVerifying ? "Querying..." : "Verify Entire Chain"}</span>
             </button>
 
+            {/* Tactile Toggle Switch for DBA Tamper */}
             <button
               onClick={toggleTamperSimulation}
-              className={`px-3 py-1.5 rounded text-xs font-semibold text-white flex items-center gap-1.5 shadow-sm transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 shadow-xs transition-all cursor-pointer active:scale-95 ${
                 isTampered
-                  ? "bg-[#059669] hover:bg-[#047857]"
-                  : "bg-[#ba1a1a] hover:bg-[#93000a] animate-pulse"
+                  ? "bg-emerald-600 hover:bg-emerald-700 text-white"
+                  : "bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200"
               }`}
             >
-              <span className="material-symbols-outlined text-sm">
+              <span className="material-symbols-outlined text-sm font-bold">
                 {isTampered ? "restore" : "bug_report"}
               </span>
               <span>
@@ -150,21 +155,26 @@ export const TamperSimulator: React.FC = () => {
 
         {/* Real-time Forensic Log Terminal */}
         {isTampered && (
-          <div className="bg-neutral-900 border border-neutral-800 p-3 rounded font-mono text-[11px] text-neutral-300 space-y-1">
-            <div className="flex items-center justify-between text-neutral-400 border-b border-neutral-800 pb-1">
-              <span>AyuTrial Forensic Audit Engine v2.4</span>
-              <span className="text-[#ba1a1a] font-bold">● BREACH ALERT ACTIVE</span>
+          <div className="bg-slate-900 text-emerald-400 font-mono text-xs rounded-xl p-4 space-y-1.5 shadow-md border border-slate-800">
+            <div className="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-2">
+              <span className="flex items-center gap-2 text-rose-400">
+                <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                <span>AyuTrial Forensic Audit Engine v2.4</span>
+              </span>
+              <span className="text-rose-300 font-bold bg-rose-950/60 px-2 py-0.5 rounded-full border border-rose-800 text-[10px]">
+                ● BREACH ALERT ACTIVE
+              </span>
             </div>
-            <p className="text-neutral-400">
+            <p className="text-slate-400 pt-1">
               [CRITICAL] 2026-09-25T04:42:01Z - Linear audit chain integrity verification failed!
             </p>
-            <p className="text-[#ba1a1a]">
+            <p className="text-rose-400 font-bold">
               [ERROR] Block #3 leaf hash mismatch: Expected 0x8c7b89f2..., Found 0x7a19ff02...
             </p>
-            <p className="text-[#fde68a]">
+            <p className="text-amber-300">
               [TRACE] Table `ecrf_records`: Field `form_data-&gt;alt_sgpt` mutated from 165 to 35 without valid 21 CFR e-signature!
             </p>
-            <p className="text-neutral-300">
+            <p className="text-slate-300">
               [ACTION] Isolated witness Merkle root mismatch triggered regulatory audit flag under 21 CFR §11.10(e).
             </p>
           </div>
@@ -175,44 +185,44 @@ export const TamperSimulator: React.FC = () => {
       </div>
 
       {/* Live FastAPI Mock Console Tabs */}
-      <div className="bg-white p-4 rounded border border-[#bfc9c3]/60 shadow-xs space-y-3">
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
         <div className="flex items-center justify-between flex-wrap gap-2">
-          <div className="flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-sm text-[#006c4a]">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-sm text-emerald-700">
               code
             </span>
-            <span className="text-xs font-bold text-[#003527]">
+            <span className="text-xs font-bold text-slate-900 tracking-tight">
               FastAPI ALCOA+ REST Endpoint Inspector
             </span>
           </div>
 
-          <div className="flex items-center bg-[#f2f3ff] p-0.5 rounded border border-[#bfc9c3]/60 text-xs font-mono">
+          <div className="flex items-center bg-slate-100 p-1 rounded-full border border-slate-200 text-xs font-mono">
             <button
               onClick={() => setActiveApiTab("verify")}
-              className={`px-2.5 py-1 rounded cursor-pointer ${
+              className={`px-3 py-1 rounded-full cursor-pointer transition-all ${
                 activeApiTab === "verify"
-                  ? "bg-white text-[#003527] font-bold shadow-xs"
-                  : "text-[#404944] hover:text-[#003527]"
+                  ? "bg-white text-emerald-800 font-bold shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               GET /api/v1/audit/verify-chain
             </button>
             <button
               onClick={() => setActiveApiTab("witness")}
-              className={`px-2.5 py-1 rounded cursor-pointer ${
+              className={`px-3 py-1 rounded-full cursor-pointer transition-all ${
                 activeApiTab === "witness"
-                  ? "bg-white text-[#003527] font-bold shadow-xs"
-                  : "text-[#404944] hover:text-[#003527]"
+                  ? "bg-white text-emerald-800 font-bold shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               POST /api/v1/audit/notarize-witness
             </button>
             <button
               onClick={() => setActiveApiTab("block3")}
-              className={`px-2.5 py-1 rounded cursor-pointer ${
+              className={`px-3 py-1 rounded-full cursor-pointer transition-all ${
                 activeApiTab === "block3"
-                  ? "bg-white text-[#003527] font-bold shadow-xs"
-                  : "text-[#404944] hover:text-[#003527]"
+                  ? "bg-white text-emerald-800 font-bold shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               GET /api/v1/audit/block/3
@@ -220,7 +230,7 @@ export const TamperSimulator: React.FC = () => {
           </div>
         </div>
 
-        <pre className="p-3 bg-neutral-900 text-[#85f8c4] rounded text-[11px] font-mono overflow-x-auto border border-neutral-800">
+        <pre className="p-4 bg-slate-900 text-emerald-400 font-mono text-xs rounded-xl overflow-x-auto shadow-inner border border-slate-800">
           {activeApiTab === "verify" &&
             JSON.stringify(
               isTampered
@@ -286,3 +296,4 @@ export const TamperSimulator: React.FC = () => {
     </div>
   );
 };
+

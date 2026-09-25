@@ -70,43 +70,56 @@ export const StatutoryBanner: React.FC = () => {
   const displayTime = wsTime || slaCountdown;
 
   return (
-    <div className="w-full bg-[#ba1a1a] text-white px-4 sm:px-6 py-1.5 flex flex-wrap items-center justify-between border-b border-white/20 z-50 text-xs shadow-sm">
-      <div className="flex items-center gap-2 flex-wrap">
-        <span className="inline-flex items-center gap-1 bg-white text-[#ba1a1a] px-2 py-0.5 rounded text-[11px] tracking-wider uppercase font-bold animate-sae-pulse">
-          <span className="material-symbols-outlined text-sm">emergency</span>
-          Active SAE: Patient AIIA-P089
-        </span>
-        <span className="font-mono text-xs font-medium tracking-tight">
-          CDSCO Statutory Clock:{" "}
-          <strong className="font-bold underline tracking-wide">
-            {displayTime}
-          </strong>{" "}
-          remaining until Form CT-16 cutoff
-        </span>
-        <span className="bg-white/20 text-white text-[10px] font-mono px-2 py-0.5 rounded border border-white/30 hidden md:inline-block">
-          {slaStatus} (NDCT Rules 2019, Sch III)
-        </span>
-      </div>
+    <div className="w-full px-4 pt-2">
+      <div className="bg-white/95 backdrop-blur-md border border-rose-200/90 shadow-sm rounded-full py-1.5 px-4 mx-auto max-w-6xl flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-3 flex-wrap">
+          {/* Pulsing Soft Rose Dot & Alert Pill */}
+          <span className="inline-flex items-center gap-2 bg-rose-50 text-rose-700 border border-rose-200 px-2.5 py-0.5 rounded-full text-[11px] font-semibold tracking-wide">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+            </span>
+            Active SAE: Patient AIIA-P089
+          </span>
 
-      <div className="flex items-center gap-3 mt-1 sm:mt-0">
-        <div className="flex items-center gap-1.5 text-[10px] font-mono opacity-90">
-          <span
-            className={`inline-block w-2 h-2 rounded-full ${
-              wsConnected ? "bg-[#85f8c4] animate-ping" : "bg-yellow-400"
-            }`}
-          ></span>
-          <span>
-            {WS_BASE_URL}/sla-countdown [{wsConnected ? "ONLINE STREAM" : "LOCAL BACKUP"}]
+          {/* Monospace Countdown */}
+          <span className="font-mono text-xs text-slate-600 flex items-center gap-2">
+            <span className="font-sans text-slate-500 hidden sm:inline">CDSCO Statutory Clock:</span>
+            <span className="font-mono text-sm font-semibold text-rose-700 bg-rose-50/80 px-2 py-0.5 rounded-md border border-rose-200/80 tracking-wider">
+              {displayTime}
+            </span>
+            <span className="text-slate-500 text-[11px] hidden md:inline">remaining until Form CT-16 cutoff</span>
+          </span>
+
+          {/* Statutory NDCT Rule Pill */}
+          <span className="text-slate-500 text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200/80 hidden lg:inline-flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+            Rule 34(1) NDCT Rules 2019, Sch III
           </span>
         </div>
-        <button
-          onClick={openCT16Modal}
-          className="bg-white text-[#ba1a1a] hover:bg-neutral-100 px-2 py-0.5 rounded text-[11px] font-semibold transition-transform active:scale-95 flex items-center gap-1 shadow-sm cursor-pointer"
-        >
-          <span className="material-symbols-outlined text-sm">file_download</span>
-          Download CDSCO Form CT-16
-        </button>
+
+        <div className="flex items-center gap-3 ml-auto sm:ml-0">
+          <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-slate-500">
+            <span
+              className={`inline-block w-2 h-2 rounded-full ${
+                wsConnected ? "bg-emerald-500" : "bg-amber-400"
+              }`}
+            ></span>
+            <span className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-600 font-semibold border border-slate-200">
+              {wsConnected ? "STREAM ACTIVE" : "LOCAL BACKUP"}
+            </span>
+          </div>
+
+          <button
+            onClick={openCT16Modal}
+            className="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-xs">file_download</span>
+            <span>Download Form CT-16</span>
+          </button>
+        </div>
       </div>
     </div>
   );
 };
+

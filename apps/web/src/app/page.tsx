@@ -29,29 +29,29 @@ const MainWorkspaceContent: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-w-0 bg-[#faf8ff]">
+    <div className="flex-1 flex flex-col min-w-0 bg-[#FBFBFA] text-slate-800">
       {/* Workspace Sub-header */}
-      <div className="bg-white border-b border-[#bfc9c3]/50 px-4 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-2 shadow-xs">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#006c4a]"></span>
-          <span className="text-xs font-bold text-[#003527]">
+      <div className="bg-white border-b border-slate-200/80 px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs shadow-xs">
+        <div className="flex items-center gap-2.5 flex-wrap">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span className="text-xs font-bold text-slate-900 tracking-tight">
             {roleTitles[currentRole] || roleTitles.doctor}
           </span>
-          <span className="text-neutral-300">|</span>
-          <span className="text-[11px] font-mono text-neutral-500">
-            Active Clinician: <strong>{currentUser?.name || "Dr. Jayesh Rathi"}</strong> ({currentUser?.roleHeader || "DOCTOR"})
+          <span className="text-slate-300">|</span>
+          <span className="text-[11px] font-mono text-slate-500">
+            Active Clinician: <strong className="text-slate-800">{currentUser?.name || "Dr. Jayesh Rathi"}</strong> ({currentUser?.roleHeader || "DOCTOR"})
           </span>
-          <span className="text-neutral-300">•</span>
-          <span className="text-[11px] font-mono text-neutral-500">
-            Scope: {currentSite === "SITE-01" ? "AIIA New Delhi" : "IPGT&RA Jamnagar"}
+          <span className="text-slate-300">•</span>
+          <span className="text-[11px] font-mono text-slate-500">
+            Scope: <span className="text-emerald-700 font-semibold">{currentSite === "SITE-01" ? "AIIA New Delhi" : "IPGT&RA Jamnagar"}</span>
           </span>
         </div>
 
-        <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-500">
-          <span className="bg-[#b0f0d6] text-[#002117] px-2 py-0.5 rounded font-semibold">
+        <div className="flex items-center gap-2 text-[10px] font-mono">
+          <span className="bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-semibold">
             Protocol: AIIA-GUD-2026
           </span>
-          <span className="bg-[#82f5c1] text-[#00714e] px-2 py-0.5 rounded font-semibold">
+          <span className="bg-teal-50 text-teal-800 border border-teal-200 px-2.5 py-0.5 rounded-full font-semibold">
             Status: RECRUITING
           </span>
         </div>
@@ -69,19 +69,19 @@ const MainWorkspaceContent: React.FC = () => {
       </main>
 
       {/* Regulatory Footer */}
-      <footer className="bg-white border-t border-[#bfc9c3]/50 px-4 sm:px-6 py-3 text-[11px] text-[#404944] flex flex-wrap items-center justify-between gap-2">
+      <footer className="bg-white border-t border-slate-200/80 px-4 sm:px-6 py-3 text-[11px] text-slate-500 flex flex-wrap items-center justify-between gap-2 shadow-2xs">
         <div className="flex items-center gap-3">
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-[#006c4a]"></span>
-            <span>CDSCO SUGAM Gateway: <strong>Connected (TLS 1.3)</strong></span>
+          <span className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>CDSCO SUGAM Gateway: <strong className="text-slate-800">Connected (TLS 1.3)</strong></span>
           </span>
-          <span>•</span>
-          <span>Session Hash: <strong className="font-mono">SHA256: 7d84a...93fcb</strong></span>
+          <span className="text-slate-300">•</span>
+          <span>Session Hash: <strong className="font-mono text-emerald-700">SHA256: 7d84a...93fcb</strong></span>
         </div>
         <div className="flex items-center gap-2">
           <span>Validated Under US FDA 21 CFR Part 11 &amp; GAMP 5 Category 4</span>
-          <span>•</span>
-          <strong className="text-[#003527]">AIIA &amp; NPvCC Platform</strong>
+          <span className="text-slate-300">•</span>
+          <strong className="text-emerald-700">AIIA &amp; NPvCC Platform</strong>
         </div>
       </footer>
 
@@ -102,19 +102,19 @@ export default function Home() {
     }
   }, [isMounted, isAuthenticated, router]);
 
-  if (!isMounted) {
+  if (!isMounted || !isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#002117] flex items-center justify-center text-emerald-400 font-mono text-sm">
-        <div className="flex items-center gap-3">
-          <span className="w-5 h-5 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin"></span>
-          <span>Initializing AyuTrial-CTMS Secure Workstation...</span>
+      <div className="min-h-screen bg-[#FBFBFA] flex items-center justify-center text-slate-700 font-mono text-sm">
+        <div className="flex items-center gap-3 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <span className="w-5 h-5 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin"></span>
+          <span>Authenticating AyuTrial-CTMS Session...</span>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#FBFBFA]">
       <StatutoryBanner />
       <HeaderNav />
       <PitchStepper />
@@ -125,3 +125,4 @@ export default function Home() {
     </div>
   );
 }
+

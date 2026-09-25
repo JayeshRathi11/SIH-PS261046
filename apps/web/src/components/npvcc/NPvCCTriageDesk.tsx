@@ -33,49 +33,57 @@ export const NPvCCTriageDesk: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      {/* Triage Desk Header */}
-      <div className="bg-white p-4 rounded border border-[#bfc9c3]/60 shadow-xs flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded bg-[#ba1a1a] text-white flex items-center justify-center font-bold text-sm">
-            <span className="material-symbols-outlined text-2xl">emergency</span>
+      {/* Triage Desk Header Bento */}
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center font-bold text-sm shadow-xs">
+            <span className="material-symbols-outlined text-2xl animate-sae-pulse">emergency</span>
           </div>
           <div>
-            <h2 className="text-sm font-bold text-[#003527] leading-tight">
-              National Pharmacovigilance Centre for Ayurveda (NPvCC) Incident Triage
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-semibold tracking-wider text-rose-800 bg-rose-50/80 px-2.5 py-0.5 rounded-full border border-rose-200/60 inline-flex items-center gap-1.5">
+                ▪ Pharmacovigilance Triage
+              </span>
+              <span className="bg-slate-100 text-slate-700 border border-slate-200 text-[9px] font-mono px-2 py-0.5 rounded-full font-bold">
+                NPvCC APEX GATE
+              </span>
+            </div>
+            <h2 className="text-base font-bold text-slate-900 tracking-tight mt-1">
+              National Pharmacovigilance Centre for Ayurveda Incident Triage
             </h2>
-            <p className="text-[11px] text-[#404944]">
+            <p className="text-[11px] text-slate-500">
               Real-time Adverse Event Triage, BioBERT NLP MedDRA Coding &amp; CDSCO Form CT-16 Expedited Gate
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="bg-[#ffdad6] text-[#ba1a1a] px-3 py-1.5 rounded text-xs font-mono font-bold border border-[#ba1a1a]/30 flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-sm animate-spin">
-              timer
-            </span>
+        <div className="flex items-center gap-2.5">
+          <div className="bg-rose-50 text-rose-700 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold border border-rose-200 flex items-center gap-2 shadow-2xs">
+            <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
             <span>T-24h Statutory Clock: {slaCountdown}</span>
           </div>
           <button
             onClick={openCT16Modal}
-            className="bg-[#ba1a1a] hover:bg-[#93000a] text-white px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95 cursor-pointer"
+            className="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-all active:scale-95 cursor-pointer"
           >
-            <span className="material-symbols-outlined text-sm">assignment_late</span>
+            <span className="material-symbols-outlined text-sm font-bold">assignment_late</span>
             <span>Compile Form CT-16</span>
           </button>
         </div>
       </div>
 
-      {/* BioBERT MedDRA Coding Pipeline */}
-      <div className="bg-white p-4 rounded border border-[#bfc9c3]/60 shadow-xs space-y-3">
-        <div className="flex items-center justify-between border-b border-[#bfc9c3]/30 pb-2">
-          <h3 className="text-xs font-bold text-[#003527] flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-sm text-[#006c4a]">
+      {/* BioBERT MedDRA Coding Pipeline Bento */}
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-sm text-emerald-600">
               psychology
             </span>
-            <span>BioBERT NLP MedDRA Autonomous Coding Pipeline</span>
-          </h3>
-          <span className="text-[10px] font-mono text-[#006c4a] bg-[#82f5c1]/30 px-2 py-0.5 rounded font-semibold">
+            <h3 className="text-xs font-bold text-slate-900 tracking-tight">
+              BioBERT NLP MedDRA Autonomous Coding Pipeline
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full font-semibold">
             Bilingual Clinical NLP Active
           </span>
         </div>
@@ -83,23 +91,25 @@ export const NPvCCTriageDesk: React.FC = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-[#f2f3ff] text-[#404944] border-b border-[#bfc9c3]/40 text-[11px] font-bold">
-                <th className="p-2.5">Ayurvedic Clinical Dictation Term</th>
-                <th className="p-2.5">MedDRA Preferred Term (PT)</th>
-                <th className="p-2.5">PT Code</th>
-                <th className="p-2.5">System Organ Class (SOC)</th>
-                <th className="p-2.5">Confidence</th>
+              <tr className="bg-slate-50 text-slate-500 border-b border-slate-200 text-[10px] uppercase font-mono tracking-wider">
+                <th className="p-3">Ayurvedic Clinical Dictation Term</th>
+                <th className="p-3">MedDRA Preferred Term (PT)</th>
+                <th className="p-3">PT Code</th>
+                <th className="p-3">System Organ Class (SOC)</th>
+                <th className="p-3">Confidence</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-200">
+            <tbody className="divide-y divide-slate-100">
               {meddraTokens.map((t) => (
-                <tr key={t.code} className="hover:bg-[#faf8ff]">
-                  <td className="p-2.5 font-semibold text-[#003527]">{t.ayur}</td>
-                  <td className="p-2.5 text-neutral-800 font-bold">{t.pt}</td>
-                  <td className="p-2.5 font-mono text-neutral-600">{t.code}</td>
-                  <td className="p-2.5 text-neutral-600">{t.soc}</td>
-                  <td className="p-2.5 font-mono text-[#006c4a] font-bold">
-                    {t.confidence}
+                <tr key={t.code} className="hover:bg-slate-50/80 transition-colors">
+                  <td className="p-3 font-semibold text-emerald-800">{t.ayur}</td>
+                  <td className="p-3 text-slate-900 font-bold">{t.pt}</td>
+                  <td className="p-3 font-mono text-slate-500">{t.code}</td>
+                  <td className="p-3 text-slate-700">{t.soc}</td>
+                  <td className="p-3 font-mono text-emerald-700 font-bold">
+                    <span className="bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                      {t.confidence}
+                    </span>
                   </td>
                 </tr>
               ))}
@@ -108,47 +118,49 @@ export const NPvCCTriageDesk: React.FC = () => {
         </div>
       </div>
 
-      {/* Causality Assessment Engine (Naranjo Algorithm) */}
-      <div className="bg-white p-4 rounded border border-[#bfc9c3]/60 shadow-xs space-y-3">
-        <div className="flex items-center justify-between border-b border-[#bfc9c3]/30 pb-2">
-          <h3 className="text-xs font-bold text-[#003527] flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-sm text-[#006c4a]">
+      {/* Causality Assessment Engine (Naranjo Algorithm) Bento */}
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-sm text-emerald-600">
               calculate
             </span>
-            <span>Ayurvedic Adverse Drug Reaction Causality Assessment (WHO-UMC / Naranjo Scale)</span>
-          </h3>
-          <span className="text-xs font-bold text-[#006c4a] bg-[#82f5c1]/30 px-2 py-0.5 rounded font-mono">
+            <h3 className="text-xs font-bold text-slate-900 tracking-tight">
+              Ayurvedic Adverse Drug Reaction Causality Assessment (WHO-UMC / Naranjo Scale)
+            </h3>
+          </div>
+          <span className="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full font-mono shadow-2xs">
             Score: +{naranjoScore} (PROBABLE CAUSALITY)
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-          <div className="p-3 rounded bg-neutral-50 border border-neutral-200 space-y-1">
-            <div className="font-bold text-[#003527]">1. Temporal Sequence</div>
-            <p className="text-[11px] text-neutral-600">
+          <div className="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200 space-y-1.5">
+            <div className="font-bold text-slate-900">1. Temporal Sequence</div>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
               Adverse reaction appeared at Day 14 following concomitant Aspirin initiation with Guduchi.
             </p>
-            <div className="text-[10px] font-mono text-[#006c4a] font-bold">+2 Points</div>
+            <div className="text-[10px] font-mono text-emerald-700 font-bold pt-1">+2 Points</div>
           </div>
 
-          <div className="p-3 rounded bg-neutral-50 border border-neutral-200 space-y-1">
-            <div className="font-bold text-[#003527]">2. De-challenge Response</div>
-            <p className="text-[11px] text-neutral-600">
+          <div className="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200 space-y-1.5">
+            <div className="font-bold text-slate-900">2. De-challenge Response</div>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
               Discontinuation of botanical formulation followed by downward titration of transaminases.
             </p>
-            <div className="text-[10px] font-mono text-[#006c4a] font-bold">+2 Points</div>
+            <div className="text-[10px] font-mono text-emerald-700 font-bold pt-1">+2 Points</div>
           </div>
 
-          <div className="p-3 rounded bg-neutral-50 border border-neutral-200 space-y-1">
-            <div className="font-bold text-[#003527]">3. Alternative Etiology</div>
-            <p className="text-[11px] text-neutral-600">
+          <div className="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200 space-y-1.5">
+            <div className="font-bold text-slate-900">3. Alternative Etiology</div>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
               Viral hepatitis markers (HBsAg, Anti-HCV) negative. No other hepatotoxic agents.
             </p>
-            <div className="text-[10px] font-mono text-[#006c4a] font-bold">+2 Points</div>
+            <div className="text-[10px] font-mono text-emerald-700 font-bold pt-1">+2 Points</div>
           </div>
         </div>
 
-        <div className="flex justify-end pt-2 border-t border-neutral-100">
+        <div className="flex justify-end pt-3 border-t border-slate-100">
           <button
             onClick={() =>
               showToast(
@@ -156,7 +168,7 @@ export const NPvCCTriageDesk: React.FC = () => {
                 "success"
               )
             }
-            className="bg-[#003527] hover:bg-[#064e3b] text-white px-3 py-1.5 rounded text-xs font-semibold cursor-pointer"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all active:scale-95 cursor-pointer shadow-xs"
           >
             Lock Causality Adjudication
           </button>

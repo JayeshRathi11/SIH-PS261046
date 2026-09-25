@@ -86,17 +86,25 @@ export const ProtocolStateMachine: React.FC = () => {
   return (
     <div className="space-y-4">
       {/* State Machine Workflow Header */}
-      <div className="bg-white p-4 rounded border border-[#bfc9c3]/60 shadow-xs flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded bg-[#064e3b] text-[#85f8c4] flex items-center justify-center font-bold text-sm">
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center font-bold text-sm shadow-xs">
             <span className="material-symbols-outlined text-2xl">account_tree</span>
           </div>
           <div>
-            <h2 className="text-sm font-bold text-[#003527] leading-tight">
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-semibold tracking-wider text-emerald-800 bg-emerald-50/80 px-2.5 py-0.5 rounded-full border border-emerald-200/60 inline-flex items-center gap-1.5">
+                ▪ Protocol Governance
+              </span>
+              <span className="bg-slate-100 text-slate-700 border border-slate-200 text-[9px] font-mono px-2 py-0.5 rounded-full font-bold">
+                REGULATORY GATES
+              </span>
+            </div>
+            <h2 className="text-base font-bold text-slate-900 tracking-tight mt-1">
               Protocol Regulatory State Machine &amp; Ethics Clearance
             </h2>
-            <p className="text-[11px] text-[#404944]">
-              Strict statutory progression: Draft → IEC Approved → CTRI Linked → Recruiting → Completed
+            <p className="text-[11px] text-slate-500">
+              Statutory progression: Draft → IEC Approved → CTRI Linked → Recruiting → Completed
             </p>
           </div>
         </div>
@@ -104,120 +112,136 @@ export const ProtocolStateMachine: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={handlePushOfflineBatch}
-            className="bg-[#006c4a] hover:bg-[#005137] text-white px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-transform active:scale-95 cursor-pointer"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 shadow-xs transition-all active:scale-95 cursor-pointer"
           >
-            <span className="material-symbols-outlined text-sm">sync</span>
+            <span className="material-symbols-outlined text-sm font-bold">sync</span>
             <span>Sync Bedside Offline Batch</span>
           </button>
         </div>
       </div>
 
-      {/* Lifecycle Visual Progress Stepper */}
-      <div className="bg-white p-4 rounded border border-[#bfc9c3]/60 shadow-xs">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-center text-xs">
-          <div className="p-2.5 rounded bg-[#ecfdf5] border border-[#a7f3d0]">
-            <div className="font-bold text-[#059669]">1. DRAFT</div>
-            <div className="text-[10px] text-neutral-500 font-mono">Protocol Finalized</div>
+      {/* Lifecycle Visual Progress Stepper Bento */}
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 text-center text-xs">
+          <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200/80">
+            <div className="font-bold text-emerald-800 flex items-center justify-center gap-1">
+              <span className="material-symbols-outlined text-xs">check</span>
+              <span>1. DRAFT</span>
+            </div>
+            <div className="text-[10px] text-slate-500 font-mono mt-0.5">Protocol Finalized</div>
           </div>
-          <div className="p-2.5 rounded bg-[#ecfdf5] border border-[#a7f3d0]">
-            <div className="font-bold text-[#059669]">2. IEC_APPROVED</div>
-            <div className="text-[10px] text-neutral-500 font-mono">Ethics Cleared</div>
+          <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200/80">
+            <div className="font-bold text-emerald-800 flex items-center justify-center gap-1">
+              <span className="material-symbols-outlined text-xs">check</span>
+              <span>2. IEC_APPROVED</span>
+            </div>
+            <div className="text-[10px] text-slate-500 font-mono mt-0.5">Ethics Cleared</div>
           </div>
-          <div className="p-2.5 rounded bg-[#ecfdf5] border border-[#a7f3d0]">
-            <div className="font-bold text-[#059669]">3. CTRI_LINKED</div>
-            <div className="text-[10px] text-neutral-500 font-mono">Regex Validated</div>
+          <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200/80">
+            <div className="font-bold text-emerald-800 flex items-center justify-center gap-1">
+              <span className="material-symbols-outlined text-xs">check</span>
+              <span>3. CTRI_LINKED</span>
+            </div>
+            <div className="text-[10px] text-slate-500 font-mono mt-0.5">Regex Validated</div>
           </div>
-          <div className="p-2.5 rounded bg-[#064e3b] text-white shadow-xs font-bold border-2 border-[#85f8c4]">
-            <div className="text-[#85f8c4]">4. RECRUITING</div>
-            <div className="text-[10px] text-[#80bea6] font-mono">Active Screening</div>
+          <div className="p-3 rounded-xl bg-emerald-600 text-white shadow-xs font-bold border-2 border-emerald-600">
+            <div className="text-white flex items-center justify-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+              <span>4. RECRUITING</span>
+            </div>
+            <div className="text-[10px] text-emerald-100 font-mono mt-0.5">Active Screening</div>
           </div>
-          <div className="p-2.5 rounded bg-neutral-100 border border-neutral-200 opacity-60">
-            <div className="font-bold text-neutral-600">5. COMPLETED</div>
-            <div className="text-[10px] text-neutral-500 font-mono">Data Lock</div>
+          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 opacity-60">
+            <div className="font-bold text-slate-400">5. COMPLETED</div>
+            <div className="text-[10px] text-slate-400 font-mono mt-0.5">Data Lock</div>
           </div>
         </div>
       </div>
 
       {/* Protocol Configuration & Regex Form */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-white p-4 rounded border border-[#bfc9c3]/60 shadow-xs space-y-3">
-          <h3 className="text-xs font-bold text-[#003527] flex items-center gap-1.5 border-b border-[#bfc9c3]/30 pb-2">
-            <span className="material-symbols-outlined text-sm text-[#006c4a]">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+          <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+            <span className="material-symbols-outlined text-sm text-emerald-600">
               verified_user
             </span>
-            <span>Statutory CTRI Validation (ICMR Registry)</span>
-          </h3>
+            <h3 className="text-xs font-bold text-slate-900 tracking-tight">
+              Statutory CTRI Validation (ICMR Registry)
+            </h3>
+          </div>
 
-          <div className="space-y-2 text-xs">
+          <div className="space-y-3 text-xs">
             <div>
-              <label className="block text-[10px] font-semibold text-neutral-600 mb-0.5">
+              <label className="block text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
                 CTRI Registration ID (Format: CTRI/YYYY/MM/NNNNNN)
               </label>
               <input
                 type="text"
                 value={ctriInput}
                 onChange={(e) => setCtriInput(e.target.value)}
-                className="w-full text-xs font-mono p-2 bg-[#faf8ff] border border-neutral-300 rounded font-bold text-[#006c4a]"
+                className="w-full text-xs font-mono p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-900 focus:outline-none focus:border-emerald-500 focus:bg-white"
               />
-              <div className="text-[10px] text-[#059669] flex items-center gap-1 mt-1">
-                <span className="material-symbols-outlined text-xs">check</span>
+              <div className="text-[10px] text-emerald-700 flex items-center gap-1.5 mt-1.5">
+                <span className="material-symbols-outlined text-xs text-emerald-600">check_circle</span>
                 <span>Matches statutory ICMR prospective clinical trial registration pattern</span>
               </div>
             </div>
 
             <div>
-              <label className="block text-[10px] font-semibold text-neutral-600 mb-0.5">
+              <label className="block text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
                 Institutional Ethics Committee (IEC) Clearance Number
               </label>
               <input
                 type="text"
                 value={iecNumber}
                 onChange={(e) => setIecNumber(e.target.value)}
-                className="w-full text-xs font-mono p-2 bg-[#faf8ff] border border-neutral-300 rounded"
+                className="w-full text-xs font-mono p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:border-emerald-500 focus:bg-white"
               />
             </div>
 
             <button
               onClick={handleAdvanceStatus}
               disabled={isAdvancing}
-              className="w-full bg-[#003527] hover:bg-[#064e3b] text-white py-2 rounded text-xs font-semibold transition-transform active:scale-95 cursor-pointer mt-2 disabled:opacity-50"
+              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xl text-xs font-semibold transition-all active:scale-95 cursor-pointer shadow-xs mt-2 disabled:opacity-50"
             >
               {isAdvancing ? "Validating & Advancing Status..." : "Advance Protocol Status via API"}
             </button>
           </div>
         </div>
 
-        {/* Multi-Center Cohort Telemetry */}
-        <div className="bg-white p-4 rounded border border-[#bfc9c3]/60 shadow-xs space-y-3">
-          <h3 className="text-xs font-bold text-[#003527] flex items-center gap-1.5 border-b border-[#bfc9c3]/30 pb-2">
-            <span className="material-symbols-outlined text-sm text-[#006c4a]">
+        {/* Multi-Center Cohort Telemetry Bento Card */}
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-4">
+          <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+            <span className="material-symbols-outlined text-sm text-emerald-600">
               groups
             </span>
-            <span>Site Recruitment Quota Breakdown</span>
-          </h3>
+            <h3 className="text-xs font-bold text-slate-900 tracking-tight">
+              Site Recruitment Quota Breakdown
+            </h3>
+          </div>
 
-          <div className="space-y-2 text-xs">
-            <div className="p-2 rounded bg-neutral-50 border border-neutral-200 flex justify-between items-center">
+          <div className="space-y-3 text-xs">
+            <div className="p-3 rounded-xl bg-slate-50/70 border border-slate-200 flex justify-between items-center">
               <div>
-                <div className="font-bold text-[#003527]">SITE-01: AIIA New Delhi</div>
-                <div className="text-[10px] text-neutral-500 font-mono">PI: Dr. V. Sharma</div>
+                <div className="font-bold text-slate-900">SITE-01: AIIA New Delhi</div>
+                <div className="text-[10px] text-slate-500 font-mono mt-0.5">PI: Dr. V. Sharma</div>
               </div>
-              <span className="font-mono font-bold text-[#006c4a] bg-white px-2 py-0.5 rounded border border-[#a7f3d0]">
+              <span className="font-mono font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
                 120 Enrolled
               </span>
             </div>
 
-            <div className="p-2 rounded bg-neutral-50 border border-neutral-200 flex justify-between items-center">
+            <div className="p-3 rounded-xl bg-slate-50/70 border border-slate-200 flex justify-between items-center">
               <div>
-                <div className="font-bold text-[#003527]">SITE-02: IPGT&amp;RA Jamnagar</div>
-                <div className="text-[10px] text-neutral-500 font-mono">PI: Dr. H. M. Chandola</div>
+                <div className="font-bold text-slate-900">SITE-02: IPGT&amp;RA Jamnagar</div>
+                <div className="text-[10px] text-slate-500 font-mono mt-0.5">PI: Dr. H. M. Chandola</div>
               </div>
-              <span className="font-mono font-bold text-[#006c4a] bg-white px-2 py-0.5 rounded border border-[#a7f3d0]">
+              <span className="font-mono font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
                 80 Enrolled
               </span>
             </div>
 
-            <div className="text-[11px] text-[#404944] pt-1">
+            <div className="text-[11px] text-slate-500 pt-1 leading-relaxed">
               Trial enrollment status is restricted under Row-Level Security (RLS) to assigned institutional clinicians.
             </div>
           </div>

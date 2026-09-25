@@ -11,7 +11,7 @@ export const HerbDrugMatrix: React.FC = () => {
       herb: "Guduchi (Tinospora cordifolia)",
       drug: "Aspirin (Acetylsalicylic acid)",
       severity: "CRITICAL",
-      severityColor: "bg-[#ba1a1a] text-white",
+      severityClass: "bg-rose-500/15 text-rose-300 border-rose-500/40 shadow-[0_0_12px_rgba(244,63,94,0.2)]",
       mechanism:
         "Synergistic antiplatelet inhibition + additive hepatotoxicity via CYP450 modulation. Causes acute ALT/AST elevation & scleral icterus.",
       incident: "Flagged in Patient AIIA-P089",
@@ -21,7 +21,7 @@ export const HerbDrugMatrix: React.FC = () => {
       herb: "Shuddha Guggulu (Commiphora mukul)",
       drug: "Warfarin (Coumadin)",
       severity: "CRITICAL",
-      severityColor: "bg-[#ba1a1a] text-white",
+      severityClass: "bg-rose-500/15 text-rose-300 border-rose-500/40 shadow-[0_0_12px_rgba(244,63,94,0.2)]",
       mechanism:
         "Guggulsterones displace warfarin from albumin binding sites, elevating INR > 4.5 and inducing severe spontaneous hemorrhagic risk.",
       incident: "Monitored in AIIA-GUG-2024",
@@ -31,7 +31,7 @@ export const HerbDrugMatrix: React.FC = () => {
       herb: "Haridra (Curcuma longa)",
       drug: "Low Molecular Weight Heparin",
       severity: "MODERATE",
-      severityColor: "bg-[#fffbeb] text-[#d97706] border border-[#fde68a]",
+      severityClass: "bg-amber-500/15 text-amber-300 border-amber-500/30",
       mechanism:
         "Curcumin inhibits thrombin-induced platelet aggregation; synergistic anticoagulation requires aPTT monitoring.",
       incident: "Theoretical Interaction",
@@ -41,7 +41,7 @@ export const HerbDrugMatrix: React.FC = () => {
       herb: "Ashwagandha (Withania somnifera)",
       drug: "Lorazepam / Benzodiazepines",
       severity: "MODERATE",
-      severityColor: "bg-[#fffbeb] text-[#d97706] border border-[#fde68a]",
+      severityClass: "bg-amber-500/15 text-amber-300 border-amber-500/30",
       mechanism:
         "Withanolides exert GABA-mimetic activity, potentiating central nervous system sedation and respiratory depression.",
       incident: "Monitored in AIIA-ASH-2025",
@@ -51,17 +51,25 @@ export const HerbDrugMatrix: React.FC = () => {
 
   return (
     <div className="space-y-4">
-      {/* Header Banner */}
-      <div className="bg-white p-4 rounded border border-[#bfc9c3]/60 shadow-xs flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded bg-[#064e3b] text-[#85f8c4] flex items-center justify-center font-bold text-sm">
+      {/* Header Banner Bento */}
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center font-bold text-sm shadow-xs">
             <span className="material-symbols-outlined text-2xl">medication_liquid</span>
           </div>
           <div>
-            <h2 className="text-sm font-bold text-[#003527] leading-tight">
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-semibold tracking-wider text-emerald-800 bg-emerald-50/80 px-2.5 py-0.5 rounded-full border border-emerald-200/60 inline-flex items-center gap-1.5">
+                ▪ Interoperability Safety Matrix
+              </span>
+              <span className="bg-slate-100 text-slate-700 border border-slate-200 text-[9px] font-mono px-2 py-0.5 rounded-full font-bold">
+                NPvCC MONOGRAPHS
+              </span>
+            </div>
+            <h2 className="text-base font-bold text-slate-900 tracking-tight mt-1">
               Institutional Botanical &amp; Pharmaceutical Interaction Matrix
             </h2>
-            <p className="text-[11px] text-[#404944]">
+            <p className="text-[11px] text-slate-500">
               National Pharmacovigilance Centre for Ayurveda (NPvCC) Herb-Drug Safety Engine
             </p>
           </div>
@@ -71,22 +79,25 @@ export const HerbDrugMatrix: React.FC = () => {
           onClick={() =>
             showToast("Herb-Drug matrix refreshed with latest NPvCC clinical trial monographs.", "info")
           }
-          className="bg-[#f2f3ff] hover:bg-[#eaedff] text-[#003527] px-3 py-1.5 rounded text-xs font-semibold border border-[#bfc9c3]/50 cursor-pointer"
+          className="bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 px-4 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-all active:scale-95 shadow-2xs flex items-center gap-1.5"
         >
-          Check Active Cohorts
+          <span className="material-symbols-outlined text-sm text-emerald-600">sync</span>
+          <span>Check Active Cohorts</span>
         </button>
       </div>
 
-      {/* Interactions Table */}
-      <div className="bg-white rounded border border-[#bfc9c3]/60 shadow-xs overflow-hidden">
-        <div className="p-3 bg-[#faf8ff] border-b border-[#bfc9c3]/40 flex items-center justify-between">
-          <h3 className="text-xs font-bold text-[#003527] flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-sm text-[#ba1a1a]">
+      {/* Interactions Table Bento */}
+      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+        <div className="p-4 bg-slate-50/60 border-b border-slate-200/80 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-sm text-rose-600">
               warning
             </span>
-            <span>Flagged Pharmacodynamic &amp; Pharmacokinetic Conflicts</span>
-          </h3>
-          <span className="text-[10px] font-mono text-neutral-500">
+            <h3 className="text-xs font-bold text-slate-900 tracking-tight">
+              Flagged Pharmacodynamic &amp; Pharmacokinetic Conflicts
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono text-slate-500 bg-white border border-slate-200 px-2.5 py-0.5 rounded-full shadow-2xs">
             4 Documented Interaction Pathways
           </span>
         </div>
@@ -94,51 +105,57 @@ export const HerbDrugMatrix: React.FC = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-[#f2f3ff] text-[#404944] border-b border-[#bfc9c3]/40 text-[11px] font-bold">
-                <th className="p-2.5">Ayurvedic Botanical Formulation</th>
-                <th className="p-2.5">Concomitant Allopathic Agent</th>
-                <th className="p-2.5">Severity</th>
-                <th className="p-2.5">Pharmacological Mechanism</th>
-                <th className="p-2.5">Trial Correlation</th>
-                <th className="p-2.5 text-right">Actions</th>
+              <tr className="bg-slate-50 text-slate-500 border-b border-slate-200 text-[10px] uppercase font-mono tracking-wider">
+                <th className="p-3">Ayurvedic Botanical Formulation</th>
+                <th className="p-3">Concomitant Allopathic Agent</th>
+                <th className="p-3">Severity</th>
+                <th className="p-3">Pharmacological Mechanism</th>
+                <th className="p-3">Trial Correlation</th>
+                <th className="p-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-200">
+            <tbody className="divide-y divide-slate-100">
               {interactions.map((i, idx) => (
                 <tr
                   key={idx}
-                  className={`hover:bg-[#faf8ff] transition-colors ${
-                    i.active ? "bg-[#ffdad6]/20" : ""
+                  className={`hover:bg-slate-50/80 transition-colors ${
+                    i.active ? "bg-rose-50/40 border-l-4 border-rose-500" : ""
                   }`}
                 >
-                  <td className="p-2.5 font-bold text-[#003527]">{i.herb}</td>
-                  <td className="p-2.5 font-semibold text-neutral-800">{i.drug}</td>
-                  <td className="p-2.5">
+                  <td className="p-3 font-semibold text-emerald-800">{i.herb}</td>
+                  <td className="p-3 font-bold text-slate-900">{i.drug}</td>
+                  <td className="p-3">
                     <span
-                      className={`text-[9px] font-mono px-2 py-0.5 rounded font-bold ${i.severityColor}`}
+                      className={`text-[9px] font-mono px-2.5 py-0.5 rounded-full font-bold border ${
+                        i.severity === "CRITICAL"
+                          ? "bg-rose-50 text-rose-700 border-rose-200"
+                          : "bg-amber-50 text-amber-800 border border-amber-200"
+                      }`}
                     >
                       {i.severity}
                     </span>
                   </td>
-                  <td className="p-2.5 text-[11px] text-neutral-600 max-w-xs leading-relaxed">
+                  <td className="p-3 text-[11px] text-slate-600 max-w-xs leading-relaxed">
                     {i.mechanism}
                   </td>
-                  <td className="p-2.5 font-mono text-[11px]">
+                  <td className="p-3 font-mono text-[11px]">
                     <span
                       className={
-                        i.active ? "text-[#ba1a1a] font-bold" : "text-neutral-500"
+                        i.active ? "text-rose-700 font-bold flex items-center gap-1" : "text-slate-500"
                       }
                     >
+                      {i.active && <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span>}
                       {i.incident}
                     </span>
                   </td>
-                  <td className="p-2.5 text-right">
+                  <td className="p-3 text-right">
                     {i.active && (
                       <button
                         onClick={openCT16Modal}
-                        className="px-2 py-1 bg-[#ba1a1a] hover:bg-[#93000a] text-white rounded text-[10px] font-semibold cursor-pointer shadow-xs"
+                        className="px-3 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-lg text-[10px] font-mono font-bold cursor-pointer shadow-2xs transition-all active:scale-95 flex items-center gap-1 ml-auto"
                       >
-                        Form CT-16
+                        <span className="material-symbols-outlined text-xs">assignment_late</span>
+                        <span>Form CT-16</span>
                       </button>
                     )}
                   </td>
@@ -151,3 +168,4 @@ export const HerbDrugMatrix: React.FC = () => {
     </div>
   );
 };
+

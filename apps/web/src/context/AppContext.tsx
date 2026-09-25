@@ -162,7 +162,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   const router = useRouter();
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<UserPersona>(PRESET_PERSONAS.doctor);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [currentRole, setCurrentRole] = useState<Role>("doctor");
   const [currentSite, setCurrentSite] = useState<Site>("SITE-01");
   const [activeTab, setActiveTab] = useState<Tab>("ecrf_desk");
@@ -240,16 +240,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
             admin: "analytics",
           };
           setActiveTab(roleToTab[session.role] || "ecrf_desk");
+        } else {
+          setIsAuthenticated(false);
         }
       } else {
-        // Default seed session into storage for seamless first load
-        localStorage.setItem(
-          "ayutrial_session",
-          JSON.stringify(PRESET_PERSONAS.doctor)
-        );
+        setIsAuthenticated(false);
       }
     } catch {
-      // Fallback safely
+      setIsAuthenticated(false);
     }
   }, []);
 

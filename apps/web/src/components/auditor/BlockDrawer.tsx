@@ -9,26 +9,26 @@ export const BlockDrawer: React.FC = () => {
   if (activeBlockDrawer === null) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-xs">
-      <div className="bg-white w-full max-w-md h-full shadow-2xl p-5 overflow-y-auto space-y-4 border-l border-neutral-300 animate-in slide-in-from-right duration-200">
+    <div className="fixed inset-0 z-50 flex justify-end bg-slate-900/40 backdrop-blur-sm">
+      <div className="bg-white w-full max-w-md h-full shadow-2xl p-6 overflow-y-auto space-y-4 border-l border-slate-200 animate-in slide-in-from-right duration-200 text-slate-800">
         {/* Drawer Header */}
-        <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
-          <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[#006c4a] text-xl">
-              fingerprint
-            </span>
+        <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
+              <span className="material-symbols-outlined text-lg">fingerprint</span>
+            </div>
             <div>
-              <h2 className="text-sm font-bold text-[#003527]">
+              <h2 className="text-sm font-bold text-slate-900 tracking-tight">
                 Forensic Block Inspector #{activeBlockDrawer}
               </h2>
-              <div className="text-[10px] font-mono text-neutral-500">
+              <div className="text-[10px] font-mono text-slate-500">
                 21 CFR Part 11 Electronic Record Detail
               </div>
             </div>
           </div>
           <button
             onClick={closeBlockDrawer}
-            className="text-neutral-400 hover:text-neutral-700 text-lg cursor-pointer"
+            className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 flex items-center justify-center text-xs font-bold cursor-pointer border border-slate-200 transition-colors"
           >
             ✕
           </button>
@@ -36,25 +36,24 @@ export const BlockDrawer: React.FC = () => {
 
         {/* Block Integrity Badge */}
         {activeBlockDrawer === 3 && isTampered ? (
-          <div className="p-3 bg-[#ffdad6]/40 border-2 border-[#ba1a1a] rounded text-xs space-y-1">
-            <div className="flex items-center gap-1.5 font-bold text-[#ba1a1a]">
-              <span className="material-symbols-outlined text-base">cancel</span>
+          <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-2xl text-xs space-y-1.5 shadow-xs">
+            <div className="flex items-center gap-2 font-bold text-rose-800">
+              <span className="material-symbols-outlined text-base text-rose-600 animate-pulse">cancel</span>
               <span>SHA-256 HASH COMPROMISED (TAMPERED)</span>
             </div>
-            <p className="text-[11px] text-[#93000a]">
-              The ALT transaminase field was modified directly in the database table from
-              165 U/L to 35 U/L. The recomputed leaf hash fails the isolated Merkle witness proof!
+            <p className="text-[11px] text-rose-700 leading-relaxed">
+              The ALT transaminase field was modified directly in PostgreSQL from 165 U/L to 35 U/L. The recomputed leaf hash fails the isolated Merkle witness proof!
             </p>
           </div>
         ) : (
-          <div className="p-2.5 bg-[#ecfdf5] border border-[#059669] rounded text-xs flex items-center justify-between">
-            <div className="flex items-center gap-1.5 font-bold text-[#064e3b]">
-              <span className="material-symbols-outlined text-base text-[#059669]">
+          <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-2xl text-xs flex items-center justify-between">
+            <div className="flex items-center gap-2 font-bold text-emerald-800">
+              <span className="material-symbols-outlined text-base text-emerald-600">
                 check_circle
               </span>
               <span>Cryptographic Integrity Valid</span>
             </div>
-            <span className="text-[10px] font-mono bg-white px-2 py-0.5 rounded border border-[#059669] font-bold text-[#059669]">
+            <span className="text-[10px] font-mono bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full border border-emerald-200 font-bold">
               ALCOA+ VERIFIED
             </span>
           </div>
@@ -62,25 +61,25 @@ export const BlockDrawer: React.FC = () => {
 
         {/* Metadata Grid */}
         <div className="space-y-2 text-xs">
-          <div className="font-semibold text-neutral-700">Block Header Attributes:</div>
-          <div className="bg-neutral-50 p-3 rounded border border-neutral-200 space-y-1.5 font-mono text-[11px]">
+          <div className="font-semibold text-slate-500 uppercase tracking-wider text-[10px]">Block Header Attributes:</div>
+          <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2 font-mono text-[11px]">
             <div>
-              <span className="text-neutral-500">Height:</span>{" "}
-              <strong>#{activeBlockDrawer}</strong>
+              <span className="text-slate-500">Height:</span>{" "}
+              <strong className="text-slate-900">#{activeBlockDrawer}</strong>
             </div>
             <div>
-              <span className="text-neutral-500">Timestamp:</span>{" "}
-              <span>2026-01-29T14:30:00.000Z</span>
+              <span className="text-slate-500">Timestamp:</span>{" "}
+              <span className="text-slate-700">2026-01-29T14:30:00.000Z</span>
             </div>
             <div>
-              <span className="text-neutral-500">Signer Identity:</span>{" "}
-              <strong className="text-[#003527]">
+              <span className="text-slate-500">Signer Identity:</span>{" "}
+              <strong className="text-emerald-700">
                 CN=Dr. V. Sharma, O=AIIA, C=IN
               </strong>
             </div>
             <div>
-              <span className="text-neutral-500">Merkle Path:</span>{" "}
-              <strong className={activeBlockDrawer === 3 && isTampered ? "text-[#ba1a1a]" : "text-[#059669]"}>
+              <span className="text-slate-500">Merkle Path:</span>{" "}
+              <strong className={activeBlockDrawer === 3 && isTampered ? "text-rose-700" : "text-emerald-700"}>
                 {activeBlockDrawer === 3 && isTampered ? "BROKEN (Mismatch at Node #3)" : "Valid [L -> R -> Root]"}
               </strong>
             </div>
@@ -89,19 +88,19 @@ export const BlockDrawer: React.FC = () => {
 
         {/* Raw Payload JSON */}
         <div className="space-y-1.5">
-          <div className="font-semibold text-neutral-700 text-xs flex justify-between">
+          <div className="font-semibold text-slate-500 text-[10px] uppercase tracking-wider flex justify-between">
             <span>Raw Database Payload (JSON):</span>
             {activeBlockDrawer === 3 && isTampered && (
-              <span className="text-[10px] text-[#ba1a1a] font-mono font-bold">
+              <span className="text-[10px] text-rose-700 font-mono font-bold animate-pulse">
                 ⚠️ MUTATED BY DBA
               </span>
             )}
           </div>
           <pre
-            className={`p-3 rounded text-[11px] font-mono overflow-x-auto border ${
+            className={`p-3.5 rounded-xl text-[11px] font-mono overflow-x-auto border ${
               activeBlockDrawer === 3 && isTampered
-                ? "bg-[#ffdad6]/20 border-[#ba1a1a] text-[#93000a]"
-                : "bg-neutral-900 border-neutral-800 text-neutral-200"
+                ? "bg-slate-950 border-rose-300 text-rose-400 shadow-xs"
+                : "bg-slate-950 border-slate-800 text-emerald-400"
             }`}
           >
             {activeBlockDrawer === 3
@@ -135,10 +134,10 @@ export const BlockDrawer: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <div className="pt-3 border-t border-neutral-200 flex justify-end">
+        <div className="pt-4 border-t border-slate-100 flex justify-end">
           <button
             onClick={closeBlockDrawer}
-            className="px-3 py-1.5 rounded text-xs font-semibold bg-neutral-200 hover:bg-neutral-300 text-neutral-800 cursor-pointer"
+            className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer transition-colors border border-slate-200"
           >
             Close Inspector
           </button>
