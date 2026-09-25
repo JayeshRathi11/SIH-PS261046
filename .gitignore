@@ -35,7 +35,7 @@ htmlcov/
 *.pdf
 *.zip
 !apps/web/public/**
-UI/**/screen.png
+UI/
 
 # OS & Editor files
 .DS_Store
