@@ -1,41 +1,40 @@
-# Virtual environments & Python packages
+# Temporary Audit Scratchpads & Pitch Content
+SYSTEM_AUDIT_SCRATCHPAD.md
+SIH_PRESENTATION_CONTENT.md
+temp_*
+*.tmp
+*.log
+
+# Environments & Dependencies
 .venv/
 venv/
 env/
+node_modules/
+.next/
+dist/
+out/
+build/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 *.egg-info/
-dist/
-build/
 .pytest_cache/
 htmlcov/
 .coverage
-*.log
-*.tmp
-temp_*
-
-# Node & Frontend build outputs
-node_modules/
-.next/
-out/
-.turbo/
-
-# Sensitive environment files (preserve .env.example)
-.env
 .env.local
+.env
 .env.*.local
 !.env.example
 
-# Heavy media & binary artifacts
-UI/**/screen.png
+# Large media/binaries
 *.png
 *.jpg
 *.jpeg
 *.pdf
 *.zip
 !apps/web/public/**
+UI/**/screen.png
 
 # OS & Editor files
 .DS_Store
@@ -43,5 +42,6 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Local documentation & scratchpads (untracked)
+# Local documentation & scratchpads
 docs/
+app/data/witness_merkle_store.txt

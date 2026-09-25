@@ -8,7 +8,7 @@ export const HerbDrugAlertModal: React.FC<{
   isOpen: boolean;
   onClose: () => void;
 }> = ({ isOpen, onClose }) => {
-  const { openCT16Modal, showToast, currentRole, currentSite, clinicalNotes } = useApp();
+  const { openCT16Modal, showToast, currentRole, currentSite, clinicalNotes, currentUser } = useApp();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [conflicts, setConflicts] = useState<any[] | null>(null);
 
@@ -22,7 +22,7 @@ export const HerbDrugAlertModal: React.FC<{
       clinical_notes: clinicalNotes,
       ayurvedic_intervention: "Guduchi Extract 500mg BD",
       concomitant_drugs: ["Aspirin 75mg OD"],
-      reported_by: "dr_v_sharma",
+      reported_by: currentUser?.id || "dr_v_sharma",
     };
 
     try {

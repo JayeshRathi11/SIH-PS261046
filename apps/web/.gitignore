@@ -1,41 +1,44 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Temporary Audit Scratchpads & Pitch Content
+SYSTEM_AUDIT_SCRATCHPAD.md
+SIH_PRESENTATION_CONTENT.md
+temp_*
+*.tmp
+*.log
 
-# dependencies
-/node_modules
+# Dependencies & Build
+node_modules/
+.next/
+dist/
+out/
+build/
+.turbo/
 /.pnp
 .pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
 
-# testing
-/coverage
+# Testing & Coverage
+coverage/
+.coverage
 
-# next.js
-/.next/
-/out/
+# Environments
+.env*
+!.env.example
 
-# production
-/build
+# Large media/binaries
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.zip
+!public/**
 
-# misc
+# Misc
 .DS_Store
+Thumbs.db
 *.pem
-
-# debug
+*.tsbuildinfo
+next-env.d.ts
+.vercel
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
